@@ -49,5 +49,9 @@ float resultadoFinal(sala m, int freq, int prof, int umbralSilencio );
 locutor medirLaDistancia(sala m, audio frase, int freq, int prof);
 
 int encontrarAparicion(audio x, audio y);
+bool esMaximaCorrelacion(audio a, int starPoint, audio frase);
+int comienzoCorrelacion(audio a,audio frase);
+
+
 
 #endif //SALADEREUNION_EJERCICIOS_H
