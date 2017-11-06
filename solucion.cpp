@@ -63,8 +63,44 @@ bool sonTodosCeros(audio a){
 
 
 /************************** EJERCICIO elAcaparador **************************/
-int elAcaparador(sala m, int freq, int prof) {
-    return -1;
+int elAcaparador(sala m, int freq, int prof){
+    int persona = 0;
+    for(int i =0; i<m.size();i++){
+        if(acapara(m,i,prof,freq)){
+            persona = i;
+
+        }
+
+    }
+
+    return persona;
+}
+
+bool acapara(sala m, int p, int prof, int freq){
+    int x =0;
+    bool res = false;
+    while(x<m.size()){
+        if(x!=p && intensidadMedia(m[x]) < intensidadMedia(m[p])){
+            res = true;
+
+
+        }
+
+
+        x=x+1;
+
+    }
+    return res;
+
+}
+float intensidadMedia(audio a){
+    int i=0;
+    int sum = 0;
+    while(i<a.size()){
+        sum += abs(a[i])/a.size();
+        i = i+1;
+    }
+    return sum;
 }
 
 /************************** EJERCICIO ardillizar **************************/
