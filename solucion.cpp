@@ -62,34 +62,32 @@ bool sonTodosCeros(audio a){
 /************************** EJERCICIO elAcaparador **************************/
 int elAcaparador(sala m, int freq, int prof){
     int persona = 0;
-    for(int i =0; i<m.size();i++){
-        if(acapara(m,i,prof,freq)){
+    for(int i = 0; i < m.size(); i++)
+        if(acapara(m, i, prof, freq))
             persona = i;
-        }
-    }
     return persona;
 }
 
-bool acapara(sala m, int p, int prof, int freq){
-    int x =0;
-    bool res = false;
-    while(x<m.size()){
-        if(x!=p && intensidadMedia(m[x]) < intensidadMedia(m[p])){
-            res = true;
-        }
-        x=x+1;
+bool acapara(sala m, int posibleAcaparador, int prof, int freq){
+    bool res = true;
+    int persona = 0;
+    while(persona < m.size()){
+        if(persona != posibleAcaparador and intensidadMedia(m[persona]) >= intensidadMedia(m[posibleAcaparador]))
+            res = false;
+        persona++;
     }
     return res;
 
 }
+
 float intensidadMedia(audio a) {
     int i = 0;
     int sum = 0;
     while (i < a.size()) {
-        sum += abs(a[i]) / a.size();
-        i = i + 1;
+        sum += abs(a[i]);
+        i++;
     }
-    return sum;
+    return sum/(float)a.size();
 }
 
 /************************** EJERCICIO ardillizar **************************/
@@ -121,11 +119,11 @@ sala flashElPerezoso(sala m, int prof, int freq){
     int length_mi = 2 * m[0].size() - 1;
     sala res(length_m, vector<int> (length_mi));
 
-    int i= 0;
-    while(i<length_m){
+    int i = 0;
+    while(i < length_m){
         int j = 0;
         int l = 0;
-        while(j<m[i].size() || l<vecInterpolado(m[i]).size()){
+        while(j < m[i].size() or l < vecInterpolado(m[i]).size()){
             res[i][2*j] = m[i][j];
             res[i][2*j+1] = vecInterpolado(m[i])[l];
             j++;
@@ -135,13 +133,14 @@ sala flashElPerezoso(sala m, int prof, int freq){
     }
     return res;
 }
-//fun para inteppolar vector
+
 vector<int> vecInterpolado(vector<int> a){
-    vector<int> aux;
-    for( int i=1; i<a.size(); i++){
-        aux.push_back(floor(((a[i-1] + a[i])/2)));
+    vector<int> interpolado;
+    for(int i = 1; i < a.size(); i++){
+        int promedioVecinos = floor((a[i-1] + a[i])/2);
+        interpolado.push_back(promedioVecinos);
     }
-    return aux;
+    return interpolado;
 }
 
 /************************** EJERCICIO silencios **************************/
