@@ -83,12 +83,8 @@ bool acapara(sala m, int p, int prof, int freq){
         if(x!=p && intensidadMedia(m[x]) < intensidadMedia(m[p])){
             res = true;
 
-
         }
-
-
         x=x+1;
-
     }
     return res;
 
@@ -130,9 +126,32 @@ audio ardillizarAudio(audio a){
 }
 
 /************************** EJERCICIO flashElPerezoso **************************/
-sala flashElPerezoso(sala m, int prof, int freq) {
-    sala res;
+sala flashElPerezoso(sala m, int prof, int freq){
+    int length_m = m.size();
+    int length_mi = 2 * m[0].size() - 1;
+    sala res(length_m, vector<int> (length_mi));
+
+    int i= 0;
+    while(i<length_m){
+        int j = 0;
+        int l = 0;
+        while(j<m[i].size() || l<vecInterpolado(m[i]).size()){
+            res[i][2*j] = m[i][j];
+            res[i][2*j+1] = vecInterpolado(m[i])[l];
+            j++;
+            l++;
+        }
+        i++;
+    }
     return res;
+}
+//fun para inteppolar vector
+vector<int> vecInterpolado(vector<int> a){
+    vector<int> aux;
+    for( int i=1; i<a.size(); i++){
+        aux.push_back(floor(((a[i-1] + a[i])/2)));
+    }
+    return aux;
 }
 
 /************************** EJERCICIO silencios **************************/
