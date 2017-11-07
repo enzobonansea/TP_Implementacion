@@ -20,8 +20,8 @@ TEST(silenciosTEST, unAudio) {
     for (int i = 0; i < ts.size(); i++) {
         intervalo t1 = ts[i];
         intervalo t2 = t_out[i];
-        EXPECT_NEAR(get<0>(t1), get<0>(t2), 0.01);
-        EXPECT_NEAR(get<1>(t1), get<1>(t2), 0.01);
+        EXPECT_NEAR(get<0>(t1), get<0>(t2), 0.1);
+        EXPECT_NEAR(get<1>(t1), get<1>(t2), 0.1);
     }
 }
 

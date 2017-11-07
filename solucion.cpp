@@ -3,6 +3,8 @@
 #include "ejercicios.h"
 #include "Funciones_TPI.h"
 #include "math.h"
+#include <iomanip>
+#include <fstream>
 
 /************************** EJERCICIO grabacionValida **************************/
 bool grabacionValida(audio s, int prof, int freq) {
@@ -63,8 +65,44 @@ bool sonTodosCeros(audio a){
 
 
 /************************** EJERCICIO elAcaparador **************************/
-int elAcaparador(sala m, int freq, int prof) {
-    return -1;
+int elAcaparador(sala m, int freq, int prof){
+    int persona = 0;
+    for(int i =0; i<m.size();i++){
+        if(acapara(m,i,prof,freq)){
+            persona = i;
+
+        }
+
+    }
+
+    return persona;
+}
+
+bool acapara(sala m, int p, int prof, int freq){
+    int x =0;
+    bool res = false;
+    while(x<m.size()){
+        if(x!=p && intensidadMedia(m[x]) < intensidadMedia(m[p])){
+            res = true;
+
+
+        }
+
+
+        x=x+1;
+
+    }
+    return res;
+
+}
+float intensidadMedia(audio a){
+    int i=0;
+    int sum = 0;
+    while(i<a.size()){
+        sum += abs(a[i])/a.size();
+        i = i+1;
+    }
+    return sum;
 }
 
 /************************** EJERCICIO ardillizar **************************/
@@ -78,9 +116,6 @@ sala ardillizar(sala m, int prof, int freq) {
     }
     return res;
 }
-
-/*¿Para que entran por parametro prof y freq si no debo garantizar nada sobre ellos en
- * la postcondicion?*/
 
 audio ardillizarAudio(audio a){
     audio res;
@@ -102,65 +137,50 @@ sala flashElPerezoso(sala m, int prof, int freq) {
 /************************** EJERCICIO silencios **************************/
 lista_intervalos silencios(audio s, int prof, int freq, int umbral) {
     lista_intervalos res;
-    for(int i=0;i<s.size();i++){
-        for(int j=i; j<s.size();j++){
+    for (int i = 0; i < s.size(); i++) {
+        for (int j = i; j < s.size(); j++) {
             intervalo tupla;
-            get<0>(tupla) =(float)i/(float)freq;
-            get<1>(tupla) =(float)j/(float)freq;
-            if(esSilencio(s,tupla,umbral,i,j)) {
+            float primerElemento = i / (float) freq; //despues de este tiempo esta la muestra i, i+1, ...
+            float segundoElemento = (j + 1) / (float) freq; //antes de este tiempo esta la muetra j, j-1, ... (por eso j+1 y no j)
+            get<0>(tupla) = primerElemento;
+            get<1>(tupla) = segundoElemento;
+            if (esSilencio(s, tupla, umbral, i, j))
                 res.push_back(tupla);
-
-            }
-
         }
-
     }
-
-
     return res;
 }
 
+bool esSilencio (audio s, intervalo inter, int umbral, int i, int j){
+    bool res = false;
+    float duracion = get<1>(inter) - get<0>(inter);
+    float epsilon = 0.00001;
+    bool duracionValida = (duracion >= 0.1 - epsilon) or (duracion >= 0.1 + epsilon);
+    if(duracionValida and noSuperaUmbral(s, i, j, umbral) and noHaySilencioMayor(s, i, j, umbral))
+        res = true;
+    return res;
+}
 
-
-bool noSuperaUmbral (audio s, int i, int j,int umbral){
+bool noSuperaUmbral (audio s, int i, int j,int umbral) {
     bool res = true;
-    for(auto k= i; k <= j; k++) {
-        if (s[k] > umbral) {
+    for (int k = i; k <= j; k++)
+        if (abs(s[k]) > umbral)
             res = false;
-
-        }
-    }
     return res;
 }
-
 
 bool noHaySilencioMayor(audio s, int i, int j, int umbral) {
     bool res = true;
-    if(i>0 && j<s.size()){
-        if (abs(s[i - 1]) < umbral || abs(s[j+1])<umbral) {
-            res = false;
+    if(i > 0){
+        if (j < s.size() - 1){
+            res = abs(s[i-1]) > umbral and abs(s[j+1] > umbral);
+        }else{
+            res = abs(s[i-1]) > umbral;
         }
-    }
-    else if ( i > 0 ) {
-        if (abs(s[i - 1]) < umbral) {
-            res = false;
+    }else{
+        if(j < s.size() - 1){
+            res = abs(s[j+1]) > umbral;
         }
-    }else if(j < s.size()){
-        if(abs(s[j+1])<umbral) {
-            res = false;
-        }
-    }
-
-    return res;
-}
-
-
-
-bool esSilencio (audio s,intervalo inter,int umbral,int i,int j){
-    bool res = false;
-    if((get<1>(inter) - get<0>(inter) > 0.1)  && noSuperaUmbral(s, i,j, umbral) && noHaySilencioMayor(s, i,j, umbral)){
-        res = true;
-
     }
     return res;
 }
@@ -173,15 +193,12 @@ bool hayQuilombo(sala m, int prof, int freq, int umbral) {
     while(p1 < cantPersonas){
         int p2 = 0;
         while(p2 < cantPersonas){
-            if(!seRespetan(m, p1, p2, freq, umbral, prof))
+            if(p1 != p2 and !seRespetan(m, p1, p2, freq, umbral, prof))
                 res = true;
             p2++;
         }
         p1++;
     }
-    /* el codigo precedente compara todos los posibles pares de personas y deja en res un valor
-     * de verdad que depende de si 'hay respeto' o no entre todos estos pares. Si hay respeto,
-     * no hay quilombo, entonces res = false */
     return res;
 }
 
@@ -191,12 +208,8 @@ bool seRespetan(sala m, int p1, int p2, int freq, int umbral, int prof){
     audio persona2 = m[p2];
     int i = 0;
     while(i < persona1.size()){
-        if( !haySilencioQueLoContiene(persona1, i, freq, umbral, prof) and
-            !haySilencioQueLoContiene(persona2, i, freq, umbral, prof)    )
-            /* si vale la guarda anterior, persona1[i] y persona2[i] estan en dos no-silencios
-             * simultaneamente, es decir hay superposicion de habla entre persona1 y persona2
-             * por ende no hay respeto, luego seRespetan devuelve false */
-            res = false;
+        bool algunSilencioContieneLaMuestra = haySilencioQueLoContiene(persona1, i, freq, umbral, prof) or haySilencioQueLoContiene(persona2, i, freq, umbral, prof);
+        res &= algunSilencioContieneLaMuestra;
         i++;
     }
     return res;
@@ -204,21 +217,20 @@ bool seRespetan(sala m, int p1, int p2, int freq, int umbral, int prof){
 
 bool haySilencioQueLoContiene(audio a, int i, int freq, int umbral, int prof){
     bool res = false;
-    float tiempoEnCuestion = i * freq; //asocio a la muestra a[i] un tiempo
-    lista_intervalos momentosDeSilencio = silencios(a, freq, umbral, prof);
+    float tiempoAntesDeLaMuestra = i/(float)freq;
+    float tiempoDespuesDeLaMuestra = (i+1)/(float)freq;
+    lista_intervalos intervalosDeSilencio = silencios(a, prof, freq, umbral);
     int j = 0;
-    while(j < momentosDeSilencio.size()){
-        int inicio = get<0>(momentosDeSilencio[j]);
-        int fin = get<1>(momentosDeSilencio[j]);
-        if(inicio <= tiempoEnCuestion and tiempoEnCuestion <= fin)
+    while(j < intervalosDeSilencio.size()){
+        float inicio = get<0>(intervalosDeSilencio[j]);
+        float fin = get<1>(intervalosDeSilencio[j]);
+        bool enElIntervalo = tiempoAntesDeLaMuestra >= inicio and tiempoDespuesDeLaMuestra <= fin;
+        if(enElIntervalo)
             res = true;
         j++;
     }
-    /* en el ciclo me fijo si el tiempo asociado a a[i] se encuentra dentro de un intervalo de silencio o no.
-     * Por ende devuelvo true si y solo si al menos un silencio contiene a a[i] */
     return res;
 }
-
 /************************** EJERCICIO compararSilencios **************************/
 /*float compararSilencios(audio vec, int freq, int prof,int locutor, int umbralSilencio){
 
