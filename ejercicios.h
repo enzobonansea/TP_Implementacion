@@ -46,8 +46,24 @@ float recall(lista_intervalos listaIntervalos, audio s, int prof, int freq, int 
 float Funo(lista_intervalos listaIntervalos, audio s, int prof, int freq, int umbral, tiempo dur);
 float resultadoFinal(sala m, int freq, int prof, int umbralSilencio );
 
+float compararSilencios(audio vec, int freq, int prof,int locutor, int umbralSilencio);
+lista_intervalos convertirALista(string archivo);
+vector<bool> enmascarar(lista_intervalos listaIntervalo, tiempo dur);
+void negacionLogica(vector<bool> &mascara );
+vector<bool> enmascararSilencios(audio s, int prof, int freq, int umbral);
+int cantidadVerdaderos(vector<bool> mascara);
+int cantidadFalsos(vector<bool> mascara);
+float precision(lista_intervalos listaIntervalos, tiempo dur);
+float recall(lista_intervalos listaIntervalos, audio s, int prof, int freq, int umbral, tiempo dur);
+float Funo(lista_intervalos listaIntervalos, audio s, int prof, int freq, int umbral, tiempo dur);
+float resultadoFinal(sala m, int freq, int prof, int umbralSilencio );
+
 locutor medirLaDistancia(sala m, audio frase, int freq, int prof);
 
 int encontrarAparicion(audio x, audio y);
+bool esMaximaCorrelacion(audio a, int starPoint, audio frase);
+int comienzoCorrelacion(audio a,audio frase);
+
+
 
 #endif //SALADEREUNION_EJERCICIOS_H

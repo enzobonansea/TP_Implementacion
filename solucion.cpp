@@ -3,8 +3,6 @@
 #include "ejercicios.h"
 #include "Funciones_TPI.h"
 #include "math.h"
-#include <iomanip>
-#include <fstream>
 
 /************************** EJERCICIO grabacionValida **************************/
 bool grabacionValida(audio s, int prof, int freq) {
@@ -103,6 +101,40 @@ float intensidadMedia(audio a){
         i = i+1;
     }
     return sum;
+int elAcaparador(sala m, int freq, int prof){
+    int persona = 0;
+    for(int i =0; i<m.size();i++){
+        if(acapara(m,i,prof,freq)){
+            persona = i;
+
+        }
+
+    }
+
+    return persona;
+}
+
+bool acapara(sala m, int p, int prof, int freq){
+    int x =0;
+    bool res = false;
+    while(x<m.size()){
+        if(x!=p && intensidadMedia(m[x]) < intensidadMedia(m[p])){
+            res = true;
+
+        }
+        x=x+1;
+    }
+    return res;
+
+}
+float intensidadMedia(audio a){
+    int i=0;
+    int sum = 0;
+    while(i<a.size()){
+        sum += abs(a[i])/a.size();
+        i = i+1;
+    }
+    return sum;
 }
 
 /************************** EJERCICIO ardillizar **************************/
@@ -129,9 +161,32 @@ audio ardillizarAudio(audio a){
 }
 
 /************************** EJERCICIO flashElPerezoso **************************/
-sala flashElPerezoso(sala m, int prof, int freq) {
-    sala res;
+sala flashElPerezoso(sala m, int prof, int freq){
+    int length_m = m.size();
+    int length_mi = 2 * m[0].size() - 1;
+    sala res(length_m, vector<int> (length_mi));
+
+    int i= 0;
+    while(i<length_m){
+        int j = 0;
+        int l = 0;
+        while(j<m[i].size() || l<vecInterpolado(m[i]).size()){
+            res[i][2*j] = m[i][j];
+            res[i][2*j+1] = vecInterpolado(m[i])[l];
+            j++;
+            l++;
+        }
+        i++;
+    }
     return res;
+}
+//fun para inteppolar vector
+vector<int> vecInterpolado(vector<int> a){
+    vector<int> aux;
+    for( int i=1; i<a.size(); i++){
+        aux.push_back(floor(((a[i-1] + a[i])/2)));
+    }
+    return aux;
 }
 
 /************************** EJERCICIO silencios **************************/
@@ -234,7 +289,7 @@ bool haySilencioQueLoContiene(audio a, int i, int freq, int umbral, int prof){
 /************************** EJERCICIO compararSilencios **************************/
 /*float compararSilencios(audio vec, int freq, int prof,int locutor, int umbralSilencio){
 
-    que carajos me esta pidiendo?
+    // todo que carajos me esta pidiendo?
 
 
 }*/
@@ -247,11 +302,11 @@ lista_intervalos convertirALista(string archivo){
 // abro y leo el archivo
     ifstream fin;
     fin.open(archivo, ios::in);
-//itero cada linea y guardo el tiempo inicial y final
+//itero cada linea y guardo el tiempo inicial y final en una lista de tuplas
     while(!fin.eof()){
-        tiempo tInit;
-        tiempo tFin;
-        intervalo tupla;
+        tiempo tInit;//tiempo inicial
+        tiempo tFin;//tiempo final
+        intervalo tupla;//tupla del tiempo inicial y final
         fin >> tInit >> tFin;
         get<0>(tupla)=tInit;
         get<0>(tupla)=tFin;
@@ -270,6 +325,7 @@ vector<bool> enmascarar(lista_intervalos listaIntervalo, tiempo dur){
         bool valor = false;
         for (int i = 0; i < listaIntervalo.size(); i++) {
             if (get<0>(listaIntervalo[i]) <= j / 100 && j / 100 < get<1>(listaIntervalo[i])) {
+                //me fijo los intervalos de 10 milesimos si existen dentro de algun intervalo de habla devuelvo true (mirar especificacion de TiempoEnPosicionI
                 valor = true;
             }
 
@@ -296,8 +352,9 @@ void negacionLogica(vector<bool> &mascara ){
 
 //convierto a lista de intervalos los silencios de un audio con la funcion silencios
 vector<bool> enmascararSilencios(audio s, int prof, int freq, int umbral){
-
+    //creo una lista de intervalos de silencios del audio s
     lista_intervalos mascaraSilencio = silencios(s,prof,freq,umbral);
+    //enmascaro los silencios TRUE si es Silencio FALSE si no es silencio
     vector<bool> res = enmascarar(mascaraSilencio, s.size()/freq);
 
     return res;
@@ -344,7 +401,7 @@ float recall(lista_intervalos listaIntervalos, audio s, int prof, int freq, int 
 
 
 }
-
+//estoy hay que implementar en compararSilencios
 float Funo(lista_intervalos listaIntervalos, audio s, int prof, int freq, int umbral, tiempo dur){
     float res = 2* (precision(listaIntervalos, dur)*recall(listaIntervalos,s,prof,freq,umbral,dur)/(precision(listaIntervalos, dur)+recall(listaIntervalos,s,prof,freq,umbral,dur)));
     return res;
@@ -357,6 +414,7 @@ float resultadoFinal(sala m, int freq, int prof, int umbralSilencio ){
 
     for(int i =0; i<m.size();i++){
         vector <bool> mascaraDeSilencios = enmascararSilencios(m[i],prof,freq,umbralSilencio);
+        //convierto a lista de intervalos al archivo del locutor
         lista_intervalos mascara = convertirALista(string("habla_spkr")+to_string(i)+".txt");
         sum += Funo(mascara,m[i],prof,freq,umbralSilencio,m[i].size()/freq);
     }
@@ -367,18 +425,79 @@ float resultadoFinal(sala m, int freq, int prof, int umbralSilencio ){
 }
 
 /************************** EJERCICIO sacarPausas **************************/
+//usar esSilencio del punto 7
 audio sacarPausas(audio s, lista_intervalos sil, int freq, int prof, int umbral) {
     audio result;
+    int i =0;
+    /*bool esSilencio (audio s,intervalo inter,int umbral,int i,int j)*/
+    while(i<s.size()){
+        for(int j=i; j<s.size();j++){
+            tuple<float,float> inter;//chequeo por intervalos
+            get<0>(inter)=float(i/freq);//tiempo inicial
+            get<1>(inter)=float(j/freq);//tiempo final
+            /*si el intervalo es un silencio y no esta contenido en otro silencio(esSilencio)
+              salto la posicion inicial a j sino pusheo tod o el intervalo al vector audio   */
+
+                if(esSilencio(s,inter,umbral,i,j)){
+                    i = j;
+                }else{
+                    for(int k=i;k<=j;k++) {
+                        result.push_back(s[k]);
+                    }
+                }
+
+        }
+        //aca si i= j termina j+1 sino se incrementa en 1 el i original
+        i++;
+    }
     return result;
 }
 
 /************************** EJERCICIO encontrarAparicion **************************/
-int encontrarAparicion(audio x, audio y) {
-    return -1;
+int encontrarAparicion(audio x, audio y) {   //x = target  y=audio
+    int res = comienzoCorrelacion(x,y);
+    return res;
 }
+
+int comienzoCorrelacion(audio a,audio frase){
+    int l_a= a.size();
+    int l_f= frase.size();
+    int acum = 0;
+        for(int i = 0; i<l_a - l_f; i++){
+            if (esMaximaCorrelacion(a,i,frase)){
+                acum = acum +i;
+            }
+        }
+
+    return acum;
+}
+
+
+bool esMaximaCorrelacion(audio a, int starPoint, audio frase){
+    int l_a= a.size();
+    int l_f= frase.size();
+    bool res = false;
+        for(int i = 0; i < l_a - l_f; i++){
+            if(i!=starPoint){
+                if (correlacion(subseq(a,i,i+l_f),frase) < correlacion(subseq(a, starPoint, starPoint+l_f),frase)){
+                    res= true;
+                } else {
+                    res = false;
+                }
+            }
+        }
+    return res;
+}
+
+
+
+//LISTO  (verificar si faltan casos de test)
 
 /************************** EJERCICIO medirLaDistancia **************************/
 locutor medirLaDistancia(sala m, audio frase, int freq, int prof) {
     locutor out;
+
+
+
     return out;
 }
