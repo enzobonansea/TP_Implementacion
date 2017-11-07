@@ -1,8 +1,5 @@
-// Version preliminar. Esto seguramente ni compile, es para tener una idea de la complejidad de los ejercicios.
-
 #include "ejercicios.h"
 #include "Funciones_TPI.h"
-#include "math.h"
 
 /************************** EJERCICIO grabacionValida **************************/
 bool grabacionValida(audio s, int prof, int freq) {
@@ -68,11 +65,8 @@ int elAcaparador(sala m, int freq, int prof){
     for(int i =0; i<m.size();i++){
         if(acapara(m,i,prof,freq)){
             persona = i;
-
         }
-
     }
-
     return persona;
 }
 
@@ -82,57 +76,18 @@ bool acapara(sala m, int p, int prof, int freq){
     while(x<m.size()){
         if(x!=p && intensidadMedia(m[x]) < intensidadMedia(m[p])){
             res = true;
-
-
-        }
-
-
-        x=x+1;
-
-    }
-    return res;
-
-}
-float intensidadMedia(audio a){
-    int i=0;
-    int sum = 0;
-    while(i<a.size()){
-        sum += abs(a[i])/a.size();
-        i = i+1;
-    }
-    return sum;
-int elAcaparador(sala m, int freq, int prof){
-    int persona = 0;
-    for(int i =0; i<m.size();i++){
-        if(acapara(m,i,prof,freq)){
-            persona = i;
-
-        }
-
-    }
-
-    return persona;
-}
-
-bool acapara(sala m, int p, int prof, int freq){
-    int x =0;
-    bool res = false;
-    while(x<m.size()){
-        if(x!=p && intensidadMedia(m[x]) < intensidadMedia(m[p])){
-            res = true;
-
         }
         x=x+1;
     }
     return res;
 
 }
-float intensidadMedia(audio a){
-    int i=0;
+float intensidadMedia(audio a) {
+    int i = 0;
     int sum = 0;
-    while(i<a.size()){
-        sum += abs(a[i])/a.size();
-        i = i+1;
+    while (i < a.size()) {
+        sum += abs(a[i]) / a.size();
+        i = i + 1;
     }
     return sum;
 }
@@ -418,7 +373,6 @@ float resultadoFinal(sala m, int freq, int prof, int umbralSilencio ){
         lista_intervalos mascara = convertirALista(string("habla_spkr")+to_string(i)+".txt");
         sum += Funo(mascara,m[i],prof,freq,umbralSilencio,m[i].size()/freq);
     }
-
 
     res = sum/m.size();
     return res;

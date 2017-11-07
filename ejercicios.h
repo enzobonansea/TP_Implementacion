@@ -29,11 +29,10 @@ lista_intervalos silencios(audio s, int prof, int freq, int umbral);
 bool noSuperaUmbral (audio s, int i, int j,int umbral);
 bool noHaySilencioMayor(audio s, int i, int j, int umbral);
 bool esSilencio (audio s,intervalo inter,int umbral,int i,int j);
-
+vector<int> vecInterpolado(vector<int> a);
 bool hayQuilombo(sala m, int prof, int freq, int umbral);
 bool seRespetan(sala m, int p1, int p2, int freq, int umbral, int prof);
 bool haySilencioQueLoContiene(audio a, int i, int freq, int umbral, int prof);
-float darPrecision(float numero);
 float compararSilencios(audio vec, int freq, int prof,int locutor, int umbralSilencio);
 lista_intervalos convertirALista(string archivo);
 vector<bool> enmascarar(lista_intervalos listaIntervalo, tiempo dur);
