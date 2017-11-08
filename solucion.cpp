@@ -162,9 +162,14 @@ lista_intervalos silencios(audio s, int prof, int freq, int umbral) {
 
 bool esSilencio (audio s, intervalo inter, int umbral, int i, int j){
     bool res = false;
-    float duracion = get<1>(inter) - get<0>(inter);
-    float epsilon = 0.00001;
-    bool duracionValida = (duracion >= 0.1 - epsilon) or (duracion >= 0.1 + epsilon);
+    /* La duracion es valida si y solo si (get<1>(inter) - get<0>(inter) >= 0.1), pero hay un problema: la representacion
+     * inexacta de los reales como floats. Por este motivo, para la maquina (0.5 - 0.4 >= 0.1) es false pues al 0.5 lo
+     * representa exacto y al 0.4 como 0.400006, luego su resta es menor a 0.1 (muy aproximado, pero menor) y por ende
+     * habian ciertos intervalos de silencio que no eran tenidos en cuenta.
+     * Para solucionar este problema nos valemos de lo siguiente: la maquina representa de forma exacta a los enteros,
+     * (get<1>(inter) - get<0>(inter) >= 0.1) sii ( (get<1>(inter) - get<0>(inter))*10 >= 0.1 * 10 ) sii
+     * ( get<1>(inter) * 10 - get<0>(inter) * 10 >= 1) y tanto (get<1>(inter) * 10) como (get<0>(inter) * 10) son enteros. */
+    bool duracionValida = get<1>(inter) * 10 - get<0>(inter) * 10 >=  1;
     if(duracionValida and noSuperaUmbral(s, i, j, umbral) and noHaySilencioMayor(s, i, j, umbral))
         res = true;
     return res;
@@ -241,53 +246,36 @@ bool haySilencioQueLoContiene(audio a, int i, int freq, int umbral, int prof){
     return res;
 }
 /************************** EJERCICIO compararSilencios **************************/
-/*float compararSilencios(audio vec, int freq, int prof,int locutor, int umbralSilencio){
-
-    // todo que carajos me esta pidiendo?
-
-
-}*/
-
-
-// tomo un archivo y lo convierto en una lista de tuplas(float,float)
-lista_intervalos convertirALista(string archivo){
-
+lista_intervalos cargarIntervaloDeHabla(string archivo){
     lista_intervalos res;
-// abro y leo el archivo
-    ifstream fin;
-    fin.open(archivo, ios::in);
-//itero cada linea y guardo el tiempo inicial y final en una lista de tuplas
-    while(!fin.eof()){
-        tiempo tInit;//tiempo inicial
-        tiempo tFin;//tiempo final
-        intervalo tupla;//tupla del tiempo inicial y final
-        fin >> tInit >> tFin;
-        get<0>(tupla)=tInit;
-        get<0>(tupla)=tFin;
+    ifstream entrada;
+    entrada.open(archivo, ifstream::in);
+    while(!entrada.eof()){
+        tiempo tIni;
+        tiempo tFin;
+        intervalo tupla;
+        entrada >> tIni >> tFin;
+        get<0>(tupla) = tIni;
+        get<0>(tupla) = tFin;
         res.push_back(tupla);
     }
-
-
     return res;
 }
 
-//de la lista de intervalos formo un vector de booleanos, cada posicion represente el tiempo i/100 ( intervalos de 10 milesimos) si el tiempo en la posicion se encuentre entre un intervalo de la lista de intervalos devuelvo true sino false
 vector<bool> enmascarar(lista_intervalos listaIntervalo, tiempo dur){
-    vector <bool> res;
-
-    for(int j=0; j < dur*100; j++) {
+    vector <bool> mascara;
+    for(int i = 0; i < dur*100; i++) {
         bool valor = false;
-        for (int i = 0; i < listaIntervalo.size(); i++) {
-            if (get<0>(listaIntervalo[i]) <= j / 100 && j / 100 < get<1>(listaIntervalo[i])) {
-                //me fijo los intervalos de 10 milesimos si existen dentro de algun intervalo de habla devuelvo true (mirar especificacion de TiempoEnPosicionI
+        for (int j = 0; j < listaIntervalo.size(); j++) {
+            float t0 = get<0>(listaIntervalo[j]);
+            float t1 = get<1>(listaIntervalo[j]);
+            float tiempoEnPosicion_i = i /(float)100;
+            if (t0 <= tiempoEnPosicion_i and tiempoEnPosicion_i < t1)
                 valor = true;
-            }
-
         }
-        res.push_back(valor);
-
+        mascara.push_back(valor);
     }
-    return res;
+    return mascara;
 }
 
 // invierto mascara
@@ -369,7 +357,7 @@ float resultadoFinal(sala m, int freq, int prof, int umbralSilencio ){
     for(int i =0; i<m.size();i++){
         vector <bool> mascaraDeSilencios = enmascararSilencios(m[i],prof,freq,umbralSilencio);
         //convierto a lista de intervalos al archivo del locutor
-        lista_intervalos mascara = convertirALista(string("habla_spkr")+to_string(i)+".txt");
+        lista_intervalos mascara = cargarIntervaloDeHabla(string("habla_spkr")+to_string(i)+".txt");
         sum += Funo(mascara,m[i],prof,freq,umbralSilencio,m[i].size()/freq);
     }
 

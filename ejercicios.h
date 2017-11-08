@@ -34,7 +34,7 @@ bool hayQuilombo(sala m, int prof, int freq, int umbral);
 bool seRespetan(sala m, int p1, int p2, int freq, int umbral, int prof);
 bool haySilencioQueLoContiene(audio a, int i, int freq, int umbral, int prof);
 float compararSilencios(audio vec, int freq, int prof,int locutor, int umbralSilencio);
-lista_intervalos convertirALista(string archivo);
+lista_intervalos cargarIntervaloDeHabla(string archivo);
 vector<bool> enmascarar(lista_intervalos listaIntervalo, tiempo dur);
 void negacionLogica(vector<bool> &mascara );
 vector<bool> enmascararSilencios(audio s, int prof, int freq, int umbral);
