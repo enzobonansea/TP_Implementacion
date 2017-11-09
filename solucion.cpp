@@ -153,28 +153,27 @@ lista_intervalos silencios(audio s, int prof, int freq, int umbral) {
             float segundoElemento = (j + 1) / (float) freq; //antes de este tiempo esta la muetra j, j-1, ... (por eso j+1 y no j)
             get<0>(tupla) = primerElemento;
             get<1>(tupla) = segundoElemento;
-            if (esSilencio(s, tupla, umbral, i, j))
+            if (esSilencio(s, tupla, umbral, i, j, freq))
                 res.push_back(tupla);
         }
     }
     return res;
 }
 
-bool esSilencio (audio s, intervalo inter, int umbral, int i, int j){
+bool esSilencio (audio s, intervalo inter, int umbral, int i, int j, int freq){
     bool res = false;
-    /* La duracion es valida si y solo si (get<1>(inter) - get<0>(inter) >= 0.1), pero hay un problema: la representacion
-     * inexacta de los reales como floats. Por este motivo, para la maquina (0.5 - 0.4 >= 0.1) es false pues al 0.5 lo
-     * representa exacto y al 0.4 como 0.400006, luego su resta es menor a 0.1 (muy aproximado, pero menor) y por ende
-     * habian ciertos intervalos de silencio que no eran tenidos en cuenta.
-     * Para solucionar este problema nos valemos de lo siguiente: la maquina representa de forma exacta a los enteros,
-     * (get<1>(inter) - get<0>(inter) >= 0.1) sii ( (get<1>(inter) - get<0>(inter))*10 >= 0.1 * 10 ) sii
-     * ( get<1>(inter) * 10 - get<0>(inter) * 10 >= 1) y tanto (get<1>(inter) * 10) como (get<0>(inter) * 10) son enteros. */
-    bool duracionValida = get<1>(inter) * 10 - get<0>(inter) * 10 >=  1;
+    float tf = get<1>(inter);
+    float ti = get<0>(inter);
+    bool duracionValida = indiceEnTiempo(tf, freq) - indiceEnTiempo(ti, freq) >= indiceEnTiempo(0.1, freq);
     if(duracionValida and noSuperaUmbral(s, i, j, umbral) and noHaySilencioMayor(s, i, j, umbral))
         res = true;
     return res;
 }
 
+int indiceEnTiempo(float tiempo, int freq){
+    int res = floor(freq * tiempo);
+    return res;
+}
 bool noSuperaUmbral (audio s, int i, int j,int umbral) {
     bool res = true;
     for (int k = i; k <= j; k++)
@@ -278,77 +277,116 @@ vector<bool> enmascarar(lista_intervalos listaIntervalo, tiempo dur){
     return mascara;
 }
 
-// invierto mascara
-void negacionLogica(vector<bool> &mascara ){
-    for(int i=0; i<mascara.size();i++){
-        if(mascara[i]== false){
-            mascara[i] = true;
-
-        }else{
-            mascara[i] = true;
-        }
-
+void negacionLogica(vector<bool> &mascara ) {
+    for (int i = 0; i < mascara.size(); i++) {
+        bool temp = mascara[i];
+        mascara[i] = !temp;
     }
-    return;
 }
 
-//convierto a lista de intervalos los silencios de un audio con la funcion silencios
 vector<bool> enmascararSilencios(audio s, int prof, int freq, int umbral){
-    //creo una lista de intervalos de silencios del audio s
-    lista_intervalos mascaraSilencio = silencios(s,prof,freq,umbral);
-    //enmascaro los silencios TRUE si es Silencio FALSE si no es silencio
-    vector<bool> res = enmascarar(mascaraSilencio, s.size()/freq);
-
-    return res;
+    lista_intervalos silenciosSinMascara = silencios(s,prof,freq,umbral);
+    float duracion = s.size() /(float) freq;
+    vector<bool> silencioEnmascarado = enmascarar(silenciosSinMascara, duracion);
+    return silencioEnmascarado;
 }
 
-int cantidadVerdaderos(vector<bool> mascara){
-    int res = 0;
-    for(int i=0; i<mascara.size(); i++){
-        if(mascara[i]==true){
-            res+=1;
-
-        }
-
+tuple<vector<bool>, vector<bool> > mascarasDeSilencios(string audioVerdadero, string momentosDeHabla){
+    ifstream entrada;
+    //guardo el audio verdadero en un vector, busco sus intervalos de silencio y los enmascaro
+    audio audioVerdaderoGuardado;
+    entrada.open(audioVerdadero, ifstream::in);
+    while(!entrada.eof()){
+        int a = 0;
+        entrada >> a;
+        audioVerdaderoGuardado.push_back(a);
     }
-    return res;
-}
-
-int cantidadFalsos(vector<bool> mascara){
-    int res = 0;
-    for(int i=0; i<mascara.size(); i++){
-        if(mascara[i]== false){
-            res+=1;
-
-        }
-
+    entrada.close();
+    int prof = 16;
+    int freq = 35;
+    int umbral = 1;
+    vector<bool> mascaraSilenciosSegunAlgoritmo = enmascararSilencios(audioVerdaderoGuardado, prof, freq, umbral);
+    /* guardo en una lista de intervalos los momentos de habla, los enmascaro y luego realizo su negacion logica
+     * para obtener la mascara de los silencios */
+    lista_intervalos momentosDeHablaGuardados;
+    entrada.open(momentosDeHabla, ifstream::in);
+    while(!entrada.eof()){
+        float a = 0;
+        float b = 0;
+        entrada >> a >> b;
+        intervalo tupla;
+        get<0>(tupla) = a;
+        get<1>(tupla) = b;
+        momentosDeHablaGuardados.push_back(tupla);
     }
+    entrada.close();
+    vector<bool> mascaraDeHablaReal = enmascarar(momentosDeHablaGuardados, 120);
+    negacionLogica(mascaraDeHablaReal);
+    vector<bool> mascaraSilenciosReal = mascaraDeHablaReal;
+    //armo la tupla que quiero devolver
+    tuple<vector<bool>, vector<bool> > res;
+    get<0>(res) = mascaraSilenciosSegunAlgoritmo;
+    get<1>(res) = mascaraSilenciosReal;
     return res;
+}
+
+//get<0>(res) debe tener el mismo largo que get<1>(res)
+
+int verdaderosPositivos(tuple<vector<bool>, vector<bool> > mascaras){
+    int cant = 0;
+    for(int i = 0; i < get<0>(mascaras).size(); i++)
+        if(get<0>(mascaras)[i] == get<1>(mascaras)[i] == true)
+            cant++;
+    return cant;
+}
+int verdaderosNegativos(tuple<vector<bool>, vector<bool> > mascaras){
+    int cant = 0;
+    for(int i = 0; i < get<0>(mascaras).size(); i++)
+        if(get<0>(mascaras)[i] == get<1>(mascaras)[i] == false)
+            cant++;
+    return cant;
+}
+int falsosPositivos(tuple<vector<bool>, vector<bool> > mascaras){
+    int cant = 0;
+    for(int i = 0; i < get<0>(mascaras).size(); i++)
+        if(get<0>(mascaras)[i] == true and get<1>(mascaras)[i] == false)
+            cant++;
+    return cant;
+}
+int falsosNegativos(tuple<vector<bool>, vector<bool> > mascaras){
+    int cant = 0;
+    for(int i = 0; i < get<0>(mascaras).size(); i++)
+        if(get<0>(mascaras)[i] == false and get<1>(mascaras)[i] == true)
+            cant++;
+    return cant;
+}
+
+
+float precision(tuple<vector<bool>, vector<bool> > mascaras){
+    float res = verdaderosPositivos(mascaras) / (verdaderosPositivos(mascaras) + falsosPositivos(mascaras));
+    return res;
+}
+
+float recall(tuple<vector<bool>, vector<bool> > mascaras){
+    //esta bien definida recall?
+    float res = verdaderosPositivos(mascaras) / (verdaderosPositivos(mascaras) + falsosNegativos(mascaras));
+    return res;
+
 
 }
 
-float precision(lista_intervalos listaIntervalos, tiempo dur){
-    vector <bool> mascara = enmascarar(listaIntervalos, dur);
-    float  res = cantidadVerdaderos(mascara)/(cantidadVerdaderos(mascara)+cantidadFalsos(mascara));
-
-    return res;
-}
-
-float recall(lista_intervalos listaIntervalos, audio s, int prof, int freq, int umbral, tiempo dur){
-    vector <bool> mascara = enmascarar(listaIntervalos, dur);
-    vector <bool> mascaranegativa = enmascararSilencios(s,prof,freq,umbral);
-    float  res = cantidadVerdaderos(mascara)/(cantidadVerdaderos(mascara)+cantidadFalsos(mascaranegativa));
-
-    return res;
-
+float compararSilencios(audio vec, int freq, int prof, int locutor, int umbralSilencio){
 
 }
+
+
+/*
 //estoy hay que implementar en compararSilencios
 float Funo(lista_intervalos listaIntervalos, audio s, int prof, int freq, int umbral, tiempo dur){
     float res = 2* (precision(listaIntervalos, dur)*recall(listaIntervalos,s,prof,freq,umbral,dur)/(precision(listaIntervalos, dur)+recall(listaIntervalos,s,prof,freq,umbral,dur)));
     return res;
-
 }
+
 //promedio de Funo entre todos los locutores
 float resultadoFinal(sala m, int freq, int prof, int umbralSilencio ){
     float res;
@@ -364,7 +402,7 @@ float resultadoFinal(sala m, int freq, int prof, int umbralSilencio ){
     res = sum/m.size();
     return res;
 }
-
+*/
 /************************** EJERCICIO sacarPausas **************************/
 //usar esSilencio del punto 7
 audio sacarPausas(audio s, lista_intervalos sil, int freq, int prof, int umbral) {
@@ -379,7 +417,7 @@ audio sacarPausas(audio s, lista_intervalos sil, int freq, int prof, int umbral)
             /*si el intervalo es un silencio y no esta contenido en otro silencio(esSilencio)
               salto la posicion inicial a j sino pusheo tod o el intervalo al vector audio   */
 
-                if(esSilencio(s,inter,umbral,i,j)){
+                if(esSilencio(s,inter,umbral,i,j, freq)){
                     i = j;
                 }else{
                     for(int k=i;k<=j;k++) {

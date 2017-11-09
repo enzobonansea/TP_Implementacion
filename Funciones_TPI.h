@@ -13,17 +13,11 @@
 using namespace std;
 
 void grabarVectorAudio(audio vec, string nombreArchivo);
-
-audio leerVectorAudio(string nombreArchivo, int &frecuencia, int &profundidad, int &duracion);
-
-sala cargarSalaAudio(vector<string> arch, int &frecuencia, int &profundidad, int &duracion);
-
-sala cargarSalaAudio(vector<string> arch, int &frecuencia, int &profundidad, int &duracion, int ini, int longitud);
-
-void calcularEstadisticos(audio vec, float &media, float &std);
-
+audio leerVectorAudio(string nombreArchivo, int& frecuencia, int& profundidad, int& duracion);
+sala cargarSalaAudio(vector<string> arch, int& frecuencia, int& profundidad, int& duracion);
+sala cargarSalaAudio(vector<string> arch, int& frecuencia, int& profundidad, int& duracion,int ini, int longitud);
+void calcularEstadisticos(audio vec, float& media, float& std);
 audio subAudio(audio in, int ini, int longitud);
-
 float correlacion(audio x, audio y);
 
 

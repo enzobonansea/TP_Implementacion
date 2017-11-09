@@ -20,12 +20,12 @@ using namespace std;
 #define VELOCIDAD_SONIDO                340.29 // metro/seg
 
 // DEFINICIONES DE TIPO
-typedef float tiempo;
 typedef vector<int> audio;
 typedef vector<audio> sala;
-typedef tuple<float, float> intervalo;
+typedef float tiempo;
+typedef tuple<tiempo,tiempo> intervalo;
 typedef vector<intervalo> lista_intervalos;
 typedef vector<float> lista_distancias;
-typedef tuple<int, lista_distancias> locutor;
+typedef tuple<int,lista_distancias> locutor;
 
 #endif //UTILES_DEFINICIONES_H
