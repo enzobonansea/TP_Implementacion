@@ -479,45 +479,70 @@ audio sacarPausas(audio s, lista_intervalos sil, int freq, int prof, int umbral)
 }
 
 /************************** EJERCICIO encontrarAparicion **************************/
-int encontrarAparicion(audio x, audio y) {   //x = target  y=audio
+int encontrarAparicion(audio x, audio y){
     int res = comienzoCorrelacion(x,y);
     return res;
 }
 
-int comienzoCorrelacion(audio a,audio frase){
-    int l_a= a.size();
-    int l_f= frase.size();
+int comienzoCorrelacion(audio a, audio frase) {
+    int l_a = a.size();
+    int l_f = frase.size();
     int acum = 0;
-        for(int i = 0; i<l_a - l_f; i++){
-            if (esMaximaCorrelacion(a,i,frase)){
-                acum = acum +i;
-            }
-        }
+    for (int i = 0; i < l_a - l_f; i++) {
+        if (correlacion(subseq(a, acum, acum + l_f), frase) < correlacion(subseq(a, i, i + l_f), frase)) {
+            acum = i;
 
+        }
+    }
     return acum;
 }
 
-bool esMaximaCorrelacion(audio a, int starPoint, audio frase){
-    int l_a= a.size();
-    int l_f= frase.size();
-    bool res = false;
-        for(int i = 0; i < l_a - l_f; i++){
-            if(i!=starPoint){
-                if (correlacion(subseq(a,i,i+l_f),frase) < correlacion(subseq(a, starPoint, starPoint+l_f),frase)){
-                    res= true;
-                } else {
-                    res = false;
-                }
-            }
-        }
-    return res;
-}
+//LISTO  (verificar si faltan casos de test)
 
 /************************** EJERCICIO medirLaDistancia **************************/
-locutor medirLaDistancia(sala m, audio frase, int freq, int prof) {
+locutor medirLaDistancia(sala m, audio frase, int freq, int prof){
     locutor out;
+    int elLoDijo = 0;
+    for(int p = 0; p < m.size(); p++){
+        if (intensidadCorrelacion(m[elLoDijo],frase) < intensidadCorrelacion(m[p],frase)){ // aca estoy busacando quien lo dijo
+            elLoDijo = p;
+        }
+    }
+    get<0>(out) = elLoDijo;
 
-
+    int j=0;
+    while(j < m.size()) {
+        if(j!= get<0>(out)) {
+            get<1>(out).push_back(distanciaAP(m, get<0>(out), j, freq, frase)); // busco las distancias de cada microfono
+        }
+        j++;
+    }
 
     return out;
 }
+
+
+float intensidadCorrelacion(audio a, audio frase){
+    int l_a= a.size();
+    int l_f= frase.size();
+    int sum = 0;
+    int acum = 0;
+    for (int i = 0; i < l_a - l_f; i++) {
+        if (correlacion(subseq(a, acum, acum + l_f), frase) < correlacion(subseq(a, i, i + l_f), frase)) {
+            acum = i;
+        }
+    }
+    sum = sum + intensidadMedia(subseq(a, acum, acum + l_f));
+
+    return sum;
+}
+
+
+float distanciaAP(sala m, int p1,int p2,int freq, audio frase) {
+    float vel_sonido_freq = 343.2 / freq;
+    float dist = abs(comienzoCorrelacion(m[p1], frase) - comienzoCorrelacion(m[p2], frase)) * vel_sonido_freq;
+
+    return dist;
+}
+
+//trate de seguir la especificacion pero el programa me cuelga... verificar los auxiliares
