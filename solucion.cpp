@@ -58,7 +58,6 @@ bool sonTodosCeros(audio a){
     return res;
 }
 
-
 /************************** EJERCICIO elAcaparador **************************/
 int elAcaparador(sala m, int freq, int prof){
     int persona = 0;
@@ -144,7 +143,7 @@ vector<int> vecInterpolado(vector<int> a){
 }
 
 /************************** EJERCICIO silencios **************************/
-lista_intervalos silencios(audio s, int prof, int freq, int umbral) {
+lista_intervalos silencios(audio &s, int prof, int freq, int umbral) {
     lista_intervalos res;
     for (int i = 0; i < s.size(); i++) {
         for (int j = i; j < s.size(); j++) {
@@ -160,7 +159,7 @@ lista_intervalos silencios(audio s, int prof, int freq, int umbral) {
     return res;
 }
 
-bool esSilencio (audio s, intervalo inter, int umbral, int i, int j, int freq){
+bool esSilencio (audio &s, intervalo inter, int umbral, int i, int j, int freq){
     bool res = false;
     float tf = get<1>(inter);
     float ti = get<0>(inter);
@@ -174,7 +173,8 @@ int indiceEnTiempo(float tiempo, int freq){
     int res = floor(freq * tiempo);
     return res;
 }
-bool noSuperaUmbral (audio s, int i, int j,int umbral) {
+
+bool noSuperaUmbral (audio &s, int i, int j,int umbral) {
     bool res = true;
     for (int k = i; k <= j; k++)
         if (abs(s[k]) > umbral)
@@ -182,7 +182,7 @@ bool noSuperaUmbral (audio s, int i, int j,int umbral) {
     return res;
 }
 
-bool noHaySilencioMayor(audio s, int i, int j, int umbral) {
+bool noHaySilencioMayor(audio &s, int i, int j, int umbral) {
     bool res = true;
     if(i > 0){
         if (j < s.size() - 1){
@@ -244,7 +244,14 @@ bool haySilencioQueLoContiene(audio a, int i, int freq, int umbral, int prof){
     }
     return res;
 }
+
 /************************** EJERCICIO compararSilencios **************************/
+/* en los archivos spkrX.dat obtengo de las primeras 3 posiciones los valores
+ * correspondientes a la frecuencia, profundidad y duracion de cada audio */
+int freq = 16000;
+int prof = 16;
+int dur = 120;
+
 lista_intervalos cargarIntervaloDeHabla(string archivo){
     lista_intervalos res;
     ifstream entrada;
@@ -284,125 +291,164 @@ void negacionLogica(vector<bool> &mascara ) {
     }
 }
 
-vector<bool> enmascararSilencios(audio s, int prof, int freq, int umbral){
-    lista_intervalos silenciosSinMascara = silencios(s,prof,freq,umbral);
+vector<bool> enmascararSilencios(audio &s, int umbral){
+    lista_intervalos silenciosSinMascara = silencios(s, prof, freq, umbral);
     float duracion = s.size() /(float) freq;
     vector<bool> silencioEnmascarado = enmascarar(silenciosSinMascara, duracion);
     return silencioEnmascarado;
 }
 
-tuple<vector<bool>, vector<bool> > mascarasDeSilencios(string audioVerdadero, string momentosDeHabla){
+audio deArchivoAVector (string archivo){
+    int freq = 0;
+    int prof = 0;
+    int dur = 0;
+    audio vector;
     ifstream entrada;
-    //guardo el audio verdadero en un vector, busco sus intervalos de silencio y los enmascaro
-    audio audioVerdaderoGuardado;
-    entrada.open(audioVerdadero, ifstream::in);
-    while(!entrada.eof()){
-        int a = 0;
-        entrada >> a;
-        audioVerdaderoGuardado.push_back(a);
+    entrada.open(archivo, ifstream::in);
+    entrada >> freq;
+    entrada >> prof;
+    entrada >> dur;
+    while(!entrada.eof()) {
+        int amplitud = 0;
+        entrada >> amplitud;
+        vector.push_back(amplitud);
     }
     entrada.close();
-    int prof = 16;
-    int freq = 35;
-    int umbral = 1;
-    vector<bool> mascaraSilenciosSegunAlgoritmo = enmascararSilencios(audioVerdaderoGuardado, prof, freq, umbral);
-    /* guardo en una lista de intervalos los momentos de habla, los enmascaro y luego realizo su negacion logica
-     * para obtener la mascara de los silencios */
-    lista_intervalos momentosDeHablaGuardados;
-    entrada.open(momentosDeHabla, ifstream::in);
-    while(!entrada.eof()){
-        float a = 0;
-        float b = 0;
-        entrada >> a >> b;
-        intervalo tupla;
-        get<0>(tupla) = a;
-        get<1>(tupla) = b;
-        momentosDeHablaGuardados.push_back(tupla);
-    }
-    entrada.close();
-    vector<bool> mascaraDeHablaReal = enmascarar(momentosDeHablaGuardados, 120);
-    negacionLogica(mascaraDeHablaReal);
-    vector<bool> mascaraSilenciosReal = mascaraDeHablaReal;
-    //armo la tupla que quiero devolver
-    tuple<vector<bool>, vector<bool> > res;
-    get<0>(res) = mascaraSilenciosSegunAlgoritmo;
-    get<1>(res) = mascaraSilenciosReal;
-    return res;
+   return vector;
 }
 
-//get<0>(res) debe tener el mismo largo que get<1>(res)
-
-int verdaderosPositivos(tuple<vector<bool>, vector<bool> > mascaras){
-    int cant = 0;
-    for(int i = 0; i < get<0>(mascaras).size(); i++)
-        if(get<0>(mascaras)[i] == get<1>(mascaras)[i] == true)
-            cant++;
-    return cant;
-}
-int verdaderosNegativos(tuple<vector<bool>, vector<bool> > mascaras){
-    int cant = 0;
-    for(int i = 0; i < get<0>(mascaras).size(); i++)
-        if(get<0>(mascaras)[i] == get<1>(mascaras)[i] == false)
-            cant++;
-    return cant;
-}
-int falsosPositivos(tuple<vector<bool>, vector<bool> > mascaras){
-    int cant = 0;
-    for(int i = 0; i < get<0>(mascaras).size(); i++)
-        if(get<0>(mascaras)[i] == true and get<1>(mascaras)[i] == false)
-            cant++;
-    return cant;
-}
-int falsosNegativos(tuple<vector<bool>, vector<bool> > mascaras){
-    int cant = 0;
-    for(int i = 0; i < get<0>(mascaras).size(); i++)
-        if(get<0>(mascaras)[i] == false and get<1>(mascaras)[i] == true)
-            cant++;
-    return cant;
-}
-
-
-float precision(tuple<vector<bool>, vector<bool> > mascaras){
-    float res = verdaderosPositivos(mascaras) / (verdaderosPositivos(mascaras) + falsosPositivos(mascaras));
-    return res;
-}
-
-float recall(tuple<vector<bool>, vector<bool> > mascaras){
-    //esta bien definida recall?
-    float res = verdaderosPositivos(mascaras) / (verdaderosPositivos(mascaras) + falsosNegativos(mascaras));
-    return res;
-
-
-}
-
-float compararSilencios(audio vec, int freq, int prof, int locutor, int umbralSilencio){
-
-}
-
-
-/*
-//estoy hay que implementar en compararSilencios
-float Funo(lista_intervalos listaIntervalos, audio s, int prof, int freq, int umbral, tiempo dur){
-    float res = 2* (precision(listaIntervalos, dur)*recall(listaIntervalos,s,prof,freq,umbral,dur)/(precision(listaIntervalos, dur)+recall(listaIntervalos,s,prof,freq,umbral,dur)));
-    return res;
-}
-
-//promedio de Funo entre todos los locutores
-float resultadoFinal(sala m, int freq, int prof, int umbralSilencio ){
-    float res;
-    float sum = 0;
-
-    for(int i =0; i<m.size();i++){
-        vector <bool> mascaraDeSilencios = enmascararSilencios(m[i],prof,freq,umbralSilencio);
-        //convierto a lista de intervalos al archivo del locutor
-        lista_intervalos mascara = cargarIntervaloDeHabla(string("habla_spkr")+to_string(i)+".txt");
-        sum += Funo(mascara,m[i],prof,freq,umbralSilencio,m[i].size()/freq);
-    }
-
-    res = sum/m.size();
-    return res;
-}
+/* //audios reales
+audio centro = deArchivoAVector("datos/pzm.dat");
+audio persona0 = deArchivoAVector("datos/spkr0.dat");
+audio persona1 = deArchivoAVector("datos/spkr1.dat");
+audio persona2 = deArchivoAVector("datos/spkr2.dat");
+audio persona3 = deArchivoAVector("datos/spkr3.dat");
+audio persona4 = deArchivoAVector("datos/spkr4.dat");
+audio persona5 = deArchivoAVector("datos/spkr5.dat");
 */
+int verdaderosPositivos(vector<bool> &mascaraConAlgoritmo, vector<bool> &mascaraDesdeIntervalos){
+    //cantidad de T detectados que eran T realmente
+    //se asume que las longitudes de ambos vectores es la misma
+    int res = 0;
+    negacionLogica(mascaraDesdeIntervalos);
+    for(int i = 0; i < mascaraConAlgoritmo.size(); i++){
+        if(mascaraDesdeIntervalos[i] == true)
+            if(mascaraConAlgoritmo[i] == true)
+                res++;
+    }
+    return res;
+}
+int verdaderosNegativos(vector<bool> &mascaraConAlgoritmo, vector<bool> &mascaraDesdeIntervalos){
+    //cantidad de F detectados que eran F realmente
+    //se asume que las longitudes de ambos vectores es la misma
+    int res = 0;
+    negacionLogica(mascaraDesdeIntervalos);
+    for(int i = 0; i < mascaraConAlgoritmo.size(); i++){
+        if(mascaraDesdeIntervalos[i] == false)
+            if(mascaraConAlgoritmo[i] == false)
+                res++;
+    }
+    return res;
+}
+int falsosPositivos(vector<bool> &mascaraConAlgoritmo, vector<bool> &mascaraDesdeIntervalos){
+    //cantidad de T detectados que eran F realmente
+    //se asume que las longitudes de ambos vectores es la misma
+    int res = 0;
+    negacionLogica(mascaraDesdeIntervalos);
+    for(int i = 0; i < mascaraConAlgoritmo.size(); i++){
+        if(mascaraDesdeIntervalos[i] == false)
+            if(mascaraConAlgoritmo[i] == true)
+                res++;
+    }
+    return res;
+}
+int falsosNegativos(vector<bool> &mascaraConAlgoritmo, vector<bool> &mascaraDesdeIntervalos){
+    //cantidad de F detectados que eran T realmente
+    //se asume que las longitudes de ambos vectores es la misma
+    int res = 0;
+    negacionLogica(mascaraDesdeIntervalos);
+    for(int i = 0; i < mascaraConAlgoritmo.size(); i++){
+        if(mascaraDesdeIntervalos[i] == true)
+            if(mascaraConAlgoritmo[i] == false)
+                res++;
+    }
+    return res;
+}
+
+float compararSilencios(audio &vec, int freq, int prof, int locutor, int umbralSilencio){
+    /* obtengo la mascara de silencios de vec y la mascara de habla asociada
+     * al locutor. El locutor puede ser 0, 1, 2, 3, 4, 5 o 6 (este ultimo es el
+     * microfono del centro */
+    vector<bool> mascaraDesdeArchivo = enmascararSilencios(vec, umbralSilencio);
+    string archivoDeHabla;
+    if (locutor == 0){archivoDeHabla = "datos/habla_spkr0.txt";}
+    if (locutor == 1){archivoDeHabla = "datos/habla_spkr1.txt";}
+    if (locutor == 2){archivoDeHabla = "datos/habla_spkr2.txt";}
+    if (locutor == 3){archivoDeHabla = "datos/habla_spkr3.txt";}
+    if (locutor == 4){archivoDeHabla = "datos/habla_spkr4.txt";}
+    if (locutor == 5){archivoDeHabla = "datos/habla_spkr5.txt";}
+    if (locutor == 6){archivoDeHabla = "datos/habla_spkrdefault.txt";}
+    lista_intervalos listaDeHabla = cargarIntervaloDeHabla(archivoDeHabla);
+    vector<bool> mascaraDesdeIntervalo = enmascarar(listaDeHabla, dur);
+    int vp = verdaderosPositivos(mascaraDesdeArchivo, mascaraDesdeIntervalo);
+    int vn = verdaderosNegativos(mascaraDesdeArchivo, mascaraDesdeIntervalo);
+    int fp = falsosPositivos(mascaraDesdeArchivo, mascaraDesdeIntervalo);
+    int fn = falsosNegativos(mascaraDesdeArchivo, mascaraDesdeIntervalo);
+    //guarda con las disiones por cero
+    float precision = vp / (vp + fp);
+    float recall = vp / (vp + fn);
+    float f1 = (2 * precision * recall) / (precision + recall);
+    return f1;
+}
+
+float resultadoFinal(sala &m, int freq, int prof, int umbralSilencio){
+    float cantidadDeLocutores = m.size();
+    float sumaScores = 0;
+    for (int i = 0; i < cantidadDeLocutores; i++){
+        sumaScores += compararSilencios(m[i], freq, prof, i, umbralSilencio);
+    }
+    return sumaScores / cantidadDeLocutores;
+}
+
+void resultadosEjercicio7(int umbralSilencio){
+    int decision = 0;
+    cout << "Ingrese el numero de la persona a la que le quiere comparar" << endl;
+    cout << "los momentos de silencio: " << endl;
+    cout << "* Persona 0" << endl;
+    cout << "* Persona 1" << endl;
+    cout << "* Persona 2" << endl;
+    cout << "* Persona 3" << endl;
+    cout << "* Persona 4" << endl;
+    cout << "* Persona 5" << endl;
+    cout << "* Microfono central (6)" << endl;
+    cout << endl;
+    cin >> decision;
+    if (decision == 0){
+        cout << "Copiando vector ..." << endl;
+        audio persona0 = deArchivoAVector("datos/spkr0.dat");
+        cout << "Vector copiado. El F1 score es: " << endl;
+        int locutor = 0;
+        cout << compararSilencios(persona0, freq, prof, 0, umbralSilencio) << endl;
+    }
+    /*  sala m = {centro,
+                persona0,
+                persona1,
+                persona2,
+                persona3,
+                persona4,
+                persona5 };
+      cout << "Los F1 score son:" << endl;
+      cout << "* Microfono central: " << compararSilencios(centro, freq, prof, 6, umbralSilencio) << endl;
+      cout << "* Persona 0: " << compararSilencios(persona0, freq, prof, 6, umbralSilencio) << endl;
+      cout << "* Persona 1: " << compararSilencios(persona1, freq, prof, 6, umbralSilencio) << endl;
+      cout << "* Persona 2: " << compararSilencios(persona2, freq, prof, 6, umbralSilencio) << endl;
+      cout << "* Persona 3: " << compararSilencios(persona3, freq, prof, 6, umbralSilencio) << endl;
+      cout << "* Persona 4: " << compararSilencios(persona4, freq, prof, 6, umbralSilencio) << endl;
+      cout << "* Persona 5: " << compararSilencios(persona5, freq, prof, 6, umbralSilencio) << endl;
+      cout << endl;
+      cout << "Y el promedio es: " << resultadoFinal(m, freq, prof, umbralSilencio); */
+}
+
 /************************** EJERCICIO sacarPausas **************************/
 //usar esSilencio del punto 7
 audio sacarPausas(audio s, lista_intervalos sil, int freq, int prof, int umbral) {
@@ -451,7 +497,6 @@ int comienzoCorrelacion(audio a,audio frase){
     return acum;
 }
 
-
 bool esMaximaCorrelacion(audio a, int starPoint, audio frase){
     int l_a= a.size();
     int l_f= frase.size();
@@ -467,10 +512,6 @@ bool esMaximaCorrelacion(audio a, int starPoint, audio frase){
         }
     return res;
 }
-
-
-
-//LISTO  (verificar si faltan casos de test)
 
 /************************** EJERCICIO medirLaDistancia **************************/
 locutor medirLaDistancia(sala m, audio frase, int freq, int prof) {
