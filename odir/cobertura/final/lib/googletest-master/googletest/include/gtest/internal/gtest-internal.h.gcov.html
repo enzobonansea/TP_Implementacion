@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-11-13 12:54:05</td>
+            <td class="headerValue">2017-11-13 13:06:38</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">100</td>
@@ -525,14 +525,14 @@
 <span class="lineNum">     463 </span>            : // of a Test object.
 <a name="464"><span class="lineNum">     464 </span>            : class TestFactoryBase {</a>
 <span class="lineNum">     465 </span>            :  public:
-<span class="lineNum">     466 </span><span class="lineCov">         48 :   virtual ~TestFactoryBase() {}</span>
+<span class="lineNum">     466 </span><span class="lineCov">         71 :   virtual ~TestFactoryBase() {}</span>
 <span class="lineNum">     467 </span>            : 
 <span class="lineNum">     468 </span>            :   // Creates a test instance to run. The instance is both created and destroyed
 <span class="lineNum">     469 </span>            :   // within TestInfoImpl::Run()
 <span class="lineNum">     470 </span>            :   virtual Test* CreateTest() = 0;
 <a name="471"><span class="lineNum">     471 </span>            : </a>
 <span class="lineNum">     472 </span>            :  protected:
-<span class="lineNum">     473 </span><span class="lineCov">         48 :   TestFactoryBase() {}</span>
+<span class="lineNum">     473 </span><span class="lineCov">         71 :   TestFactoryBase() {}</span>
 <span class="lineNum">     474 </span>            : 
 <span class="lineNum">     475 </span>            :  private:
 <span class="lineNum">     476 </span>            :   GTEST_DISALLOW_COPY_AND_ASSIGN_(TestFactoryBase);
@@ -541,9 +541,9 @@
 <span class="lineNum">     479 </span>            : // This class provides implementation of TeastFactoryBase interface.
 <a name="480"><span class="lineNum">     480 </span>            : // It is used in TEST and TEST_F macros.</a>
 <span class="lineNum">     481 </span>            : template &lt;class TestClass&gt;
-<a name="482"><span class="lineNum">     482 </span><span class="lineCov">        141 : class TestFactoryImpl : public TestFactoryBase {</span></a>
+<a name="482"><span class="lineNum">     482 </span><span class="lineCov">        210 : class TestFactoryImpl : public TestFactoryBase {</span></a>
 <span class="lineNum">     483 </span>            :  public:
-<span class="lineNum">     484 </span><span class="lineCov">         47 :   virtual Test* CreateTest() { return new TestClass; }</span>
+<span class="lineNum">     484 </span><span class="lineCov">         70 :   virtual Test* CreateTest() { return new TestClass; }</span>
 <span class="lineNum">     485 </span>            : };
 <span class="lineNum">     486 </span>            : 
 <span class="lineNum">     487 </span>            : #if GTEST_OS_WINDOWS
@@ -563,9 +563,9 @@
 <span class="lineNum">     501 </span>            : typedef void (*SetUpTestCaseFunc)();
 <a name="502"><span class="lineNum">     502 </span>            : typedef void (*TearDownTestCaseFunc)();</a>
 <a name="503"><span class="lineNum">     503 </span>            : </a>
-<span class="lineNum">     504 </span><span class="lineCov">        144 : struct CodeLocation {</span>
-<span class="lineNum">     505 </span><span class="lineCov">         48 :   CodeLocation(const std::string&amp; a_file, int a_line)</span>
-<span class="lineNum">     506 </span><span class="lineCov">         48 :       : file(a_file), line(a_line) {}</span>
+<span class="lineNum">     504 </span><span class="lineCov">        213 : struct CodeLocation {</span>
+<span class="lineNum">     505 </span><span class="lineCov">         71 :   CodeLocation(const std::string&amp; a_file, int a_line)</span>
+<span class="lineNum">     506 </span><span class="lineCov">         71 :       : file(a_file), line(a_line) {}</span>
 <span class="lineNum">     507 </span>            : 
 <span class="lineNum">     508 </span>            :   std::string file;
 <span class="lineNum">     509 </span>            :   int line;

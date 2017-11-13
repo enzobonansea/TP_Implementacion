@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-11-13 12:54:05</td>
+            <td class="headerValue">2017-11-13 13:06:38</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">10</td>
@@ -69,24 +69,24 @@
 <span class="lineNum">       7 </span>            : 
 <a name="8"><span class="lineNum">       8 </span>            : using namespace std;</a>
 <span class="lineNum">       9 </span>            : 
-<span class="lineNum">      10 </span><span class="lineCov">         10 : TEST(encontrarAparicionTEST, smallEncontrarAparicion) {</span>
-<span class="lineNum">      11 </span><span class="lineCov">          4 :     audio x = {0,0,0,-3,-3,3,0,0};</span>
-<span class="lineNum">      12 </span><span class="lineCov">          4 :     audio y = {-1,-1,1};</span>
-<span class="lineNum">      13 </span><span class="lineCov">          2 :     EXPECT_EQ(3,encontrarAparicion(x,y));</span>
-<span class="lineNum">      14 </span><span class="lineCov">          2 : }</span>
+<span class="lineNum">      10 </span><span class="lineCov">         15 : TEST(encontrarAparicionTEST, smallEncontrarAparicion) {</span>
+<span class="lineNum">      11 </span><span class="lineCov">          6 :     audio x = {0,0,0,-3,-3,3,0,0};</span>
+<span class="lineNum">      12 </span><span class="lineCov">          6 :     audio y = {-1,-1,1};</span>
+<span class="lineNum">      13 </span><span class="lineCov">          3 :     EXPECT_EQ(3,encontrarAparicion(x,y));</span>
+<span class="lineNum">      14 </span><span class="lineCov">          3 : }</span>
 <a name="15"><span class="lineNum">      15 </span>            : </a>
 <span class="lineNum">      16 </span>            : 
-<span class="lineNum">      17 </span><span class="lineCov">         10 : TEST(encontrarAparicionTEST, encontrarAparicion) {</span>
+<span class="lineNum">      17 </span><span class="lineCov">         15 : TEST(encontrarAparicionTEST, encontrarAparicion) {</span>
 <span class="lineNum">      18 </span>            :     int frecuencia, profundidad,duracion;
 <span class="lineNum">      19 </span>            :     int startPOINT, endPOINT;
-<span class="lineNum">      20 </span><span class="lineCov">          4 :     audio pzm = leerVectorAudio(&quot;datos/pzm.dat&quot;,frecuencia,profundidad,duracion);</span>
-<span class="lineNum">      21 </span><span class="lineCov">          4 :     audio frase = subAudio(pzm,POS_SMP_TEST_DISTANCIA,QUANT_SMP_TEST_DISTNACIA);</span>
-<span class="lineNum">      22 </span><span class="lineCov">          2 :     startPOINT = POS_SMP_TEST_DISTANCIA - 3000;</span>
-<span class="lineNum">      23 </span><span class="lineCov">          2 :     endPOINT = QUANT_SMP_TEST_DISTNACIA + 2 * 3000;</span>
-<span class="lineNum">      24 </span><span class="lineCov">          4 :     audio speaker = leerVectorAudio(&quot;datos/spkr1.dat&quot;,frecuencia,profundidad,duracion);</span>
-<a name="25"><span class="lineNum">      25 </span><span class="lineCov">          2 :     int posMxCrr = encontrarAparicion(subAudio(speaker,startPOINT,endPOINT),frase);</span></a>
-<span class="lineNum">      26 </span><span class="lineCov">          2 :     EXPECT_EQ(3854,posMxCrr);</span>
-<span class="lineNum">      27 </span><span class="lineCov">          8 : }</span>
+<span class="lineNum">      20 </span><span class="lineCov">          6 :     audio pzm = leerVectorAudio(&quot;datos/pzm.dat&quot;,frecuencia,profundidad,duracion);</span>
+<span class="lineNum">      21 </span><span class="lineCov">          6 :     audio frase = subAudio(pzm,POS_SMP_TEST_DISTANCIA,QUANT_SMP_TEST_DISTNACIA);</span>
+<span class="lineNum">      22 </span><span class="lineCov">          3 :     startPOINT = POS_SMP_TEST_DISTANCIA - 3000;</span>
+<span class="lineNum">      23 </span><span class="lineCov">          3 :     endPOINT = QUANT_SMP_TEST_DISTNACIA + 2 * 3000;</span>
+<span class="lineNum">      24 </span><span class="lineCov">          6 :     audio speaker = leerVectorAudio(&quot;datos/spkr1.dat&quot;,frecuencia,profundidad,duracion);</span>
+<a name="25"><span class="lineNum">      25 </span><span class="lineCov">          3 :     int posMxCrr = encontrarAparicion(subAudio(speaker,startPOINT,endPOINT),frase);</span></a>
+<span class="lineNum">      26 </span><span class="lineCov">          3 :     EXPECT_EQ(3854,posMxCrr);</span>
+<span class="lineNum">      27 </span><span class="lineCov">         12 : }</span>
 </pre>
       </td>
     </tr>

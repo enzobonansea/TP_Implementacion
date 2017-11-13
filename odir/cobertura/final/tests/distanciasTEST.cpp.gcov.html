@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-11-13 12:54:05</td>
+            <td class="headerValue">2017-11-13 13:06:38</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">6</td>
@@ -70,32 +70,32 @@
 <span class="lineNum">       8 </span>            : 
 <a name="9"><span class="lineNum">       9 </span>            : using namespace std;</a>
 <span class="lineNum">      10 </span>            : 
-<span class="lineNum">      11 </span><span class="lineCov">         10 : TEST(distanciasTEST, testBEEP) {</span>
+<span class="lineNum">      11 </span><span class="lineCov">         15 : TEST(distanciasTEST, testBEEP) {</span>
 <span class="lineNum">      12 </span>            :     int frecuencia, profundidad,duracion;
 <span class="lineNum">      13 </span>            :     int startPOINT, endPOINT;
-<span class="lineNum">      14 </span><span class="lineCov">          4 :     lista_distancias dst_spk;</span>
+<span class="lineNum">      14 </span><span class="lineCov">          6 :     lista_distancias dst_spk;</span>
 <span class="lineNum">      15 </span>            :     vector&lt;string&gt; lista_archivos = {&quot;datos/spkr0.dat&quot;,
 <span class="lineNum">      16 </span>            :                                      &quot;datos/spkr1.dat&quot;,
 <span class="lineNum">      17 </span>            :                                      &quot;datos/spkr2.dat&quot;,
-<span class="lineNum">      18 </span><span class="lineCov">          4 :                                      &quot;datos/spkr3.dat&quot;};</span>
+<span class="lineNum">      18 </span><span class="lineCov">          6 :                                      &quot;datos/spkr3.dat&quot;};</span>
 <span class="lineNum">      19 </span>            : 
-<span class="lineNum">      20 </span><span class="lineCov">          4 :     audio pzm = leerVectorAudio(&quot;datos/pzm.dat&quot;,frecuencia,profundidad,duracion);</span>
-<span class="lineNum">      21 </span><span class="lineCov">          4 :     audio frase = subAudio(pzm,POS_SMP_TEST_DISTANCIA,QUANT_SMP_TEST_DISTNACIA);</span>
+<span class="lineNum">      20 </span><span class="lineCov">          6 :     audio pzm = leerVectorAudio(&quot;datos/pzm.dat&quot;,frecuencia,profundidad,duracion);</span>
+<span class="lineNum">      21 </span><span class="lineCov">          6 :     audio frase = subAudio(pzm,POS_SMP_TEST_DISTANCIA,QUANT_SMP_TEST_DISTNACIA);</span>
 <span class="lineNum">      22 </span>            : 
-<span class="lineNum">      23 </span><span class="lineCov">          2 :     startPOINT = POS_SMP_TEST_DISTANCIA - 3000;</span>
-<span class="lineNum">      24 </span><span class="lineCov">          2 :     endPOINT = QUANT_SMP_TEST_DISTNACIA + 2 * 3000;</span>
-<span class="lineNum">      25 </span><span class="lineCov">          4 :     sala m = cargarSalaAudio(lista_archivos,frecuencia,profundidad,duracion,startPOINT,endPOINT);</span>
+<span class="lineNum">      23 </span><span class="lineCov">          3 :     startPOINT = POS_SMP_TEST_DISTANCIA - 3000;</span>
+<span class="lineNum">      24 </span><span class="lineCov">          3 :     endPOINT = QUANT_SMP_TEST_DISTNACIA + 2 * 3000;</span>
+<span class="lineNum">      25 </span><span class="lineCov">          6 :     sala m = cargarSalaAudio(lista_archivos,frecuencia,profundidad,duracion,startPOINT,endPOINT);</span>
 <span class="lineNum">      26 </span>            : 
-<span class="lineNum">      27 </span><span class="lineCov">          4 :     locutor spk = medirLaDistancia(m,frase,frecuencia,profundidad);</span>
-<span class="lineNum">      28 </span><span class="lineCov">          2 :     dst_spk = get&lt;1&gt;(spk);</span>
+<span class="lineNum">      27 </span><span class="lineCov">          6 :     locutor spk = medirLaDistancia(m,frase,frecuencia,profundidad);</span>
+<span class="lineNum">      28 </span><span class="lineCov">          3 :     dst_spk = get&lt;1&gt;(spk);</span>
 <span class="lineNum">      29 </span>            : 
-<span class="lineNum">      30 </span><span class="lineCov">          2 :     cout &lt;&lt; &quot;locutor &quot; &lt;&lt; get&lt;0&gt;(spk) &lt;&lt; endl;</span>
-<span class="lineNum">      31 </span><span class="lineCov">         10 :     for(int i=0;i&lt;m.size();i++){</span>
-<span class="lineNum">      32 </span><span class="lineCov">          8 :         cout &lt;&lt; &quot;distancia locutor &quot; &lt;&lt; i &lt;&lt; &quot; al locutor que dijo la frase &quot; &lt;&lt; get&lt;0&gt;(spk);</span>
-<span class="lineNum">      33 </span><span class="lineCov">          8 :         cout &lt;&lt; &quot;: &quot; &lt;&lt; dst_spk[i] &lt;&lt; endl;</span>
+<span class="lineNum">      30 </span><span class="lineCov">          3 :     cout &lt;&lt; &quot;locutor &quot; &lt;&lt; get&lt;0&gt;(spk) &lt;&lt; endl;</span>
+<span class="lineNum">      31 </span><span class="lineCov">         15 :     for(int i=0;i&lt;m.size();i++){</span>
+<span class="lineNum">      32 </span><span class="lineCov">         12 :         cout &lt;&lt; &quot;distancia locutor &quot; &lt;&lt; i &lt;&lt; &quot; al locutor que dijo la frase &quot; &lt;&lt; get&lt;0&gt;(spk);</span>
+<span class="lineNum">      33 </span><span class="lineCov">         12 :         cout &lt;&lt; &quot;: &quot; &lt;&lt; dst_spk[i] &lt;&lt; endl;</span>
 <a name="34"><span class="lineNum">      34 </span>            :     }</a>
-<span class="lineNum">      35 </span><span class="lineCov">          2 :     EXPECT_EQ(1,get&lt;0&gt;(spk));</span>
-<span class="lineNum">      36 </span><span class="lineCov">          8 : }</span>
+<span class="lineNum">      35 </span><span class="lineCov">          3 :     EXPECT_EQ(1,get&lt;0&gt;(spk));</span>
+<span class="lineNum">      36 </span><span class="lineCov">         12 : }</span>
 </pre>
       </td>
     </tr>
