@@ -31,9 +31,9 @@ bool micFunciona(audio s, int freq){
     int i = 0;
     while (i < s.size()){
         int j = 0;
-        while(j < i){
+        while(j < s.size()){
             audio subsecuencia = subseq(s, i, j);
-            int duracion = subsecuencia.size() / freq;
+            float duracion = subsecuencia.size() / (float)freq;
             if (duracion > 1 and sonTodosCeros(subsecuencia))
                 res = false;
             j++;
@@ -173,7 +173,7 @@ bool esSilencio (audio &s, intervalo inter, int umbral, int i, int j, int freq){
     bool res = false;
     float tf = get<1>(inter);
     float ti = get<0>(inter);
-    bool duracionValida = indiceEnTiempo(tf, freq) - indiceEnTiempo(ti, freq) >= indiceEnTiempo(0.1, freq);
+    bool duracionValida = indiceEnTiempo(tf, freq) - indiceEnTiempo(ti, freq) > indiceEnTiempo(0.1, freq);
     if(duracionValida and noSuperaUmbral(s, i, j, umbral) and noHaySilencioMayor(s, i, j, umbral))
         res = true;
     return res;
@@ -402,33 +402,33 @@ float resultadoFinal(sala &m, int freq, int prof, int umbralSilencio){
 
 /************************** EJERCICIO sacarPausas **************************/
 //usar esSilencio del punto 7
-audio sacarPausas(audio s, lista_intervalos sil, int freq, int prof, int umbral) {
+audio sacarPausas(audio s, int freq, int prof, int umbral) {
     audio result;
     int i =0;
+    vector < tuple<int,int> > aux;
     /*bool esSilencio (audio s,intervalo inter,int umbral,int i,int j)*/
-    while(i<s.size()){
-        for(int j=i; j<s.size();j++){
-            tuple<float,float> inter;//chequeo por intervalos
-            get<0>(inter)=float(i/freq);//tiempo inicial
-            get<1>(inter)=float(j/freq);//tiempo final
-            /*si el intervalo es un silencio y no esta contenido en otro silencio(esSilencio)
-              salto la posicion inicial a j sino pusheo tod o el intervalo al vector audio   */
-
-                if(esSilencio(s,inter,umbral,i,j, freq)){
+    while(i<s.size()) {
+        if (s[i] <= umbral) {
+            for (int j = i; j < s.size(); j++) {
+                tuple<float,float> inter;
+                get<0>(inter) = i/(float)freq;
+                get<1>(inter) = j/(float)freq;
+                if (esSilencio(s,inter,umbral,i,j-1, freq)) {
+                    result.push_back(s[j]);
                     i = j;
-                }else{
-                    for(int k=i;k<=j;k++) {
-                        result.push_back(s[k]);
-                    }
                 }
-
+            }
+        } else {
+            result.push_back(s[i]);
         }
-        //aca si i= j termina j+1 sino se incrementa en 1 el i original
         i++;
     }
+    /*si el intervalo es un silencio y no esta contenido en otro silencio(esSilencio)
+    salto la posicion inicial a j sino pusheo tod o el intervalo al vector audio   */
+
+
     return result;
 }
-
 /************************** EJERCICIO encontrarAparicion **************************/
 int encontrarAparicion(audio x, audio y){
     int res = comienzoCorrelacion(x,y);
