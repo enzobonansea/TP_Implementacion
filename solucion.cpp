@@ -26,7 +26,7 @@ bool enRango(audio s, int prof){
     return res;
 }
 
-bool micFunciona(audio s, int freq){
+bool micFunciona(audio s, int freq){to
     bool res = true;
     int i = 0;
     while (i < s.size()){
@@ -474,7 +474,7 @@ locutor medirLaDistancia(sala m, audio frase, int freq, int prof){
 float intensidadCorrelacion(audio a, audio frase){
     int l_a= a.size();
     int l_f= frase.size();
-    int sum = 0;
+    float sum = 0;
     int acum = 0;
     for (int i = 0; i < l_a - l_f; i++) {
         if (correlacion(subseq(a, acum, acum + l_f), frase) < correlacion(subseq(a, i, i + l_f), frase)) {
