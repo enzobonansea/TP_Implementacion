@@ -399,7 +399,6 @@ float resultadoFinal(sala &m, int freq, int prof, int umbralSilencio){
 }
 
 /************************** EJERCICIO sacarPausas **************************/
-//usar esSilencio del punto 7
 audio sacarPausas(audio s, int freq, int prof, int umbral) {
     audio result;
     int i =0;
@@ -446,8 +445,6 @@ int comienzoCorrelacion(audio a, audio frase) {
     return acum;
 }
 
-//LISTO  (verificar si faltan casos de test)
-
 /************************** EJERCICIO medirLaDistancia **************************/
 locutor medirLaDistancia(sala m, audio frase, int freq, int prof){
     locutor out;
@@ -463,13 +460,14 @@ locutor medirLaDistancia(sala m, audio frase, int freq, int prof){
     while(j < m.size()) {
         if(j!= get<0>(out)) {
             get<1>(out).push_back(distanciaAP(m, get<0>(out), j, freq, frase)); // busco las distancias de cada microfono
+        }else{
+            get<1>(out).push_back(0); // la distancia entre la persona que dijo la frase y si misma es cero
         }
         j++;
     }
 
     return out;
 }
-
 
 float intensidadCorrelacion(audio a, audio frase){
     int l_a= a.size();
@@ -493,5 +491,3 @@ float distanciaAP(sala m, int p1,int p2,int freq, audio frase) {
 
     return dist;
 }
-
-//trate de seguir la especificacion pero el programa me cuelga... verificar los auxiliares
