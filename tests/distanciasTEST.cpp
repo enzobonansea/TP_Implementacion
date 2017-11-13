@@ -15,7 +15,7 @@ TEST(distanciasTEST, testBEEP) {
     vector<string> lista_archivos = {"datos/spkr0.dat",
                                      "datos/spkr1.dat",
                                      "datos/spkr2.dat",
-                                     "datos/spkr4.dat"};
+                                     "datos/spkr3.dat"};
 
     audio pzm = leerVectorAudio("datos/pzm.dat",frecuencia,profundidad,duracion);
     audio frase = subAudio(pzm,POS_SMP_TEST_DISTANCIA,QUANT_SMP_TEST_DISTNACIA);
