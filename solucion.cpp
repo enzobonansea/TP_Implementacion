@@ -150,18 +150,20 @@ lista_intervalos silencios(audio &s, int prof, int freq, int umbral){
         if (abs(s[i]) <= umbral) {
             //solo en este caso me interesaria armar una tupla
             int j = i + indiceEnTiempo(0.1, freq) + 1; //asi la duracion es mayor a 0.1 segundos
-            while (j < s.size() and noSuperaUmbral(s, i, j, umbral)) {
-                if (noHaySilencioMayor(s, i, j, umbral)) {//armo la tupla
-                    intervalo tupla;
-                    float primerElemento = i / (float) freq; //tiempo hasta i exclusive
-                    float segundoElemento = (j + 1) / (float) freq; //tiempo hasta j inclusive (por eso +1)
-                    get<0>(tupla) = primerElemento;
-                    get<1>(tupla) = segundoElemento;
-                    res.push_back(tupla);
+            bool candidatoASilencio = noSuperaUmbral(s, i, j, umbral);
+            if(candidatoASilencio) {
+                while (j < s.size() and abs(s[j]) <= umbral) {
+                    if (noHaySilencioMayor(s, i, j, umbral)) {//armo la tupla
+                        intervalo tupla;
+                        float primerElemento = i / (float) freq; //tiempo hasta i exclusive
+                        float segundoElemento = (j + 1) / (float) freq; //tiempo hasta j inclusive (por eso +1)
+                        get<0>(tupla) = primerElemento;
+                        get<1>(tupla) = segundoElemento;
+                        res.push_back(tupla);
+                    }
+                    j++;
                 }
-                j++;
-                if (abs(s[j]) > umbral)
-                    i = j;
+                i = j;
             }
         }
         i++;
