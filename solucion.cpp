@@ -389,8 +389,6 @@ float compararSilencios(audio &vec, int freq, int prof, int locutor, int umbralS
     return f1;
 }
 
-
-//es la unica funcion que hay que arreglar (creo)
 float resultadoFinal(sala &m, int freq, int prof, int umbralSilencio){
     float cantidadDeLocutores = m.size();
     float sumaScores = 0;
