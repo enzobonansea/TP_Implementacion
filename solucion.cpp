@@ -167,7 +167,7 @@ lista_intervalos silencios(audio &s, int prof, int freq, int umbral){
         i++;
     }
     return res;
-    }
+}
 
 bool esSilencio (audio &s, intervalo inter, int umbral, int i, int j, int freq){
     bool res = false;
@@ -312,10 +312,10 @@ vector<bool> enmascararSilencios(audio &s, int umbral){
     return silencioEnmascarado;
 }
 
-int verdaderosPositivos(vector<bool> &mascaraConAlgoritmo, vector<bool> &mascaraDesdeIntervalos){
+unsigned int verdaderosPositivos(vector<bool> &mascaraConAlgoritmo, vector<bool> &mascaraDesdeIntervalos){
     //cantidad de T detectados que eran T realmente
     //se asume que las longitudes de ambos vectores es la misma
-    int res = 0;
+    unsigned int res = 0;
     for(int i = 0; i < mascaraDesdeIntervalos.size(); i++){
         if(mascaraDesdeIntervalos[i] == true)
             if(mascaraConAlgoritmo[i] == true)
@@ -323,10 +323,10 @@ int verdaderosPositivos(vector<bool> &mascaraConAlgoritmo, vector<bool> &mascara
     }
     return res;
 }
-int verdaderosNegativos(vector<bool> &mascaraConAlgoritmo, vector<bool> &mascaraDesdeIntervalos){
+unsigned int verdaderosNegativos(vector<bool> &mascaraConAlgoritmo, vector<bool> &mascaraDesdeIntervalos){
     //cantidad de F detectados que eran F realmente
     //se asume que las longitudes de ambos vectores es la misma
-    int res = 0;
+    unsigned int res = 0;
     for(int i = 0; i < mascaraDesdeIntervalos.size(); i++){
         if(mascaraDesdeIntervalos[i] == false)
             if(mascaraConAlgoritmo[i] == false)
@@ -334,10 +334,10 @@ int verdaderosNegativos(vector<bool> &mascaraConAlgoritmo, vector<bool> &mascara
     }
     return res;
 }
-int falsosPositivos(vector<bool> &mascaraConAlgoritmo, vector<bool> &mascaraDesdeIntervalos){
+unsigned int falsosPositivos(vector<bool> &mascaraConAlgoritmo, vector<bool> &mascaraDesdeIntervalos){
     //cantidad de T detectados que eran F realmente
     //se asume que las longitudes de ambos vectores es la misma
-    int res = 0;
+    unsigned int res = 0;
     for(int i = 0; i < mascaraDesdeIntervalos.size(); i++){
         if(mascaraDesdeIntervalos[i] == false)
             if(mascaraConAlgoritmo[i] == true)
@@ -345,10 +345,10 @@ int falsosPositivos(vector<bool> &mascaraConAlgoritmo, vector<bool> &mascaraDesd
     }
     return res;
 }
-int falsosNegativos(vector<bool> &mascaraConAlgoritmo, vector<bool> &mascaraDesdeIntervalos){
+unsigned int falsosNegativos(vector<bool> &mascaraConAlgoritmo, vector<bool> &mascaraDesdeIntervalos){
     //cantidad de F detectados que eran T realmente
     //se asume que las longitudes de ambos vectores es la misma
-    int res = 0;
+    unsigned int res = 0;
     for(int i = 0; i < mascaraDesdeIntervalos.size(); i++){
         if(mascaraDesdeIntervalos[i] == true)
             if(mascaraConAlgoritmo[i] == false)
@@ -377,12 +377,12 @@ float compararSilencios(audio &vec, int freq, int prof, int locutor, int umbralS
     negacionLogica(mascaraDesdeIntervalo);
 
     //calculo los datos necesarios para el estadistico
-    int vp = verdaderosPositivos(mascaraDesdeArchivo, mascaraDesdeIntervalo);
-    int vn = verdaderosNegativos(mascaraDesdeArchivo, mascaraDesdeIntervalo);
-    int fp = falsosPositivos(mascaraDesdeArchivo, mascaraDesdeIntervalo);
-    int fn = falsosNegativos(mascaraDesdeArchivo, mascaraDesdeIntervalo);
-    float precision = vp / (vp + fp);
-    float recall = vp / (vp + fn);
+    unsigned int vp = verdaderosPositivos(mascaraDesdeArchivo, mascaraDesdeIntervalo);
+    unsigned int vn = verdaderosNegativos(mascaraDesdeArchivo, mascaraDesdeIntervalo);
+    unsigned int fp = falsosPositivos(mascaraDesdeArchivo, mascaraDesdeIntervalo);
+    unsigned int fn = falsosNegativos(mascaraDesdeArchivo, mascaraDesdeIntervalo);
+    float precision = vp / (float) (vp + fp);
+    float recall = vp / (float) (vp + fn);
 
     //calculo el estadistico
     float f1 = (2 * precision * recall) / (precision + recall);
