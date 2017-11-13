@@ -6,8 +6,9 @@ set(CMAKE_CXX_STANDARD 11)
 add_subdirectory(lib/googletest-master)
 include_directories(lib/googletest-master/googletest/include)
 
-
-set(SOURCE_FILES main.cpp solucion.cpp Funciones_TPI.cpp ejercicios.h)
+set(SOURCE_FILES main.cpp solucion.cpp Funciones_TPI.cpp ejercicios.h tests/grabacionValidaTEST.cpp
+        tests/elAcaparadorTEST.cpp tests/distanciasTEST.cpp tests/encontrarAparicionTEST.cpp tests/ardillizarTEST.cpp
+        tests/silenciosTEST.cpp tests/hayQuilomboTEST.cpp tests/flashElPerezosoTEST.cpp tests/cargarIntervalosDeHablaTEST.cpp tests/enmascararTEST.cpp tests/negacionLogica.cpp tests/compararSilencios.cpp)
 
 add_executable(salaDeReunion ${SOURCE_FILES})
 

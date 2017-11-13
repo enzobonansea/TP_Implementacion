@@ -8,8 +8,6 @@
 
 using namespace std;
 
-
-
 TEST(distanciasTEST, testBEEP) {
     int frecuencia, profundidad,duracion;
     int startPOINT, endPOINT;
@@ -36,4 +34,3 @@ TEST(distanciasTEST, testBEEP) {
     }
     EXPECT_EQ(1,get<0>(spk));
 }
-

@@ -36,7 +36,8 @@ bool seRespetan(sala m, int p1, int p2, int freq, int umbral, int prof);
 bool haySilencioQueLoContiene(audio a, int i, int freq, int umbral, int prof);
 
 lista_intervalos cargarIntervaloDeHabla(string archivo);
-vector<bool> enmascarar(lista_intervalos listaIntervalo, tiempo dur);
+vector<bool> enmascarar(tiempo dur, lista_intervalos tiempos);
+float tiempoEnPosicion(int i);
 void negacionLogica(vector<bool> &mascara );
 vector<bool> enmascararSilencios(audio &s, int umbral);
 audio deArchivoAVector (string archivo);
@@ -53,6 +54,8 @@ audio sacarPausas(audio s, lista_intervalos sil, int freq, int prof, int umbral)
 int encontrarAparicion(audio x, audio y);
 int comienzoCorrelacion(audio a,audio frase);
 bool esMaximaCorrelacion(audio a, int starPoint, audio frase);
+float intensidadCorrelacion(audio a, audio frase);
+float distanciaAP(sala m, int p1,int p2,int freq, audio frase);
 
 locutor medirLaDistancia(sala m, audio frase, int freq, int prof);
 
