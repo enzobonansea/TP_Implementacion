@@ -6,6 +6,7 @@
 
 using namespace std;
 
+
 TEST(hayQuilomboTEST, quilombo1){
     //inicializacion
     sala m = { {1, 0},
@@ -21,8 +22,8 @@ TEST(hayQuilomboTEST, quilombo1){
 
 TEST(hayQuilomboTEST, sinQuilombo1){
     //inicializacion
-    sala m = { {1, 0},
-               {0, 0} };
+    sala m = { {1, 0, 2, 3, 0, 0, 0, 0, 0, 0, 0 },
+               {0, 0, 0, 0, 0, 1, 0, 2, 3, 0, 0} };
     int prof = 16;
     int freq = 10;
     int umbral = 0;
@@ -47,8 +48,8 @@ TEST(hayQuilomboTEST, quilombo2){
 
 TEST(hayQuilomboTEST, sinQuilombo2){
     //inicializacion
-    sala m = {  {1, 0, 3, 4, 0, 1},
-                {0, 1, 0, 0, 3, 0}  };
+    sala m = {  {1, 0, 0, 0, 3, 4, 0, 0, 0, 1, 1, 1},
+                {0, 0, 0, 1, 0, 0, 0, 3, 1, 0, 0, 0}  };
     int prof = 16;
     int freq = 10; //en 10 muestras transcurre 1s sii en 1 muestra transcurren 0.1 s
     int umbral = 0;
@@ -85,4 +86,5 @@ TEST(hayQuilomboTEST, sinQuilombo3){
     //check
     EXPECT_FALSE(res);
 }
+
 

@@ -49,7 +49,7 @@ float compararSilencios(audio &vec, int freq, int prof, int locutor, int umbralS
 float resultadoFinal(sala &m, int freq, int prof, int umbralSilencio);
 void resultadosEjercicio7(int umbralSilencio);
 
-audio sacarPausas(audio s, lista_intervalos sil, int freq, int prof, int umbral);
+audio sacarPausas(audio s, int freq, int prof, int umbral);
 
 int encontrarAparicion(audio x, audio y);
 int comienzoCorrelacion(audio a,audio frase);
