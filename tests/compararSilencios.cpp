@@ -19,13 +19,13 @@ TEST(compararSilencios, persona0){
 TEST(compararSilencios, salaCompleta){
     cout << "El F1-score promedio de la sala es: ";
     int frecuencia, profundidad, duracion = 0;
-    vector<string> archivos = {"datos/pzm.dat",
-                               "datos/spkr0.dat",
+    vector<string> archivos = {"datos/spkr0.dat",
                                "datos/spkr1.dat",
                                "datos/spkr2.dat",
                                "datos/spkr3.dat",
                                "datos/spkr4.dat",
-                               "datos/spkr5.dat"};
+                               "datos/spkr5.dat",
+                               "datos/pzm.dat"};
     sala reunion = cargarSalaAudio(archivos, frecuencia, profundidad, duracion);
     int umbral = 4000;
     cout << resultadoFinal(reunion, frecuencia, profundidad, umbral);

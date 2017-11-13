@@ -390,12 +390,12 @@ float compararSilencios(audio &vec, int freq, int prof, int locutor, int umbralS
 }
 
 float resultadoFinal(sala &m, int freq, int prof, int umbralSilencio){
-    float cantidadDeLocutores = m.size();
+    int cantidadDeLocutores = m.size();
     float sumaScores = 0;
     for (int i = 0; i < cantidadDeLocutores; i++){
         sumaScores += compararSilencios(m[i], freq, prof, i, umbralSilencio);
     }
-    return sumaScores / cantidadDeLocutores;
+    return sumaScores / (float) cantidadDeLocutores;
 }
 
 /************************** EJERCICIO sacarPausas **************************/
