@@ -26,7 +26,7 @@ bool enRango(audio s, int prof){
     return res;
 }
 
-bool micFunciona(audio s, int freq){to
+bool micFunciona(audio s, int freq){
     bool res = true;
     int i = 0;
     while (i < s.size()){
