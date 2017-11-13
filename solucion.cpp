@@ -260,7 +260,7 @@ bool haySilencioQueLoContiene(audio a, int i, int freq, int umbral, int prof){
 /************************** EJERCICIO compararSilencios **************************/
 /* en los archivos spkrX.dat obtengo de las primeras 3 posiciones los valores
  * correspondientes a la frecuencia, profundidad y duracion de cada audio */
-int freq = 16000, prof = 16, dur = 120;
+
 
 lista_intervalos cargarIntervaloDeHabla(string archivo){
     lista_intervalos res;
@@ -307,9 +307,9 @@ void negacionLogica(vector<bool> &mascara ) {
     }
 }
 
-vector<bool> enmascararSilencios(audio &s, int umbral){
+vector<bool> enmascararSilencios(audio &s, int umbral, int prof, int freq){
     lista_intervalos silenciosSinMascara = silencios(s, prof, freq, umbral);
-    float duracion = s.size() /(float) freq;
+    float duracion = s.size() / freq;
     vector<bool> silencioEnmascarado = enmascarar(duracion, silenciosSinMascara);
     return silencioEnmascarado;
 }
@@ -361,7 +361,7 @@ unsigned int falsosNegativos(vector<bool> &mascaraConAlgoritmo, vector<bool> &ma
 
 float compararSilencios(audio &vec, int freq, int prof, int locutor, int umbralSilencio){
     //obtengo la mascara de silencios de vec
-    vector<bool> mascaraDesdeArchivo = enmascararSilencios(vec, umbralSilencio);
+    vector<bool> mascaraDesdeArchivo = enmascararSilencios(vec, umbralSilencio, prof, freq);
 
     //obtengo la mascara de habla asociada al locutor. El locutor puede ser 0, 1, 2, 3, 4, 5, o 6
     //(este ultimo es el microfono del centro)
@@ -374,6 +374,7 @@ float compararSilencios(audio &vec, int freq, int prof, int locutor, int umbralS
     if (locutor == 5){archivoDeHabla = "datos/habla_spkr5.txt";}
     if (locutor == 6){archivoDeHabla = "datos/habla_spkrdefault.txt";}
     lista_intervalos listaDeHabla = cargarIntervaloDeHabla(archivoDeHabla);
+    int dur = vec.size()/freq;
     vector<bool> mascaraDesdeIntervalo = enmascarar(dur, listaDeHabla);
     //transformo la mascara de habla a mascara de silencios
     negacionLogica(mascaraDesdeIntervalo);
@@ -481,14 +482,14 @@ float intensidadCorrelacion(audio a, audio frase){
             acum = i;
         }
     }
-    sum = sum + intensidadMedia(subseq(a, acum, acum + l_f));
+    sum =  intensidadMedia(subseq(a, acum, acum + l_f));
 
     return sum;
 }
 
 
 float distanciaAP(sala m, int p1,int p2,int freq, audio frase) {
-    float vel_sonido_freq = 343.2 / freq;
+    float vel_sonido_freq = (float)343.2 / (float)freq;
     float dist = abs(comienzoCorrelacion(m[p1], frase) - comienzoCorrelacion(m[p2], frase)) * vel_sonido_freq;
 
     return dist;

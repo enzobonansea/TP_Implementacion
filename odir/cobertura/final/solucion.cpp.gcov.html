@@ -31,18 +31,18 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">323</td>
-            <td class="headerCovTableEntry">329</td>
-            <td class="headerCovTableEntryHi">98.2 %</td>
+            <td class="headerCovTableEntry">332</td>
+            <td class="headerCovTableEntry">332</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-11-13 03:55:41</td>
+            <td class="headerValue">2017-11-13 12:54:05</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">38</td>
             <td class="headerCovTableEntry">39</td>
-            <td class="headerCovTableEntryHi">97.4 %</td>
+            <td class="headerCovTableEntry">39</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -64,501 +64,498 @@
 <span class="lineNum">       2 </span>            : #include &quot;Funciones_TPI.h&quot;
 <a name="3"><span class="lineNum">       3 </span>            : </a>
 <span class="lineNum">       4 </span>            : /************************** EJERCICIO grabacionValida **************************/
-<span class="lineNum">       5 </span><span class="lineCov">          4 : bool grabacionValida(audio s, int prof, int freq) {</span>
-<span class="lineNum">       6 </span><span class="lineCov">          4 :     bool res = false;</span>
-<span class="lineNum">       7 </span><span class="lineCov">          4 :     bool freqValida = freq &gt;= 4;</span>
-<span class="lineNum">       8 </span><span class="lineCov">          4 :     bool profValida = prof == 16 or prof == 32;</span>
-<span class="lineNum">       9 </span><span class="lineCov">          4 :     int longitud = s.size();</span>
-<span class="lineNum">      10 </span><span class="lineCov">          4 :     bool duracionValida = longitud/(float)freq &gt; 1;</span>
-<span class="lineNum">      11 </span><span class="lineCov">          4 :     if(freqValida and profValida and duracionValida and enRango(s, prof) and micFunciona(s, freq))</span>
-<span class="lineNum">      12 </span><span class="lineCov">          2 :         res = true;</span>
-<span class="lineNum">      13 </span><span class="lineCov">          4 :     return res;</span>
+<span class="lineNum">       5 </span><span class="lineCov">          8 : bool grabacionValida(audio s, int prof, int freq) {</span>
+<span class="lineNum">       6 </span><span class="lineCov">          8 :     bool res = false;</span>
+<span class="lineNum">       7 </span><span class="lineCov">          8 :     bool freqValida = freq &gt;= 4;</span>
+<span class="lineNum">       8 </span><span class="lineCov">          8 :     bool profValida = prof == 16 or prof == 32;</span>
+<span class="lineNum">       9 </span><span class="lineCov">          8 :     int longitud = s.size();</span>
+<span class="lineNum">      10 </span><span class="lineCov">          8 :     bool duracionValida = longitud/(float)freq &gt; 1;</span>
+<span class="lineNum">      11 </span><span class="lineCov">          8 :     if(freqValida and profValida and duracionValida and enRango(s, prof) and micFunciona(s, freq))</span>
+<span class="lineNum">      12 </span><span class="lineCov">          4 :         res = true;</span>
+<span class="lineNum">      13 </span><span class="lineCov">          8 :     return res;</span>
 <a name="14"><span class="lineNum">      14 </span>            : }</a>
 <span class="lineNum">      15 </span>            : 
-<span class="lineNum">      16 </span><span class="lineCov">          4 : bool enRango(audio s, int prof){</span>
-<span class="lineNum">      17 </span><span class="lineCov">          4 :     bool res = true;</span>
-<span class="lineNum">      18 </span><span class="lineCov">          4 :     double limiteInferior = pow(-2, prof - 1);</span>
-<span class="lineNum">      19 </span><span class="lineCov">          4 :     double limiteSuperior = pow(2, prof - 1) -1;</span>
-<span class="lineNum">      20 </span><span class="lineCov">          4 :     int i = 0;</span>
-<span class="lineNum">      21 </span><span class="lineCov">         78 :     while(i &lt; s.size()){</span>
-<span class="lineNum">      22 </span><span class="lineCov">         37 :         if(!(limiteInferior &lt;= s[i] and s[i] &lt;= limiteSuperior))</span>
-<span class="lineNum">      23 </span><span class="lineCov">          1 :             res = false;</span>
-<span class="lineNum">      24 </span><span class="lineCov">         37 :         i++;</span>
+<span class="lineNum">      16 </span><span class="lineCov">          8 : bool enRango(audio s, int prof){</span>
+<span class="lineNum">      17 </span><span class="lineCov">          8 :     bool res = true;</span>
+<span class="lineNum">      18 </span><span class="lineCov">          8 :     double limiteInferior = pow(-2, prof - 1);</span>
+<span class="lineNum">      19 </span><span class="lineCov">          8 :     double limiteSuperior = pow(2, prof - 1) -1;</span>
+<span class="lineNum">      20 </span><span class="lineCov">          8 :     int i = 0;</span>
+<span class="lineNum">      21 </span><span class="lineCov">        156 :     while(i &lt; s.size()){</span>
+<span class="lineNum">      22 </span><span class="lineCov">         74 :         if(!(limiteInferior &lt;= s[i] and s[i] &lt;= limiteSuperior))</span>
+<span class="lineNum">      23 </span><span class="lineCov">          2 :             res = false;</span>
+<span class="lineNum">      24 </span><span class="lineCov">         74 :         i++;</span>
 <span class="lineNum">      25 </span>            :     }
-<span class="lineNum">      26 </span><span class="lineCov">          4 :     return res;</span>
+<span class="lineNum">      26 </span><span class="lineCov">          8 :     return res;</span>
 <a name="27"><span class="lineNum">      27 </span>            : }</a>
 <span class="lineNum">      28 </span>            : 
-<span class="lineNum">      29 </span><span class="lineCov">          3 : bool micFunciona(audio s, int freq){</span>
-<span class="lineNum">      30 </span><span class="lineCov">          3 :     bool res = true;</span>
-<span class="lineNum">      31 </span><span class="lineCov">          3 :     int i = 0;</span>
-<span class="lineNum">      32 </span><span class="lineCov">         65 :     while (i &lt; s.size()){</span>
-<span class="lineNum">      33 </span><span class="lineCov">         31 :         int j = 0;</span>
-<span class="lineNum">      34 </span><span class="lineCov">        849 :         while(j &lt; s.size()){</span>
-<span class="lineNum">      35 </span><span class="lineCov">        818 :             audio subsecuencia = subseq(s, i, j);</span>
-<span class="lineNum">      36 </span><span class="lineCov">        409 :             float duracion = subsecuencia.size() / (float)freq;</span>
-<span class="lineNum">      37 </span><span class="lineCov">        409 :             if (duracion &gt; 1 and sonTodosCeros(subsecuencia))</span>
-<span class="lineNum">      38 </span><span class="lineCov">          3 :                 res = false;</span>
-<span class="lineNum">      39 </span><span class="lineCov">        409 :             j++;</span>
+<span class="lineNum">      29 </span><span class="lineCov">          6 : bool micFunciona(audio s, int freq){</span>
+<span class="lineNum">      30 </span><span class="lineCov">          6 :     bool res = true;</span>
+<span class="lineNum">      31 </span><span class="lineCov">          6 :     int i = 0;</span>
+<span class="lineNum">      32 </span><span class="lineCov">        130 :     while (i &lt; s.size()){</span>
+<span class="lineNum">      33 </span><span class="lineCov">         62 :         int j = 0;</span>
+<span class="lineNum">      34 </span><span class="lineCov">       1698 :         while(j &lt; s.size()){</span>
+<span class="lineNum">      35 </span><span class="lineCov">       1636 :             audio subsecuencia = subseq(s, i, j);</span>
+<span class="lineNum">      36 </span><span class="lineCov">        818 :             float duracion = subsecuencia.size() / (float)freq;</span>
+<span class="lineNum">      37 </span><span class="lineCov">        818 :             if (duracion &gt; 1 and sonTodosCeros(subsecuencia))</span>
+<span class="lineNum">      38 </span><span class="lineCov">          6 :                 res = false;</span>
+<span class="lineNum">      39 </span><span class="lineCov">        818 :             j++;</span>
 <span class="lineNum">      40 </span>            :         }
-<span class="lineNum">      41 </span><span class="lineCov">         31 :         i++;</span>
+<span class="lineNum">      41 </span><span class="lineCov">         62 :         i++;</span>
 <span class="lineNum">      42 </span>            :     }
-<span class="lineNum">      43 </span><span class="lineCov">          3 :     return res;</span>
+<span class="lineNum">      43 </span><span class="lineCov">          6 :     return res;</span>
 <a name="44"><span class="lineNum">      44 </span>            : }</a>
 <span class="lineNum">      45 </span>            : 
-<span class="lineNum">      46 </span><span class="lineCov">     180427 : audio subseq(audio s, int i, int j){</span>
-<span class="lineNum">      47 </span><span class="lineCov">     180427 :     audio res;</span>
-<span class="lineNum">      48 </span><span class="lineCov"> 2628298317 :     for (int k = i; k &lt; j; k++)</span>
-<span class="lineNum">      49 </span><span class="lineCov"> 2628117890 :         res.push_back(s[k]);</span>
-<span class="lineNum">      50 </span><span class="lineCov">     180427 :     return res;</span>
+<span class="lineNum">      46 </span><span class="lineCov">     360854 : audio subseq(audio s, int i, int j){</span>
+<span class="lineNum">      47 </span><span class="lineCov">     360854 :     audio res;</span>
+<span class="lineNum">      48 </span><span class="lineCov"> 5256596634 :     for (int k = i; k &lt; j; k++)</span>
+<span class="lineNum">      49 </span><span class="lineCov"> 5256235780 :         res.push_back(s[k]);</span>
+<span class="lineNum">      50 </span><span class="lineCov">     360854 :     return res;</span>
 <a name="51"><span class="lineNum">      51 </span>            : }</a>
 <span class="lineNum">      52 </span>            : 
-<span class="lineNum">      53 </span><span class="lineCov">         19 : bool sonTodosCeros(audio a){</span>
-<span class="lineNum">      54 </span><span class="lineCov">         19 :     bool res = true;</span>
-<span class="lineNum">      55 </span><span class="lineCov">        255 :     for(int i = 0; i &lt; a.size(); i++)</span>
-<span class="lineNum">      56 </span><span class="lineCov">        236 :         if (a[i] != 0)</span>
-<span class="lineNum">      57 </span><span class="lineCov">        220 :             res = false;</span>
-<span class="lineNum">      58 </span><span class="lineCov">         19 :     return res;</span>
+<span class="lineNum">      53 </span><span class="lineCov">         38 : bool sonTodosCeros(audio a){</span>
+<span class="lineNum">      54 </span><span class="lineCov">         38 :     bool res = true;</span>
+<span class="lineNum">      55 </span><span class="lineCov">        510 :     for(int i = 0; i &lt; a.size(); i++)</span>
+<span class="lineNum">      56 </span><span class="lineCov">        472 :         if (a[i] != 0)</span>
+<span class="lineNum">      57 </span><span class="lineCov">        440 :             res = false;</span>
+<span class="lineNum">      58 </span><span class="lineCov">         38 :     return res;</span>
 <span class="lineNum">      59 </span>            : }
 <a name="60"><span class="lineNum">      60 </span>            : </a>
 <span class="lineNum">      61 </span>            : /************************** EJERCICIO elAcaparador **************************/
-<span class="lineNum">      62 </span><span class="lineCov">          1 : int elAcaparador(sala m, int freq, int prof){</span>
-<span class="lineNum">      63 </span><span class="lineCov">          1 :     int persona = 0;</span>
-<span class="lineNum">      64 </span><span class="lineCov">          5 :     for(int i = 0; i &lt; m.size(); i++)</span>
-<span class="lineNum">      65 </span><span class="lineCov">          4 :         if(acapara(m, i, prof, freq))</span>
-<span class="lineNum">      66 </span><span class="lineCov">          1 :             persona = i;</span>
-<span class="lineNum">      67 </span><span class="lineCov">          1 :     return persona;</span>
+<span class="lineNum">      62 </span><span class="lineCov">          2 : int elAcaparador(sala m, int freq, int prof){</span>
+<span class="lineNum">      63 </span><span class="lineCov">          2 :     int persona = 0;</span>
+<span class="lineNum">      64 </span><span class="lineCov">         10 :     for(int i = 0; i &lt; m.size(); i++)</span>
+<span class="lineNum">      65 </span><span class="lineCov">          8 :         if(acapara(m, i, prof, freq))</span>
+<span class="lineNum">      66 </span><span class="lineCov">          2 :             persona = i;</span>
+<span class="lineNum">      67 </span><span class="lineCov">          2 :     return persona;</span>
 <a name="68"><span class="lineNum">      68 </span>            : }</a>
 <span class="lineNum">      69 </span>            : 
-<span class="lineNum">      70 </span><span class="lineCov">          4 : bool acapara(sala m, int posibleAcaparador, int prof, int freq){</span>
-<span class="lineNum">      71 </span><span class="lineCov">          4 :     bool res = true;</span>
-<span class="lineNum">      72 </span><span class="lineCov">          4 :     int persona = 0;</span>
-<span class="lineNum">      73 </span><span class="lineCov">         36 :     while(persona &lt; m.size()){</span>
-<span class="lineNum">      74 </span><span class="lineCov">         16 :         if(persona != posibleAcaparador and intensidadMedia(m[persona]) &gt;= intensidadMedia(m[posibleAcaparador]))</span>
-<span class="lineNum">      75 </span><span class="lineCov">          6 :             res = false;</span>
-<span class="lineNum">      76 </span><span class="lineCov">         16 :         persona++;</span>
+<span class="lineNum">      70 </span><span class="lineCov">          8 : bool acapara(sala m, int posibleAcaparador, int prof, int freq){</span>
+<span class="lineNum">      71 </span><span class="lineCov">          8 :     bool res = true;</span>
+<span class="lineNum">      72 </span><span class="lineCov">          8 :     int persona = 0;</span>
+<span class="lineNum">      73 </span><span class="lineCov">         72 :     while(persona &lt; m.size()){</span>
+<span class="lineNum">      74 </span><span class="lineCov">         32 :         if(persona != posibleAcaparador and intensidadMedia(m[persona]) &gt;= intensidadMedia(m[posibleAcaparador]))</span>
+<span class="lineNum">      75 </span><span class="lineCov">         12 :             res = false;</span>
+<span class="lineNum">      76 </span><span class="lineCov">         32 :         persona++;</span>
 <span class="lineNum">      77 </span>            :     }
-<span class="lineNum">      78 </span><span class="lineCov">          4 :     return res;</span>
+<span class="lineNum">      78 </span><span class="lineCov">          8 :     return res;</span>
 <span class="lineNum">      79 </span>            : 
 <a name="80"><span class="lineNum">      80 </span>            : }</a>
 <span class="lineNum">      81 </span>            : 
-<span class="lineNum">      82 </span><span class="lineCov">         32 : float intensidadMedia(audio a) {</span>
-<span class="lineNum">      83 </span><span class="lineCov">         32 :     int i = 0;</span>
-<span class="lineNum">      84 </span><span class="lineCov">         32 :     int sum = 0;</span>
-<span class="lineNum">      85 </span><span class="lineCov">     233920 :     while (i &lt; a.size()) {</span>
-<span class="lineNum">      86 </span><span class="lineCov">     116944 :         sum += abs(a[i]);</span>
-<span class="lineNum">      87 </span><span class="lineCov">     116944 :         i++;</span>
+<span class="lineNum">      82 </span><span class="lineCov">         64 : float intensidadMedia(audio a) {</span>
+<span class="lineNum">      83 </span><span class="lineCov">         64 :     int i = 0;</span>
+<span class="lineNum">      84 </span><span class="lineCov">         64 :     int sum = 0;</span>
+<span class="lineNum">      85 </span><span class="lineCov">     467840 :     while (i &lt; a.size()) {</span>
+<span class="lineNum">      86 </span><span class="lineCov">     233888 :         sum += abs(a[i]);</span>
+<span class="lineNum">      87 </span><span class="lineCov">     233888 :         i++;</span>
 <span class="lineNum">      88 </span>            :     }
-<span class="lineNum">      89 </span><span class="lineCov">         32 :     return sum/(float)a.size();</span>
+<span class="lineNum">      89 </span><span class="lineCov">         64 :     return sum/(float)a.size();</span>
 <span class="lineNum">      90 </span>            : }
 <a name="91"><span class="lineNum">      91 </span>            : </a>
 <span class="lineNum">      92 </span>            : /************************** EJERCICIO ardillizar **************************/
-<span class="lineNum">      93 </span><span class="lineCov">          2 : sala ardillizar(sala m, int prof, int freq) {</span>
-<span class="lineNum">      94 </span><span class="lineCov">          2 :     sala res;</span>
-<span class="lineNum">      95 </span><span class="lineCov">          2 :     int i = 0;</span>
-<span class="lineNum">      96 </span><span class="lineCov">         10 :     while(i &lt; m.size()){</span>
-<span class="lineNum">      97 </span><span class="lineCov">          8 :         audio ardillizado = ardillizarAudio(m[i]);</span>
-<span class="lineNum">      98 </span><span class="lineCov">          4 :         res.push_back(ardillizado);</span>
-<span class="lineNum">      99 </span><span class="lineCov">          4 :         i++;</span>
+<span class="lineNum">      93 </span><span class="lineCov">          4 : sala ardillizar(sala m, int prof, int freq) {</span>
+<span class="lineNum">      94 </span><span class="lineCov">          4 :     sala res;</span>
+<span class="lineNum">      95 </span><span class="lineCov">          4 :     int i = 0;</span>
+<span class="lineNum">      96 </span><span class="lineCov">         20 :     while(i &lt; m.size()){</span>
+<span class="lineNum">      97 </span><span class="lineCov">         16 :         audio ardillizado = ardillizarAudio(m[i]);</span>
+<span class="lineNum">      98 </span><span class="lineCov">          8 :         res.push_back(ardillizado);</span>
+<span class="lineNum">      99 </span><span class="lineCov">          8 :         i++;</span>
 <span class="lineNum">     100 </span>            :     }
-<span class="lineNum">     101 </span><span class="lineCov">          2 :     return res;</span>
+<span class="lineNum">     101 </span><span class="lineCov">          4 :     return res;</span>
 <a name="102"><span class="lineNum">     102 </span>            : }</a>
 <span class="lineNum">     103 </span>            : 
-<span class="lineNum">     104 </span><span class="lineCov">          4 : audio ardillizarAudio(audio a){</span>
-<span class="lineNum">     105 </span><span class="lineCov">          4 :     audio res;</span>
-<span class="lineNum">     106 </span><span class="lineCov">          4 :     int i = 0;</span>
-<span class="lineNum">     107 </span><span class="lineCov">        104 :     while (i &lt; a.size()){</span>
-<span class="lineNum">     108 </span><span class="lineCov">         50 :         if(i % 2 == 0)</span>
-<span class="lineNum">     109 </span><span class="lineCov">         26 :             res.push_back(a[i]);</span>
-<span class="lineNum">     110 </span><span class="lineCov">         50 :         i++;</span>
+<span class="lineNum">     104 </span><span class="lineCov">          8 : audio ardillizarAudio(audio a){</span>
+<span class="lineNum">     105 </span><span class="lineCov">          8 :     audio res;</span>
+<span class="lineNum">     106 </span><span class="lineCov">          8 :     int i = 0;</span>
+<span class="lineNum">     107 </span><span class="lineCov">        208 :     while (i &lt; a.size()){</span>
+<span class="lineNum">     108 </span><span class="lineCov">        100 :         if(i % 2 == 0)</span>
+<span class="lineNum">     109 </span><span class="lineCov">         52 :             res.push_back(a[i]);</span>
+<span class="lineNum">     110 </span><span class="lineCov">        100 :         i++;</span>
 <span class="lineNum">     111 </span>            :     }
-<span class="lineNum">     112 </span><span class="lineCov">          4 :     return res;</span>
+<span class="lineNum">     112 </span><span class="lineCov">          8 :     return res;</span>
 <span class="lineNum">     113 </span>            : }
 <a name="114"><span class="lineNum">     114 </span>            : </a>
 <span class="lineNum">     115 </span>            : /************************** EJERCICIO flashElPerezoso **************************/
-<span class="lineNum">     116 </span><span class="lineCov">          1 : sala flashElPerezoso(sala m, int prof, int freq){</span>
-<span class="lineNum">     117 </span><span class="lineCov">          1 :     int length_m = m.size();</span>
-<span class="lineNum">     118 </span><span class="lineCov">          1 :     int length_mi = 2 * m[0].size() - 1;</span>
-<span class="lineNum">     119 </span><span class="lineCov">          1 :     sala res(length_m, vector&lt;int&gt; (length_mi));</span>
+<span class="lineNum">     116 </span><span class="lineCov">          2 : sala flashElPerezoso(sala m, int prof, int freq){</span>
+<span class="lineNum">     117 </span><span class="lineCov">          2 :     int length_m = m.size();</span>
+<span class="lineNum">     118 </span><span class="lineCov">          2 :     int length_mi = 2 * m[0].size() - 1;</span>
+<span class="lineNum">     119 </span><span class="lineCov">          2 :     sala res(length_m, vector&lt;int&gt; (length_mi));</span>
 <span class="lineNum">     120 </span>            : 
-<span class="lineNum">     121 </span><span class="lineCov">          1 :     int i = 0;</span>
-<span class="lineNum">     122 </span><span class="lineCov">          9 :     while(i &lt; length_m){</span>
-<span class="lineNum">     123 </span><span class="lineCov">          4 :         int j = 0;</span>
-<span class="lineNum">     124 </span><span class="lineCov">          4 :         int l = 0;</span>
-<span class="lineNum">     125 </span><span class="lineCov">         52 :         while(j &lt; m[i].size() or l &lt; vecInterpolado(m[i]).size()){</span>
-<span class="lineNum">     126 </span><span class="lineCov">         24 :             res[i][2*j] = m[i][j];</span>
-<span class="lineNum">     127 </span><span class="lineCov">         24 :             res[i][2*j+1] = vecInterpolado(m[i])[l];</span>
-<span class="lineNum">     128 </span><span class="lineCov">         24 :             j++;</span>
-<span class="lineNum">     129 </span><span class="lineCov">         24 :             l++;</span>
+<span class="lineNum">     121 </span><span class="lineCov">          2 :     int i = 0;</span>
+<span class="lineNum">     122 </span><span class="lineCov">         18 :     while(i &lt; length_m){</span>
+<span class="lineNum">     123 </span><span class="lineCov">          8 :         int j = 0;</span>
+<span class="lineNum">     124 </span><span class="lineCov">          8 :         int l = 0;</span>
+<span class="lineNum">     125 </span><span class="lineCov">        104 :         while(j &lt; m[i].size() or l &lt; vecInterpolado(m[i]).size()){</span>
+<span class="lineNum">     126 </span><span class="lineCov">         48 :             res[i][2*j] = m[i][j];</span>
+<span class="lineNum">     127 </span><span class="lineCov">         48 :             res[i][2*j+1] = vecInterpolado(m[i])[l];</span>
+<span class="lineNum">     128 </span><span class="lineCov">         48 :             j++;</span>
+<span class="lineNum">     129 </span><span class="lineCov">         48 :             l++;</span>
 <span class="lineNum">     130 </span>            :         }
-<span class="lineNum">     131 </span><span class="lineCov">          4 :         i++;</span>
+<span class="lineNum">     131 </span><span class="lineCov">          8 :         i++;</span>
 <span class="lineNum">     132 </span>            :     }
-<span class="lineNum">     133 </span><span class="lineCov">          1 :     return res;</span>
+<span class="lineNum">     133 </span><span class="lineCov">          2 :     return res;</span>
 <a name="134"><span class="lineNum">     134 </span>            : }</a>
 <span class="lineNum">     135 </span>            : 
-<span class="lineNum">     136 </span><span class="lineCov">         28 : vector&lt;int&gt; vecInterpolado(vector&lt;int&gt; a){</span>
-<span class="lineNum">     137 </span><span class="lineCov">         28 :     vector&lt;int&gt; interpolado;</span>
-<span class="lineNum">     138 </span><span class="lineCov">        168 :     for(int i = 1; i &lt; a.size(); i++){</span>
-<span class="lineNum">     139 </span><span class="lineCov">        140 :         int promedioVecinos = floor((a[i-1] + a[i])/2);</span>
-<span class="lineNum">     140 </span><span class="lineCov">        140 :         interpolado.push_back(promedioVecinos);</span>
+<span class="lineNum">     136 </span><span class="lineCov">         56 : vector&lt;int&gt; vecInterpolado(vector&lt;int&gt; a){</span>
+<span class="lineNum">     137 </span><span class="lineCov">         56 :     vector&lt;int&gt; interpolado;</span>
+<span class="lineNum">     138 </span><span class="lineCov">        336 :     for(int i = 1; i &lt; a.size(); i++){</span>
+<span class="lineNum">     139 </span><span class="lineCov">        280 :         int promedioVecinos = floor((a[i-1] + a[i])/2);</span>
+<span class="lineNum">     140 </span><span class="lineCov">        280 :         interpolado.push_back(promedioVecinos);</span>
 <span class="lineNum">     141 </span>            :     }
-<span class="lineNum">     142 </span><span class="lineCov">         28 :     return interpolado;</span>
+<span class="lineNum">     142 </span><span class="lineCov">         56 :     return interpolado;</span>
 <span class="lineNum">     143 </span>            : }
 <a name="144"><span class="lineNum">     144 </span>            : </a>
 <span class="lineNum">     145 </span>            : /************************** EJERCICIO silencios **************************/
-<span class="lineNum">     146 </span><span class="lineCov">        213 : lista_intervalos silencios(audio &amp;s, int prof, int freq, int umbral){</span>
-<span class="lineNum">     147 </span><span class="lineCov">        213 :     lista_intervalos res;</span>
-<span class="lineNum">     148 </span><span class="lineCov">        213 :     int i = 0;</span>
-<span class="lineNum">     149 </span><span class="lineCov">    1766687 :     while(i &lt; s.size()) {</span>
-<span class="lineNum">     150 </span><span class="lineCov">     883237 :         if (abs(s[i]) &lt;= umbral) {</span>
+<span class="lineNum">     146 </span><span class="lineCov">        434 : lista_intervalos silencios(audio &amp;s, int prof, int freq, int umbral){</span>
+<span class="lineNum">     147 </span><span class="lineCov">        434 :     lista_intervalos res;</span>
+<span class="lineNum">     148 </span><span class="lineCov">        434 :     int i = 0;</span>
+<span class="lineNum">     149 </span><span class="lineCov">   11485864 :     while(i &lt; s.size()) {</span>
+<span class="lineNum">     150 </span><span class="lineCov">    5742715 :         if (abs(s[i]) &lt;= umbral) {</span>
 <span class="lineNum">     151 </span>            :             //solo en este caso me interesaria armar una tupla
-<span class="lineNum">     152 </span><span class="lineCov">     706021 :             int j = i + indiceEnTiempo(0.1, freq) + 1; //asi la duracion es mayor a 0.1 segundos</span>
-<span class="lineNum">     153 </span><span class="lineCov">   74711889 :             while (j &lt; s.size() and noSuperaUmbral(s, i, j, umbral)) {</span>
-<span class="lineNum">     154 </span><span class="lineCov">   37002934 :                 if (noHaySilencioMayor(s, i, j, umbral)) {//armo la tupla</span>
-<span class="lineNum">     155 </span><span class="lineCov">        221 :                     intervalo tupla;</span>
-<span class="lineNum">     156 </span><span class="lineCov">        221 :                     float primerElemento = i / (float) freq; //tiempo hasta i exclusive</span>
-<span class="lineNum">     157 </span><span class="lineCov">        221 :                     float segundoElemento = (j + 1) / (float) freq; //tiempo hasta j inclusive (por eso +1)</span>
-<span class="lineNum">     158 </span><span class="lineCov">        221 :                     get&lt;0&gt;(tupla) = primerElemento;</span>
-<span class="lineNum">     159 </span><span class="lineCov">        221 :                     get&lt;1&gt;(tupla) = segundoElemento;</span>
-<span class="lineNum">     160 </span><span class="lineCov">        221 :                     res.push_back(tupla);</span>
-<span class="lineNum">     161 </span>            :                 }
-<span class="lineNum">     162 </span><span class="lineCov">   37002934 :                 j++;</span>
-<span class="lineNum">     163 </span><span class="lineCov">   37002934 :                 if (abs(s[j]) &gt; umbral)</span>
-<span class="lineNum">     164 </span><span class="lineCov">        387 :                     i = j;</span>
-<span class="lineNum">     165 </span>            :             }
-<span class="lineNum">     166 </span>            :         }
-<span class="lineNum">     167 </span><span class="lineCov">     883237 :         i++;</span>
-<span class="lineNum">     168 </span>            :     }
-<span class="lineNum">     169 </span><span class="lineCov">        213 :     return res;</span>
-<a name="170"><span class="lineNum">     170 </span>            : }</a>
-<span class="lineNum">     171 </span>            : 
-<span class="lineNum">     172 </span><span class="lineCov">         22 : bool esSilencio (audio &amp;s, intervalo inter, int umbral, int i, int j, int freq){</span>
-<span class="lineNum">     173 </span><span class="lineCov">         22 :     bool res = false;</span>
-<span class="lineNum">     174 </span><span class="lineCov">         22 :     float tf = get&lt;1&gt;(inter);</span>
-<span class="lineNum">     175 </span><span class="lineCov">         22 :     float ti = get&lt;0&gt;(inter);</span>
-<span class="lineNum">     176 </span><span class="lineCov">         22 :     bool duracionValida = indiceEnTiempo(tf, freq) - indiceEnTiempo(ti, freq) &gt; indiceEnTiempo(0.1, freq);</span>
-<span class="lineNum">     177 </span><span class="lineCov">         22 :     if(duracionValida and noSuperaUmbral(s, i, j, umbral) and noHaySilencioMayor(s, i, j, umbral))</span>
-<span class="lineNum">     178 </span><span class="lineCov">          2 :         res = true;</span>
-<span class="lineNum">     179 </span><span class="lineCov">         22 :     return res;</span>
-<a name="180"><span class="lineNum">     180 </span>            : }</a>
-<span class="lineNum">     181 </span>            : 
-<span class="lineNum">     182 </span><span class="lineCov">     706087 : int indiceEnTiempo(float tiempo, int freq){</span>
-<span class="lineNum">     183 </span><span class="lineCov">     706087 :     int res = floor(freq * tiempo);</span>
-<span class="lineNum">     184 </span><span class="lineCov">     706087 :     return res;</span>
-<a name="185"><span class="lineNum">     185 </span>            : }</a>
-<span class="lineNum">     186 </span>            : 
-<span class="lineNum">     187 </span><span class="lineCov">   37698674 : bool noSuperaUmbral (audio &amp;s, int i, int j,int umbral) {</span>
-<span class="lineNum">     188 </span><span class="lineCov">   37698674 :     bool res = true;</span>
-<span class="lineNum">     189 </span><span class="lineCov">>17048*10^7 :     for (int k = i; k &lt;= j; k++)</span>
-<span class="lineNum">     190 </span><span class="lineCov">>17045*10^7 :         if (abs(s[k]) &gt; umbral)</span>
-<span class="lineNum">     191 </span><span class="lineCov">  155675671 :             res = false;</span>
-<span class="lineNum">     192 </span><span class="lineCov">   37698674 :     return res;</span>
-<a name="193"><span class="lineNum">     193 </span>            : }</a>
-<span class="lineNum">     194 </span>            : 
-<span class="lineNum">     195 </span><span class="lineCov">   37002942 : bool noHaySilencioMayor(audio &amp;s, int i, int j, int umbral) {</span>
-<span class="lineNum">     196 </span><span class="lineCov">   37002942 :     bool res = true;</span>
-<span class="lineNum">     197 </span><span class="lineCov">   37002942 :     if(i &gt; 0){</span>
-<span class="lineNum">     198 </span><span class="lineCov">   37002710 :         if (j &lt; s.size() - 1){</span>
-<span class="lineNum">     199 </span><span class="lineCov">   36994155 :             res = abs(s[i-1]) &gt; umbral and abs(s[j+1] &gt; umbral);</span>
-<span class="lineNum">     200 </span>            :         }else{
-<span class="lineNum">     201 </span><span class="lineCov">       8555 :             res = abs(s[i-1]) &gt; umbral;</span>
-<span class="lineNum">     202 </span>            :         }
-<span class="lineNum">     203 </span>            :     }else{
-<span class="lineNum">     204 </span><span class="lineCov">        232 :         if(j &lt; s.size() - 1){</span>
-<span class="lineNum">     205 </span><span class="lineCov">        196 :             res = abs(s[j+1]) &gt; umbral;</span>
-<span class="lineNum">     206 </span>            :         }
-<span class="lineNum">     207 </span>            :     }
-<span class="lineNum">     208 </span><span class="lineCov">   37002942 :     return res;</span>
-<span class="lineNum">     209 </span>            : }
-<a name="210"><span class="lineNum">     210 </span>            : </a>
-<span class="lineNum">     211 </span>            : /************************** EJERCICIO hayQuilombo **************************/
-<span class="lineNum">     212 </span><span class="lineCov">          6 : bool hayQuilombo(sala m, int prof, int freq, int umbral) {</span>
-<span class="lineNum">     213 </span><span class="lineCov">          6 :     bool res = false;</span>
-<span class="lineNum">     214 </span><span class="lineCov">          6 :     int p1 = 0;</span>
-<span class="lineNum">     215 </span><span class="lineCov">          6 :     int cantPersonas = m.size();</span>
-<span class="lineNum">     216 </span><span class="lineCov">         34 :     while(p1 &lt; cantPersonas){</span>
-<span class="lineNum">     217 </span><span class="lineCov">         14 :         int p2 = 0;</span>
-<span class="lineNum">     218 </span><span class="lineCov">         82 :         while(p2 &lt; cantPersonas){</span>
-<span class="lineNum">     219 </span><span class="lineCov">         34 :             if(p1 != p2 and !seRespetan(m, p1, p2, freq, umbral, prof))</span>
-<span class="lineNum">     220 </span><span class="lineCov">         10 :                 res = true;</span>
-<span class="lineNum">     221 </span><span class="lineCov">         34 :             p2++;</span>
-<span class="lineNum">     222 </span>            :         }
-<span class="lineNum">     223 </span><span class="lineCov">         14 :         p1++;</span>
-<span class="lineNum">     224 </span>            :     }
-<span class="lineNum">     225 </span><span class="lineCov">          6 :     return res;</span>
-<a name="226"><span class="lineNum">     226 </span>            : }</a>
-<span class="lineNum">     227 </span>            : 
-<span class="lineNum">     228 </span><span class="lineCov">         20 : bool seRespetan(sala m, int p1, int p2, int freq, int umbral, int prof){</span>
-<span class="lineNum">     229 </span><span class="lineCov">         20 :     bool res = true;</span>
-<span class="lineNum">     230 </span><span class="lineCov">         40 :     audio persona1 = m[p1];</span>
-<span class="lineNum">     231 </span><span class="lineCov">         40 :     audio persona2 = m[p2];</span>
-<span class="lineNum">     232 </span><span class="lineCov">         20 :     int i = 0;</span>
-<span class="lineNum">     233 </span><span class="lineCov">        288 :     while(i &lt; persona1.size()){</span>
-<span class="lineNum">     234 </span><span class="lineCov">        134 :         bool algunSilencioContieneLaMuestra = haySilencioQueLoContiene(persona1, i, freq, umbral, prof) or haySilencioQueLoContiene(persona2, i, freq, umbral, prof);</span>
-<span class="lineNum">     235 </span><span class="lineCov">        134 :         res &amp;= algunSilencioContieneLaMuestra;</span>
-<span class="lineNum">     236 </span><span class="lineCov">        134 :         i++;</span>
-<span class="lineNum">     237 </span>            :     }
-<span class="lineNum">     238 </span><span class="lineCov">         40 :     return res;</span>
-<a name="239"><span class="lineNum">     239 </span>            : }</a>
-<span class="lineNum">     240 </span>            : 
-<span class="lineNum">     241 </span><span class="lineCov">        211 : bool haySilencioQueLoContiene(audio a, int i, int freq, int umbral, int prof){</span>
-<span class="lineNum">     242 </span><span class="lineCov">        211 :     bool res = false;</span>
-<span class="lineNum">     243 </span><span class="lineCov">        211 :     float tiempoAntesDeLaMuestra = i/(float)freq;</span>
-<span class="lineNum">     244 </span><span class="lineCov">        211 :     float tiempoDespuesDeLaMuestra = (i+1)/(float)freq;</span>
-<span class="lineNum">     245 </span><span class="lineCov">        422 :     lista_intervalos intervalosDeSilencio = silencios(a, prof, freq, umbral);</span>
-<span class="lineNum">     246 </span><span class="lineCov">        211 :     int j = 0;</span>
-<span class="lineNum">     247 </span><span class="lineCov">        563 :     while(j &lt; intervalosDeSilencio.size()){</span>
-<span class="lineNum">     248 </span><span class="lineCov">        176 :         float inicio = get&lt;0&gt;(intervalosDeSilencio[j]);</span>
-<span class="lineNum">     249 </span><span class="lineCov">        176 :         float fin = get&lt;1&gt;(intervalosDeSilencio[j]);</span>
-<span class="lineNum">     250 </span><span class="lineCov">        176 :         bool enElIntervalo = tiempoAntesDeLaMuestra &gt;= inicio and tiempoDespuesDeLaMuestra &lt;= fin;</span>
-<span class="lineNum">     251 </span><span class="lineCov">        176 :         if(enElIntervalo)</span>
-<span class="lineNum">     252 </span><span class="lineCov">         94 :             res = true;</span>
-<span class="lineNum">     253 </span><span class="lineCov">        176 :         j++;</span>
-<span class="lineNum">     254 </span>            :     }
-<span class="lineNum">     255 </span><span class="lineCov">        422 :     return res;</span>
-<span class="lineNum">     256 </span>            : }
-<span class="lineNum">     257 </span>            : 
-<span class="lineNum">     258 </span>            : /************************** EJERCICIO compararSilencios **************************/
-<span class="lineNum">     259 </span>            : /* en los archivos spkrX.dat obtengo de las primeras 3 posiciones los valores
-<span class="lineNum">     260 </span>            :  * correspondientes a la frecuencia, profundidad y duracion de cada audio */
-<a name="261"><span class="lineNum">     261 </span>            : int freq = 16000, prof = 16, dur = 120;</a>
-<span class="lineNum">     262 </span>            : 
-<span class="lineNum">     263 </span><span class="lineCov">          2 : lista_intervalos cargarIntervaloDeHabla(string archivo){</span>
-<span class="lineNum">     264 </span><span class="lineCov">          2 :     lista_intervalos res;</span>
-<span class="lineNum">     265 </span><span class="lineCov">          4 :     ifstream entrada;</span>
-<span class="lineNum">     266 </span><span class="lineCov">          2 :     entrada.open(archivo, ifstream::in);</span>
-<span class="lineNum">     267 </span><span class="lineCov">         50 :     while(!entrada.eof()){</span>
-<span class="lineNum">     268 </span>            :         tiempo tIni;
-<span class="lineNum">     269 </span>            :         tiempo tFin;
-<span class="lineNum">     270 </span><span class="lineCov">         24 :         intervalo tupla;</span>
-<span class="lineNum">     271 </span><span class="lineCov">         24 :         entrada &gt;&gt; tIni &gt;&gt; tFin;</span>
-<span class="lineNum">     272 </span><span class="lineCov">         24 :         get&lt;0&gt;(tupla) = tIni;</span>
-<span class="lineNum">     273 </span><span class="lineCov">         24 :         get&lt;1&gt;(tupla) = tFin;</span>
-<span class="lineNum">     274 </span><span class="lineCov">         24 :         res.push_back(tupla);</span>
-<span class="lineNum">     275 </span>            :     }
-<span class="lineNum">     276 </span><span class="lineCov">          2 :     entrada.close();</span>
-<span class="lineNum">     277 </span><span class="lineCov">          4 :     return res;</span>
-<a name="278"><span class="lineNum">     278 </span>            : }</a>
-<span class="lineNum">     279 </span>            : 
-<span class="lineNum">     280 </span><span class="lineCov">          3 : vector&lt;bool&gt; enmascarar(tiempo dur, lista_intervalos tiempos) {</span>
-<span class="lineNum">     281 </span><span class="lineCov">          3 :     vector&lt;bool&gt; mascara(dur * 100, false);</span>
-<span class="lineNum">     282 </span><span class="lineCov">          3 :     int i = 0;</span>
-<span class="lineNum">     283 </span><span class="lineCov">      48033 :     while (i &lt; mascara.size()) {</span>
-<span class="lineNum">     284 </span><span class="lineCov">      24015 :         int j = 0;</span>
-<span class="lineNum">     285 </span><span class="lineCov">    1344105 :         while (j &lt; tiempos.size()) {</span>
-<span class="lineNum">     286 </span><span class="lineCov">     660045 :             float t0 = get&lt;0&gt;(tiempos[j]);</span>
-<span class="lineNum">     287 </span><span class="lineCov">     660045 :             float t1 = get&lt;1&gt;(tiempos[j]);</span>
-<span class="lineNum">     288 </span><span class="lineCov">     660045 :             if(t0 &lt;= tiempoEnPosicion(i) and tiempoEnPosicion(i) &lt; t1)</span>
-<span class="lineNum">     289 </span><span class="lineCov">       3500 :                 mascara[i] = true;</span>
-<span class="lineNum">     290 </span><span class="lineCov">     660045 :             j++;</span>
-<span class="lineNum">     291 </span>            :         }
-<span class="lineNum">     292 </span><span class="lineCov">      24015 :         i++;</span>
-<span class="lineNum">     293 </span>            :     }
-<span class="lineNum">     294 </span><span class="lineCov">          3 :     return mascara;</span>
-<a name="295"><span class="lineNum">     295 </span>            : }</a>
-<span class="lineNum">     296 </span>            : 
-<span class="lineNum">     297 </span><span class="lineCov">    1020098 : float tiempoEnPosicion(int i) {</span>
-<span class="lineNum">     298 </span><span class="lineCov">    1020098 :     return i / (float) 100;</span>
-<a name="299"><span class="lineNum">     299 </span>            : }</a>
-<span class="lineNum">     300 </span>            : 
-<span class="lineNum">     301 </span><span class="lineCov">          2 : void negacionLogica(vector&lt;bool&gt; &amp;mascara ) {</span>
-<span class="lineNum">     302 </span><span class="lineCov">      12017 :     for (int i = 0; i &lt; mascara.size(); i++) {</span>
-<span class="lineNum">     303 </span><span class="lineCov">      12015 :         bool temp = mascara[i];</span>
-<span class="lineNum">     304 </span><span class="lineCov">      12015 :         mascara[i] = !temp;</span>
-<span class="lineNum">     305 </span>            :     }
-<a name="306"><span class="lineNum">     306 </span><span class="lineCov">          2 : }</span></a>
-<span class="lineNum">     307 </span>            : 
-<span class="lineNum">     308 </span><span class="lineCov">          1 : vector&lt;bool&gt; enmascararSilencios(audio &amp;s, int umbral){</span>
-<span class="lineNum">     309 </span><span class="lineCov">          2 :     lista_intervalos silenciosSinMascara = silencios(s, prof, freq, umbral);</span>
-<span class="lineNum">     310 </span><span class="lineCov">          1 :     float duracion = s.size() /(float) freq;</span>
-<span class="lineNum">     311 </span><span class="lineCov">          1 :     vector&lt;bool&gt; silencioEnmascarado = enmascarar(duracion, silenciosSinMascara);</span>
-<span class="lineNum">     312 </span><span class="lineCov">          2 :     return silencioEnmascarado;</span>
-<a name="313"><span class="lineNum">     313 </span>            : }</a>
-<span class="lineNum">     314 </span>            : 
-<span class="lineNum">     315 </span><span class="lineCov">          1 : unsigned int verdaderosPositivos(vector&lt;bool&gt; &amp;mascaraConAlgoritmo, vector&lt;bool&gt; &amp;mascaraDesdeIntervalos){</span>
-<span class="lineNum">     316 </span>            :     //cantidad de T detectados que eran T realmente
-<span class="lineNum">     317 </span>            :     //se asume que las longitudes de ambos vectores es la misma
-<span class="lineNum">     318 </span><span class="lineCov">          1 :     unsigned int res = 0;</span>
-<span class="lineNum">     319 </span><span class="lineCov">      12001 :     for(int i = 0; i &lt; mascaraDesdeIntervalos.size(); i++){</span>
-<span class="lineNum">     320 </span><span class="lineCov">      12000 :         if(mascaraDesdeIntervalos[i] == true)</span>
-<span class="lineNum">     321 </span><span class="lineCov">       9758 :             if(mascaraConAlgoritmo[i] == true)</span>
-<span class="lineNum">     322 </span><span class="lineCov">       1075 :                 res++;</span>
-<span class="lineNum">     323 </span>            :     }
-<a name="324"><span class="lineNum">     324 </span><span class="lineCov">          1 :     return res;</span></a>
-<span class="lineNum">     325 </span>            : }
-<span class="lineNum">     326 </span><span class="lineCov">          1 : unsigned int verdaderosNegativos(vector&lt;bool&gt; &amp;mascaraConAlgoritmo, vector&lt;bool&gt; &amp;mascaraDesdeIntervalos){</span>
-<span class="lineNum">     327 </span>            :     //cantidad de F detectados que eran F realmente
-<span class="lineNum">     328 </span>            :     //se asume que las longitudes de ambos vectores es la misma
-<span class="lineNum">     329 </span><span class="lineCov">          1 :     unsigned int res = 0;</span>
-<span class="lineNum">     330 </span><span class="lineCov">      12001 :     for(int i = 0; i &lt; mascaraDesdeIntervalos.size(); i++){</span>
-<span class="lineNum">     331 </span><span class="lineCov">      12000 :         if(mascaraDesdeIntervalos[i] == false)</span>
-<span class="lineNum">     332 </span><span class="lineCov">       2242 :             if(mascaraConAlgoritmo[i] == false)</span>
-<span class="lineNum">     333 </span><span class="lineCov">       2065 :                 res++;</span>
-<span class="lineNum">     334 </span>            :     }
-<a name="335"><span class="lineNum">     335 </span><span class="lineCov">          1 :     return res;</span></a>
-<span class="lineNum">     336 </span>            : }
-<span class="lineNum">     337 </span><span class="lineCov">          1 : unsigned int falsosPositivos(vector&lt;bool&gt; &amp;mascaraConAlgoritmo, vector&lt;bool&gt; &amp;mascaraDesdeIntervalos){</span>
-<span class="lineNum">     338 </span>            :     //cantidad de T detectados que eran F realmente
-<span class="lineNum">     339 </span>            :     //se asume que las longitudes de ambos vectores es la misma
-<span class="lineNum">     340 </span><span class="lineCov">          1 :     unsigned int res = 0;</span>
-<span class="lineNum">     341 </span><span class="lineCov">      12001 :     for(int i = 0; i &lt; mascaraDesdeIntervalos.size(); i++){</span>
-<span class="lineNum">     342 </span><span class="lineCov">      12000 :         if(mascaraDesdeIntervalos[i] == false)</span>
-<span class="lineNum">     343 </span><span class="lineCov">       2242 :             if(mascaraConAlgoritmo[i] == true)</span>
-<span class="lineNum">     344 </span><span class="lineCov">        177 :                 res++;</span>
-<span class="lineNum">     345 </span>            :     }
-<a name="346"><span class="lineNum">     346 </span><span class="lineCov">          1 :     return res;</span></a>
-<span class="lineNum">     347 </span>            : }
-<span class="lineNum">     348 </span><span class="lineCov">          1 : unsigned int falsosNegativos(vector&lt;bool&gt; &amp;mascaraConAlgoritmo, vector&lt;bool&gt; &amp;mascaraDesdeIntervalos){</span>
-<span class="lineNum">     349 </span>            :     //cantidad de F detectados que eran T realmente
-<span class="lineNum">     350 </span>            :     //se asume que las longitudes de ambos vectores es la misma
-<span class="lineNum">     351 </span><span class="lineCov">          1 :     unsigned int res = 0;</span>
-<span class="lineNum">     352 </span><span class="lineCov">      12001 :     for(int i = 0; i &lt; mascaraDesdeIntervalos.size(); i++){</span>
-<span class="lineNum">     353 </span><span class="lineCov">      12000 :         if(mascaraDesdeIntervalos[i] == true)</span>
-<span class="lineNum">     354 </span><span class="lineCov">       9758 :             if(mascaraConAlgoritmo[i] == false)</span>
-<span class="lineNum">     355 </span><span class="lineCov">       8683 :                 res++;</span>
-<span class="lineNum">     356 </span>            :     }
-<span class="lineNum">     357 </span><span class="lineCov">          1 :     return res;</span>
-<a name="358"><span class="lineNum">     358 </span>            : }</a>
-<span class="lineNum">     359 </span>            : 
-<span class="lineNum">     360 </span><span class="lineCov">          1 : float compararSilencios(audio &amp;vec, int freq, int prof, int locutor, int umbralSilencio){</span>
-<span class="lineNum">     361 </span>            :     //obtengo la mascara de silencios de vec
-<span class="lineNum">     362 </span><span class="lineCov">          2 :     vector&lt;bool&gt; mascaraDesdeArchivo = enmascararSilencios(vec, umbralSilencio);</span>
-<span class="lineNum">     363 </span>            : 
-<span class="lineNum">     364 </span>            :     //obtengo la mascara de habla asociada al locutor. El locutor puede ser 0, 1, 2, 3, 4, 5, o 6
-<span class="lineNum">     365 </span>            :     //(este ultimo es el microfono del centro)
-<span class="lineNum">     366 </span><span class="lineCov">          2 :     string archivoDeHabla;</span>
-<span class="lineNum">     367 </span><span class="lineCov">          1 :     if (locutor == 0){archivoDeHabla = &quot;datos/habla_spkr0.txt&quot;;}</span>
-<span class="lineNum">     368 </span><span class="lineCov">          1 :     if (locutor == 1){archivoDeHabla = &quot;datos/habla_spkr1.txt&quot;;}</span>
-<span class="lineNum">     369 </span><span class="lineCov">          1 :     if (locutor == 2){archivoDeHabla = &quot;datos/habla_spkr2.txt&quot;;}</span>
-<span class="lineNum">     370 </span><span class="lineCov">          1 :     if (locutor == 3){archivoDeHabla = &quot;datos/habla_spkr3.txt&quot;;}</span>
-<span class="lineNum">     371 </span><span class="lineCov">          1 :     if (locutor == 4){archivoDeHabla = &quot;datos/habla_spkr4.txt&quot;;}</span>
-<span class="lineNum">     372 </span><span class="lineCov">          1 :     if (locutor == 5){archivoDeHabla = &quot;datos/habla_spkr5.txt&quot;;}</span>
-<span class="lineNum">     373 </span><span class="lineCov">          1 :     if (locutor == 6){archivoDeHabla = &quot;datos/habla_spkrdefault.txt&quot;;}</span>
-<span class="lineNum">     374 </span><span class="lineCov">          2 :     lista_intervalos listaDeHabla = cargarIntervaloDeHabla(archivoDeHabla);</span>
-<span class="lineNum">     375 </span><span class="lineCov">          2 :     vector&lt;bool&gt; mascaraDesdeIntervalo = enmascarar(dur, listaDeHabla);</span>
-<span class="lineNum">     376 </span>            :     //transformo la mascara de habla a mascara de silencios
-<span class="lineNum">     377 </span><span class="lineCov">          1 :     negacionLogica(mascaraDesdeIntervalo);</span>
-<span class="lineNum">     378 </span>            : 
-<span class="lineNum">     379 </span>            :     //calculo los datos necesarios para el estadistico
-<span class="lineNum">     380 </span><span class="lineCov">          1 :     unsigned int vp = verdaderosPositivos(mascaraDesdeArchivo, mascaraDesdeIntervalo);</span>
-<span class="lineNum">     381 </span><span class="lineCov">          1 :     unsigned int vn = verdaderosNegativos(mascaraDesdeArchivo, mascaraDesdeIntervalo);</span>
-<span class="lineNum">     382 </span><span class="lineCov">          1 :     unsigned int fp = falsosPositivos(mascaraDesdeArchivo, mascaraDesdeIntervalo);</span>
-<span class="lineNum">     383 </span><span class="lineCov">          1 :     unsigned int fn = falsosNegativos(mascaraDesdeArchivo, mascaraDesdeIntervalo);</span>
-<span class="lineNum">     384 </span><span class="lineCov">          1 :     float precision = vp / (float) (vp + fp);</span>
-<span class="lineNum">     385 </span><span class="lineCov">          1 :     float recall = vp / (float) (vp + fn);</span>
-<span class="lineNum">     386 </span>            : 
-<span class="lineNum">     387 </span>            :     //calculo el estadistico
-<span class="lineNum">     388 </span><span class="lineCov">          1 :     float f1 = (2 * precision * recall) / (precision + recall);</span>
-<span class="lineNum">     389 </span><span class="lineCov">          2 :     return f1;</span>
-<span class="lineNum">     390 </span>            : }
-<span class="lineNum">     391 </span>            : 
-<a name="392"><span class="lineNum">     392 </span>            : </a>
-<span class="lineNum">     393 </span>            : //es la unica funcion que hay que arreglar (creo)
-<span class="lineNum">     394 </span><span class="lineNoCov">          0 : float resultadoFinal(sala &amp;m, int freq, int prof, int umbralSilencio){</span>
-<span class="lineNum">     395 </span><span class="lineNoCov">          0 :     float cantidadDeLocutores = m.size();</span>
-<span class="lineNum">     396 </span><span class="lineNoCov">          0 :     float sumaScores = 0;</span>
-<span class="lineNum">     397 </span><span class="lineNoCov">          0 :     for (int i = 0; i &lt; cantidadDeLocutores; i++){</span>
-<span class="lineNum">     398 </span><span class="lineNoCov">          0 :         sumaScores += compararSilencios(m[i], freq, prof, i, umbralSilencio);</span>
-<span class="lineNum">     399 </span>            :     }
-<span class="lineNum">     400 </span><span class="lineNoCov">          0 :     return sumaScores / cantidadDeLocutores;</span>
-<span class="lineNum">     401 </span>            : }
-<span class="lineNum">     402 </span>            : 
-<a name="403"><span class="lineNum">     403 </span>            : /************************** EJERCICIO sacarPausas **************************/</a>
-<span class="lineNum">     404 </span>            : //usar esSilencio del punto 7
-<span class="lineNum">     405 </span><span class="lineCov">          1 : audio sacarPausas(audio s, int freq, int prof, int umbral) {</span>
-<span class="lineNum">     406 </span><span class="lineCov">          1 :     audio result;</span>
-<span class="lineNum">     407 </span><span class="lineCov">          1 :     int i =0;</span>
-<span class="lineNum">     408 </span><span class="lineCov">          2 :     vector &lt; tuple&lt;int,int&gt; &gt; aux;</span>
+<span class="lineNum">     152 </span><span class="lineCov">    4275627 :             int j = i + indiceEnTiempo(0.1, freq) + 1; //asi la duracion es mayor a 0.1 segundos</span>
+<span class="lineNum">     153 </span><span class="lineCov">    4275627 :             bool candidatoASilencio = noSuperaUmbral(s, i, j, umbral);</span>
+<span class="lineNum">     154 </span><span class="lineCov">    4275627 :             if(candidatoASilencio) {</span>
+<span class="lineNum">     155 </span><span class="lineCov">   22800913 :                 while (j &lt; s.size() and abs(s[j]) &lt;= umbral) {</span>
+<span class="lineNum">     156 </span><span class="lineCov">   11399634 :                     if (noHaySilencioMayor(s, i, j, umbral)) {//armo la tupla</span>
+<span class="lineNum">     157 </span><span class="lineCov">        777 :                         intervalo tupla;</span>
+<span class="lineNum">     158 </span><span class="lineCov">        777 :                         float primerElemento = i / (float) freq; //tiempo hasta i exclusive</span>
+<span class="lineNum">     159 </span><span class="lineCov">        777 :                         float segundoElemento = (j + 1) / (float) freq; //tiempo hasta j inclusive (por eso +1)</span>
+<span class="lineNum">     160 </span><span class="lineCov">        777 :                         get&lt;0&gt;(tupla) = primerElemento;</span>
+<span class="lineNum">     161 </span><span class="lineCov">        777 :                         get&lt;1&gt;(tupla) = segundoElemento;</span>
+<span class="lineNum">     162 </span><span class="lineCov">        777 :                         res.push_back(tupla);</span>
+<span class="lineNum">     163 </span>            :                     }
+<span class="lineNum">     164 </span><span class="lineCov">   11399634 :                     j++;</span>
+<span class="lineNum">     165 </span>            :                 }
+<span class="lineNum">     166 </span><span class="lineCov">       1645 :                 i = j;</span>
+<span class="lineNum">     167 </span>            :             }
+<span class="lineNum">     168 </span>            :         }
+<span class="lineNum">     169 </span><span class="lineCov">    5742715 :         i++;</span>
+<span class="lineNum">     170 </span>            :     }
+<span class="lineNum">     171 </span><span class="lineCov">        434 :     return res;</span>
+<a name="172"><span class="lineNum">     172 </span>            : }</a>
+<span class="lineNum">     173 </span>            : 
+<span class="lineNum">     174 </span><span class="lineCov">         44 : bool esSilencio (audio &amp;s, intervalo inter, int umbral, int i, int j, int freq){</span>
+<span class="lineNum">     175 </span><span class="lineCov">         44 :     bool res = false;</span>
+<span class="lineNum">     176 </span><span class="lineCov">         44 :     float tf = get&lt;1&gt;(inter);</span>
+<span class="lineNum">     177 </span><span class="lineCov">         44 :     float ti = get&lt;0&gt;(inter);</span>
+<span class="lineNum">     178 </span><span class="lineCov">         44 :     bool duracionValida = indiceEnTiempo(tf, freq) - indiceEnTiempo(ti, freq) &gt; indiceEnTiempo(0.1, freq);</span>
+<span class="lineNum">     179 </span><span class="lineCov">         44 :     if(duracionValida and noSuperaUmbral(s, i, j, umbral) and noHaySilencioMayor(s, i, j, umbral))</span>
+<span class="lineNum">     180 </span><span class="lineCov">          4 :         res = true;</span>
+<span class="lineNum">     181 </span><span class="lineCov">         44 :     return res;</span>
+<a name="182"><span class="lineNum">     182 </span>            : }</a>
+<span class="lineNum">     183 </span>            : 
+<span class="lineNum">     184 </span><span class="lineCov">    4275759 : int indiceEnTiempo(float tiempo, int freq){</span>
+<span class="lineNum">     185 </span><span class="lineCov">    4275759 :     int res = floor(freq * tiempo);</span>
+<span class="lineNum">     186 </span><span class="lineCov">    4275759 :     return res;</span>
+<a name="187"><span class="lineNum">     187 </span>            : }</a>
+<span class="lineNum">     188 </span>            : 
+<span class="lineNum">     189 </span><span class="lineCov">    4275667 : bool noSuperaUmbral (audio &amp;s, int i, int j,int umbral) {</span>
+<span class="lineNum">     190 </span><span class="lineCov">    4275667 :     bool res = true;</span>
+<span class="lineNum">     191 </span><span class="lineCov"> 6852311229 :     for (int k = i; k &lt;= j; k++)</span>
+<span class="lineNum">     192 </span><span class="lineCov"> 6848035562 :         if (abs(s[k]) &gt; umbral)</span>
+<span class="lineNum">     193 </span><span class="lineCov"> 1155021641 :             res = false;</span>
+<span class="lineNum">     194 </span><span class="lineCov">    4275667 :     return res;</span>
+<a name="195"><span class="lineNum">     195 </span>            : }</a>
+<span class="lineNum">     196 </span>            : 
+<span class="lineNum">     197 </span><span class="lineCov">   11399650 : bool noHaySilencioMayor(audio &amp;s, int i, int j, int umbral) {</span>
+<span class="lineNum">     198 </span><span class="lineCov">   11399650 :     bool res = true;</span>
+<span class="lineNum">     199 </span><span class="lineCov">   11399650 :     if(i &gt; 0){</span>
+<span class="lineNum">     200 </span><span class="lineCov">   11213377 :         if (j &lt; s.size() - 1){</span>
+<span class="lineNum">     201 </span><span class="lineCov">   11213298 :             res = abs(s[i-1]) &gt; umbral and abs(s[j+1] &gt; umbral);</span>
+<span class="lineNum">     202 </span>            :         }else{
+<span class="lineNum">     203 </span><span class="lineCov">         79 :             res = abs(s[i-1]) &gt; umbral;</span>
+<span class="lineNum">     204 </span>            :         }
+<span class="lineNum">     205 </span>            :     }else{
+<span class="lineNum">     206 </span><span class="lineCov">     186273 :         if(j &lt; s.size() - 1){</span>
+<span class="lineNum">     207 </span><span class="lineCov">     186201 :             res = abs(s[j+1]) &gt; umbral;</span>
+<span class="lineNum">     208 </span>            :         }
+<span class="lineNum">     209 </span>            :     }
+<span class="lineNum">     210 </span><span class="lineCov">   11399650 :     return res;</span>
+<span class="lineNum">     211 </span>            : }
+<a name="212"><span class="lineNum">     212 </span>            : </a>
+<span class="lineNum">     213 </span>            : /************************** EJERCICIO hayQuilombo **************************/
+<span class="lineNum">     214 </span><span class="lineCov">         12 : bool hayQuilombo(sala m, int prof, int freq, int umbral) {</span>
+<span class="lineNum">     215 </span><span class="lineCov">         12 :     bool res = false;</span>
+<span class="lineNum">     216 </span><span class="lineCov">         12 :     int p1 = 0;</span>
+<span class="lineNum">     217 </span><span class="lineCov">         12 :     int cantPersonas = m.size();</span>
+<span class="lineNum">     218 </span><span class="lineCov">         68 :     while(p1 &lt; cantPersonas){</span>
+<span class="lineNum">     219 </span><span class="lineCov">         28 :         int p2 = 0;</span>
+<span class="lineNum">     220 </span><span class="lineCov">        164 :         while(p2 &lt; cantPersonas){</span>
+<span class="lineNum">     221 </span><span class="lineCov">         68 :             if(p1 != p2 and !seRespetan(m, p1, p2, freq, umbral, prof))</span>
+<span class="lineNum">     222 </span><span class="lineCov">         20 :                 res = true;</span>
+<span class="lineNum">     223 </span><span class="lineCov">         68 :             p2++;</span>
+<span class="lineNum">     224 </span>            :         }
+<span class="lineNum">     225 </span><span class="lineCov">         28 :         p1++;</span>
+<span class="lineNum">     226 </span>            :     }
+<span class="lineNum">     227 </span><span class="lineCov">         12 :     return res;</span>
+<a name="228"><span class="lineNum">     228 </span>            : }</a>
+<span class="lineNum">     229 </span>            : 
+<span class="lineNum">     230 </span><span class="lineCov">         40 : bool seRespetan(sala m, int p1, int p2, int freq, int umbral, int prof){</span>
+<span class="lineNum">     231 </span><span class="lineCov">         40 :     bool res = true;</span>
+<span class="lineNum">     232 </span><span class="lineCov">         80 :     audio persona1 = m[p1];</span>
+<span class="lineNum">     233 </span><span class="lineCov">         80 :     audio persona2 = m[p2];</span>
+<span class="lineNum">     234 </span><span class="lineCov">         40 :     int i = 0;</span>
+<span class="lineNum">     235 </span><span class="lineCov">        576 :     while(i &lt; persona1.size()){</span>
+<span class="lineNum">     236 </span><span class="lineCov">        268 :         bool algunSilencioContieneLaMuestra = haySilencioQueLoContiene(persona1, i, freq, umbral, prof) or haySilencioQueLoContiene(persona2, i, freq, umbral, prof);</span>
+<span class="lineNum">     237 </span><span class="lineCov">        268 :         res &amp;= algunSilencioContieneLaMuestra;</span>
+<span class="lineNum">     238 </span><span class="lineCov">        268 :         i++;</span>
+<span class="lineNum">     239 </span>            :     }
+<span class="lineNum">     240 </span><span class="lineCov">         80 :     return res;</span>
+<a name="241"><span class="lineNum">     241 </span>            : }</a>
+<span class="lineNum">     242 </span>            : 
+<span class="lineNum">     243 </span><span class="lineCov">        422 : bool haySilencioQueLoContiene(audio a, int i, int freq, int umbral, int prof){</span>
+<span class="lineNum">     244 </span><span class="lineCov">        422 :     bool res = false;</span>
+<span class="lineNum">     245 </span><span class="lineCov">        422 :     float tiempoAntesDeLaMuestra = i/(float)freq;</span>
+<span class="lineNum">     246 </span><span class="lineCov">        422 :     float tiempoDespuesDeLaMuestra = (i+1)/(float)freq;</span>
+<span class="lineNum">     247 </span><span class="lineCov">        844 :     lista_intervalos intervalosDeSilencio = silencios(a, prof, freq, umbral);</span>
+<span class="lineNum">     248 </span><span class="lineCov">        422 :     int j = 0;</span>
+<span class="lineNum">     249 </span><span class="lineCov">       1126 :     while(j &lt; intervalosDeSilencio.size()){</span>
+<span class="lineNum">     250 </span><span class="lineCov">        352 :         float inicio = get&lt;0&gt;(intervalosDeSilencio[j]);</span>
+<span class="lineNum">     251 </span><span class="lineCov">        352 :         float fin = get&lt;1&gt;(intervalosDeSilencio[j]);</span>
+<span class="lineNum">     252 </span><span class="lineCov">        352 :         bool enElIntervalo = tiempoAntesDeLaMuestra &gt;= inicio and tiempoDespuesDeLaMuestra &lt;= fin;</span>
+<span class="lineNum">     253 </span><span class="lineCov">        352 :         if(enElIntervalo)</span>
+<span class="lineNum">     254 </span><span class="lineCov">        188 :             res = true;</span>
+<span class="lineNum">     255 </span><span class="lineCov">        352 :         j++;</span>
+<span class="lineNum">     256 </span>            :     }
+<span class="lineNum">     257 </span><span class="lineCov">        844 :     return res;</span>
+<span class="lineNum">     258 </span>            : }
+<span class="lineNum">     259 </span>            : 
+<span class="lineNum">     260 </span>            : /************************** EJERCICIO compararSilencios **************************/
+<span class="lineNum">     261 </span>            : /* en los archivos spkrX.dat obtengo de las primeras 3 posiciones los valores
+<span class="lineNum">     262 </span>            :  * correspondientes a la frecuencia, profundidad y duracion de cada audio */
+<a name="263"><span class="lineNum">     263 </span>            : </a>
+<span class="lineNum">     264 </span>            : 
+<span class="lineNum">     265 </span><span class="lineCov">         12 : lista_intervalos cargarIntervaloDeHabla(string archivo){</span>
+<span class="lineNum">     266 </span><span class="lineCov">         12 :     lista_intervalos res;</span>
+<span class="lineNum">     267 </span><span class="lineCov">         24 :     ifstream entrada;</span>
+<span class="lineNum">     268 </span><span class="lineCov">         12 :     entrada.open(archivo, ifstream::in);</span>
+<span class="lineNum">     269 </span><span class="lineCov">        502 :     while(!entrada.eof()){</span>
+<span class="lineNum">     270 </span>            :         tiempo tIni;
+<span class="lineNum">     271 </span>            :         tiempo tFin;
+<span class="lineNum">     272 </span><span class="lineCov">        245 :         intervalo tupla;</span>
+<span class="lineNum">     273 </span><span class="lineCov">        245 :         entrada &gt;&gt; tIni &gt;&gt; tFin;</span>
+<span class="lineNum">     274 </span><span class="lineCov">        245 :         get&lt;0&gt;(tupla) = tIni;</span>
+<span class="lineNum">     275 </span><span class="lineCov">        245 :         get&lt;1&gt;(tupla) = tFin;</span>
+<span class="lineNum">     276 </span><span class="lineCov">        245 :         res.push_back(tupla);</span>
+<span class="lineNum">     277 </span>            :     }
+<span class="lineNum">     278 </span><span class="lineCov">         12 :     entrada.close();</span>
+<span class="lineNum">     279 </span><span class="lineCov">         24 :     return res;</span>
+<a name="280"><span class="lineNum">     280 </span>            : }</a>
+<span class="lineNum">     281 </span>            : 
+<span class="lineNum">     282 </span><span class="lineCov">         22 : vector&lt;bool&gt; enmascarar(tiempo dur, lista_intervalos tiempos) {</span>
+<span class="lineNum">     283 </span><span class="lineCov">         22 :     vector&lt;bool&gt; mascara(dur * 100, false);</span>
+<span class="lineNum">     284 </span><span class="lineCov">         22 :     int i = 0;</span>
+<span class="lineNum">     285 </span><span class="lineCov">     480082 :     while (i &lt; mascara.size()) {</span>
+<span class="lineNum">     286 </span><span class="lineCov">     240030 :         int j = 0;</span>
+<span class="lineNum">     287 </span><span class="lineCov">   15648210 :         while (j &lt; tiempos.size()) {</span>
+<span class="lineNum">     288 </span><span class="lineCov">    7704090 :             float t0 = get&lt;0&gt;(tiempos[j]);</span>
+<span class="lineNum">     289 </span><span class="lineCov">    7704090 :             float t1 = get&lt;1&gt;(tiempos[j]);</span>
+<span class="lineNum">     290 </span><span class="lineCov">    7704090 :             if(t0 &lt;= tiempoEnPosicion(i) and tiempoEnPosicion(i) &lt; t1)</span>
+<span class="lineNum">     291 </span><span class="lineCov">      66771 :                 mascara[i] = true;</span>
+<span class="lineNum">     292 </span><span class="lineCov">    7704090 :             j++;</span>
+<span class="lineNum">     293 </span>            :         }
+<span class="lineNum">     294 </span><span class="lineCov">     240030 :         i++;</span>
+<span class="lineNum">     295 </span>            :     }
+<span class="lineNum">     296 </span><span class="lineCov">         22 :     return mascara;</span>
+<a name="297"><span class="lineNum">     297 </span>            : }</a>
+<span class="lineNum">     298 </span>            : 
+<span class="lineNum">     299 </span><span class="lineCov">   11719108 : float tiempoEnPosicion(int i) {</span>
+<span class="lineNum">     300 </span><span class="lineCov">   11719108 :     return i / (float) 100;</span>
+<a name="301"><span class="lineNum">     301 </span>            : }</a>
+<span class="lineNum">     302 </span>            : 
+<span class="lineNum">     303 </span><span class="lineCov">         12 : void negacionLogica(vector&lt;bool&gt; &amp;mascara ) {</span>
+<span class="lineNum">     304 </span><span class="lineCov">     120042 :     for (int i = 0; i &lt; mascara.size(); i++) {</span>
+<span class="lineNum">     305 </span><span class="lineCov">     120030 :         bool temp = mascara[i];</span>
+<span class="lineNum">     306 </span><span class="lineCov">     120030 :         mascara[i] = !temp;</span>
+<span class="lineNum">     307 </span>            :     }
+<a name="308"><span class="lineNum">     308 </span><span class="lineCov">         12 : }</span></a>
+<span class="lineNum">     309 </span>            : 
+<span class="lineNum">     310 </span><span class="lineCov">         10 : vector&lt;bool&gt; enmascararSilencios(audio &amp;s, int umbral, int prof, int freq){</span>
+<span class="lineNum">     311 </span><span class="lineCov">         20 :     lista_intervalos silenciosSinMascara = silencios(s, prof, freq, umbral);</span>
+<span class="lineNum">     312 </span><span class="lineCov">         10 :     float duracion = s.size() / freq;</span>
+<span class="lineNum">     313 </span><span class="lineCov">         10 :     vector&lt;bool&gt; silencioEnmascarado = enmascarar(duracion, silenciosSinMascara);</span>
+<span class="lineNum">     314 </span><span class="lineCov">         20 :     return silencioEnmascarado;</span>
+<a name="315"><span class="lineNum">     315 </span>            : }</a>
+<span class="lineNum">     316 </span>            : 
+<span class="lineNum">     317 </span><span class="lineCov">         10 : unsigned int verdaderosPositivos(vector&lt;bool&gt; &amp;mascaraConAlgoritmo, vector&lt;bool&gt; &amp;mascaraDesdeIntervalos){</span>
+<span class="lineNum">     318 </span>            :     //cantidad de T detectados que eran T realmente
+<span class="lineNum">     319 </span>            :     //se asume que las longitudes de ambos vectores es la misma
+<span class="lineNum">     320 </span><span class="lineCov">         10 :     unsigned int res = 0;</span>
+<span class="lineNum">     321 </span><span class="lineCov">     120010 :     for(int i = 0; i &lt; mascaraDesdeIntervalos.size(); i++){</span>
+<span class="lineNum">     322 </span><span class="lineCov">     120000 :         if(mascaraDesdeIntervalos[i] == true)</span>
+<span class="lineNum">     323 </span><span class="lineCov">      83566 :             if(mascaraConAlgoritmo[i] == true)</span>
+<span class="lineNum">     324 </span><span class="lineCov">      22903 :                 res++;</span>
+<span class="lineNum">     325 </span>            :     }
+<a name="326"><span class="lineNum">     326 </span><span class="lineCov">         10 :     return res;</span></a>
+<span class="lineNum">     327 </span>            : }
+<span class="lineNum">     328 </span><span class="lineCov">         10 : unsigned int verdaderosNegativos(vector&lt;bool&gt; &amp;mascaraConAlgoritmo, vector&lt;bool&gt; &amp;mascaraDesdeIntervalos){</span>
+<span class="lineNum">     329 </span>            :     //cantidad de F detectados que eran F realmente
+<span class="lineNum">     330 </span>            :     //se asume que las longitudes de ambos vectores es la misma
+<span class="lineNum">     331 </span><span class="lineCov">         10 :     unsigned int res = 0;</span>
+<span class="lineNum">     332 </span><span class="lineCov">     120010 :     for(int i = 0; i &lt; mascaraDesdeIntervalos.size(); i++){</span>
+<span class="lineNum">     333 </span><span class="lineCov">     120000 :         if(mascaraDesdeIntervalos[i] == false)</span>
+<span class="lineNum">     334 </span><span class="lineCov">      36434 :             if(mascaraConAlgoritmo[i] == false)</span>
+<span class="lineNum">     335 </span><span class="lineCov">      29015 :                 res++;</span>
+<span class="lineNum">     336 </span>            :     }
+<a name="337"><span class="lineNum">     337 </span><span class="lineCov">         10 :     return res;</span></a>
+<span class="lineNum">     338 </span>            : }
+<span class="lineNum">     339 </span><span class="lineCov">         10 : unsigned int falsosPositivos(vector&lt;bool&gt; &amp;mascaraConAlgoritmo, vector&lt;bool&gt; &amp;mascaraDesdeIntervalos){</span>
+<span class="lineNum">     340 </span>            :     //cantidad de T detectados que eran F realmente
+<span class="lineNum">     341 </span>            :     //se asume que las longitudes de ambos vectores es la misma
+<span class="lineNum">     342 </span><span class="lineCov">         10 :     unsigned int res = 0;</span>
+<span class="lineNum">     343 </span><span class="lineCov">     120010 :     for(int i = 0; i &lt; mascaraDesdeIntervalos.size(); i++){</span>
+<span class="lineNum">     344 </span><span class="lineCov">     120000 :         if(mascaraDesdeIntervalos[i] == false)</span>
+<span class="lineNum">     345 </span><span class="lineCov">      36434 :             if(mascaraConAlgoritmo[i] == true)</span>
+<span class="lineNum">     346 </span><span class="lineCov">       7419 :                 res++;</span>
+<span class="lineNum">     347 </span>            :     }
+<a name="348"><span class="lineNum">     348 </span><span class="lineCov">         10 :     return res;</span></a>
+<span class="lineNum">     349 </span>            : }
+<span class="lineNum">     350 </span><span class="lineCov">         10 : unsigned int falsosNegativos(vector&lt;bool&gt; &amp;mascaraConAlgoritmo, vector&lt;bool&gt; &amp;mascaraDesdeIntervalos){</span>
+<span class="lineNum">     351 </span>            :     //cantidad de F detectados que eran T realmente
+<span class="lineNum">     352 </span>            :     //se asume que las longitudes de ambos vectores es la misma
+<span class="lineNum">     353 </span><span class="lineCov">         10 :     unsigned int res = 0;</span>
+<span class="lineNum">     354 </span><span class="lineCov">     120010 :     for(int i = 0; i &lt; mascaraDesdeIntervalos.size(); i++){</span>
+<span class="lineNum">     355 </span><span class="lineCov">     120000 :         if(mascaraDesdeIntervalos[i] == true)</span>
+<span class="lineNum">     356 </span><span class="lineCov">      83566 :             if(mascaraConAlgoritmo[i] == false)</span>
+<span class="lineNum">     357 </span><span class="lineCov">      60663 :                 res++;</span>
+<span class="lineNum">     358 </span>            :     }
+<span class="lineNum">     359 </span><span class="lineCov">         10 :     return res;</span>
+<a name="360"><span class="lineNum">     360 </span>            : }</a>
+<span class="lineNum">     361 </span>            : 
+<span class="lineNum">     362 </span><span class="lineCov">         10 : float compararSilencios(audio &amp;vec, int freq, int prof, int locutor, int umbralSilencio){</span>
+<span class="lineNum">     363 </span>            :     //obtengo la mascara de silencios de vec
+<span class="lineNum">     364 </span><span class="lineCov">         20 :     vector&lt;bool&gt; mascaraDesdeArchivo = enmascararSilencios(vec, umbralSilencio, prof, freq);</span>
+<span class="lineNum">     365 </span>            : 
+<span class="lineNum">     366 </span>            :     //obtengo la mascara de habla asociada al locutor. El locutor puede ser 0, 1, 2, 3, 4, 5, o 6
+<span class="lineNum">     367 </span>            :     //(este ultimo es el microfono del centro)
+<span class="lineNum">     368 </span><span class="lineCov">         20 :     string archivoDeHabla;</span>
+<span class="lineNum">     369 </span><span class="lineCov">         10 :     if (locutor == 0){archivoDeHabla = &quot;datos/habla_spkr0.txt&quot;;}</span>
+<span class="lineNum">     370 </span><span class="lineCov">         10 :     if (locutor == 1){archivoDeHabla = &quot;datos/habla_spkr1.txt&quot;;}</span>
+<span class="lineNum">     371 </span><span class="lineCov">         10 :     if (locutor == 2){archivoDeHabla = &quot;datos/habla_spkr2.txt&quot;;}</span>
+<span class="lineNum">     372 </span><span class="lineCov">         10 :     if (locutor == 3){archivoDeHabla = &quot;datos/habla_spkr3.txt&quot;;}</span>
+<span class="lineNum">     373 </span><span class="lineCov">         10 :     if (locutor == 4){archivoDeHabla = &quot;datos/habla_spkr4.txt&quot;;}</span>
+<span class="lineNum">     374 </span><span class="lineCov">         10 :     if (locutor == 5){archivoDeHabla = &quot;datos/habla_spkr5.txt&quot;;}</span>
+<span class="lineNum">     375 </span><span class="lineCov">         10 :     if (locutor == 6){archivoDeHabla = &quot;datos/habla_spkrdefault.txt&quot;;}</span>
+<span class="lineNum">     376 </span><span class="lineCov">         20 :     lista_intervalos listaDeHabla = cargarIntervaloDeHabla(archivoDeHabla);</span>
+<span class="lineNum">     377 </span><span class="lineCov">         10 :     int dur = vec.size()/freq;</span>
+<span class="lineNum">     378 </span><span class="lineCov">         20 :     vector&lt;bool&gt; mascaraDesdeIntervalo = enmascarar(dur, listaDeHabla);</span>
+<span class="lineNum">     379 </span>            :     //transformo la mascara de habla a mascara de silencios
+<span class="lineNum">     380 </span><span class="lineCov">         10 :     negacionLogica(mascaraDesdeIntervalo);</span>
+<span class="lineNum">     381 </span>            : 
+<span class="lineNum">     382 </span>            :     //calculo los datos necesarios para el estadistico
+<span class="lineNum">     383 </span><span class="lineCov">         10 :     unsigned int vp = verdaderosPositivos(mascaraDesdeArchivo, mascaraDesdeIntervalo);</span>
+<span class="lineNum">     384 </span><span class="lineCov">         10 :     unsigned int vn = verdaderosNegativos(mascaraDesdeArchivo, mascaraDesdeIntervalo);</span>
+<span class="lineNum">     385 </span><span class="lineCov">         10 :     unsigned int fp = falsosPositivos(mascaraDesdeArchivo, mascaraDesdeIntervalo);</span>
+<span class="lineNum">     386 </span><span class="lineCov">         10 :     unsigned int fn = falsosNegativos(mascaraDesdeArchivo, mascaraDesdeIntervalo);</span>
+<span class="lineNum">     387 </span><span class="lineCov">         10 :     float precision = vp / (float) (vp + fp);</span>
+<span class="lineNum">     388 </span><span class="lineCov">         10 :     float recall = vp / (float) (vp + fn);</span>
+<span class="lineNum">     389 </span>            : 
+<span class="lineNum">     390 </span>            :     //calculo el estadistico
+<span class="lineNum">     391 </span><span class="lineCov">         10 :     float f1 = (2 * precision * recall) / (precision + recall);</span>
+<span class="lineNum">     392 </span><span class="lineCov">         20 :     return f1;</span>
+<a name="393"><span class="lineNum">     393 </span>            : }</a>
+<span class="lineNum">     394 </span>            : 
+<span class="lineNum">     395 </span><span class="lineCov">          2 : float resultadoFinal(sala &amp;m, int freq, int prof, int umbralSilencio){</span>
+<span class="lineNum">     396 </span><span class="lineCov">          2 :     int cantidadDeLocutores = m.size();</span>
+<span class="lineNum">     397 </span><span class="lineCov">          2 :     float sumaScores = 0;</span>
+<span class="lineNum">     398 </span><span class="lineCov">         10 :     for (int i = 0; i &lt; cantidadDeLocutores; i++){</span>
+<span class="lineNum">     399 </span><span class="lineCov">          8 :         sumaScores += compararSilencios(m[i], freq, prof, i, umbralSilencio);</span>
+<span class="lineNum">     400 </span>            :     }
+<span class="lineNum">     401 </span><span class="lineCov">          2 :     return sumaScores / (float) cantidadDeLocutores;</span>
+<span class="lineNum">     402 </span>            : }
+<a name="403"><span class="lineNum">     403 </span>            : </a>
+<span class="lineNum">     404 </span>            : /************************** EJERCICIO sacarPausas **************************/
+<span class="lineNum">     405 </span><span class="lineCov">          2 : audio sacarPausas(audio s, int freq, int prof, int umbral) {</span>
+<span class="lineNum">     406 </span><span class="lineCov">          2 :     audio result;</span>
+<span class="lineNum">     407 </span><span class="lineCov">          2 :     int i =0;</span>
+<span class="lineNum">     408 </span><span class="lineCov">          4 :     vector &lt; tuple&lt;int,int&gt; &gt; aux;</span>
 <span class="lineNum">     409 </span>            :     /*bool esSilencio (audio s,intervalo inter,int umbral,int i,int j)*/
-<span class="lineNum">     410 </span><span class="lineCov">         19 :     while(i&lt;s.size()) {</span>
-<span class="lineNum">     411 </span><span class="lineCov">          9 :         if (s[i] &lt;= umbral) {</span>
-<span class="lineNum">     412 </span><span class="lineCov">         24 :             for (int j = i; j &lt; s.size(); j++) {</span>
-<span class="lineNum">     413 </span><span class="lineCov">         22 :                 tuple&lt;float,float&gt; inter;</span>
-<span class="lineNum">     414 </span><span class="lineCov">         22 :                 get&lt;0&gt;(inter) = i/(float)freq;</span>
-<span class="lineNum">     415 </span><span class="lineCov">         22 :                 get&lt;1&gt;(inter) = j/(float)freq;</span>
-<span class="lineNum">     416 </span><span class="lineCov">         22 :                 if (esSilencio(s,inter,umbral,i,j-1, freq)) {</span>
-<span class="lineNum">     417 </span><span class="lineCov">          2 :                     result.push_back(s[j]);</span>
-<span class="lineNum">     418 </span><span class="lineCov">          2 :                     i = j;</span>
+<span class="lineNum">     410 </span><span class="lineCov">         38 :     while(i&lt;s.size()) {</span>
+<span class="lineNum">     411 </span><span class="lineCov">         18 :         if (s[i] &lt;= umbral) {</span>
+<span class="lineNum">     412 </span><span class="lineCov">         48 :             for (int j = i; j &lt; s.size(); j++) {</span>
+<span class="lineNum">     413 </span><span class="lineCov">         44 :                 tuple&lt;float,float&gt; inter;</span>
+<span class="lineNum">     414 </span><span class="lineCov">         44 :                 get&lt;0&gt;(inter) = i/(float)freq;</span>
+<span class="lineNum">     415 </span><span class="lineCov">         44 :                 get&lt;1&gt;(inter) = j/(float)freq;</span>
+<span class="lineNum">     416 </span><span class="lineCov">         44 :                 if (esSilencio(s,inter,umbral,i,j-1, freq)) {</span>
+<span class="lineNum">     417 </span><span class="lineCov">          4 :                     result.push_back(s[j]);</span>
+<span class="lineNum">     418 </span><span class="lineCov">          4 :                     i = j;</span>
 <span class="lineNum">     419 </span>            :                 }
 <span class="lineNum">     420 </span>            :             }
 <span class="lineNum">     421 </span>            :         } else {
-<span class="lineNum">     422 </span><span class="lineCov">          7 :             result.push_back(s[i]);</span>
+<span class="lineNum">     422 </span><span class="lineCov">         14 :             result.push_back(s[i]);</span>
 <span class="lineNum">     423 </span>            :         }
-<span class="lineNum">     424 </span><span class="lineCov">          9 :         i++;</span>
+<span class="lineNum">     424 </span><span class="lineCov">         18 :         i++;</span>
 <span class="lineNum">     425 </span>            :     }
 <span class="lineNum">     426 </span>            :     /*si el intervalo es un silencio y no esta contenido en otro silencio(esSilencio)
 <span class="lineNum">     427 </span>            :     salto la posicion inicial a j sino pusheo tod o el intervalo al vector audio   */
 <span class="lineNum">     428 </span>            : 
 <span class="lineNum">     429 </span>            : 
-<span class="lineNum">     430 </span><span class="lineCov">          2 :     return result;</span>
+<span class="lineNum">     430 </span><span class="lineCov">          4 :     return result;</span>
 <a name="431"><span class="lineNum">     431 </span>            : }</a>
 <span class="lineNum">     432 </span>            : /************************** EJERCICIO encontrarAparicion **************************/
-<span class="lineNum">     433 </span><span class="lineCov">          2 : int encontrarAparicion(audio x, audio y){</span>
-<span class="lineNum">     434 </span><span class="lineCov">          2 :     int res = comienzoCorrelacion(x,y);</span>
-<span class="lineNum">     435 </span><span class="lineCov">          2 :     return res;</span>
+<span class="lineNum">     433 </span><span class="lineCov">          4 : int encontrarAparicion(audio x, audio y){</span>
+<span class="lineNum">     434 </span><span class="lineCov">          4 :     int res = comienzoCorrelacion(x,y);</span>
+<span class="lineNum">     435 </span><span class="lineCov">          4 :     return res;</span>
 <a name="436"><span class="lineNum">     436 </span>            : }</a>
 <span class="lineNum">     437 </span>            : 
-<span class="lineNum">     438 </span><span class="lineCov">          8 : int comienzoCorrelacion(audio a, audio frase) {</span>
-<span class="lineNum">     439 </span><span class="lineCov">          8 :     int l_a = a.size();</span>
-<span class="lineNum">     440 </span><span class="lineCov">          8 :     int l_f = frase.size();</span>
-<span class="lineNum">     441 </span><span class="lineCov">          8 :     int acum = 0;</span>
-<span class="lineNum">     442 </span><span class="lineCov">      42013 :     for (int i = 0; i &lt; l_a - l_f; i++) {</span>
-<span class="lineNum">     443 </span><span class="lineCov">      42005 :         if (correlacion(subseq(a, acum, acum + l_f), frase) &lt; correlacion(subseq(a, i, i + l_f), frase)) {</span>
-<span class="lineNum">     444 </span><span class="lineCov">        930 :             acum = i;</span>
+<span class="lineNum">     438 </span><span class="lineCov">         16 : int comienzoCorrelacion(audio a, audio frase) {</span>
+<span class="lineNum">     439 </span><span class="lineCov">         16 :     int l_a = a.size();</span>
+<span class="lineNum">     440 </span><span class="lineCov">         16 :     int l_f = frase.size();</span>
+<span class="lineNum">     441 </span><span class="lineCov">         16 :     int acum = 0;</span>
+<span class="lineNum">     442 </span><span class="lineCov">      84026 :     for (int i = 0; i &lt; l_a - l_f; i++) {</span>
+<span class="lineNum">     443 </span><span class="lineCov">      84010 :         if (correlacion(subseq(a, acum, acum + l_f), frase) &lt; correlacion(subseq(a, i, i + l_f), frase)) {</span>
+<span class="lineNum">     444 </span><span class="lineCov">       1686 :             acum = i;</span>
 <span class="lineNum">     445 </span>            : 
 <span class="lineNum">     446 </span>            :         }
 <span class="lineNum">     447 </span>            :     }
-<span class="lineNum">     448 </span><span class="lineCov">          8 :     return acum;</span>
+<span class="lineNum">     448 </span><span class="lineCov">         16 :     return acum;</span>
 <span class="lineNum">     449 </span>            : }
-<span class="lineNum">     450 </span>            : 
-<span class="lineNum">     451 </span>            : //LISTO  (verificar si faltan casos de test)
-<a name="452"><span class="lineNum">     452 </span>            : </a>
-<span class="lineNum">     453 </span>            : /************************** EJERCICIO medirLaDistancia **************************/
-<span class="lineNum">     454 </span><span class="lineCov">          1 : locutor medirLaDistancia(sala m, audio frase, int freq, int prof){</span>
-<span class="lineNum">     455 </span><span class="lineCov">          1 :     locutor out;</span>
-<span class="lineNum">     456 </span><span class="lineCov">          1 :     int elLoDijo = 0;</span>
-<span class="lineNum">     457 </span><span class="lineCov">          5 :     for(int p = 0; p &lt; m.size(); p++){</span>
-<span class="lineNum">     458 </span><span class="lineCov">          4 :         if (intensidadCorrelacion(m[elLoDijo],frase) &lt; intensidadCorrelacion(m[p],frase)){ // aca estoy busacando quien lo dijo</span>
-<span class="lineNum">     459 </span><span class="lineCov">          1 :             elLoDijo = p;</span>
-<span class="lineNum">     460 </span>            :         }
-<span class="lineNum">     461 </span>            :     }
-<span class="lineNum">     462 </span><span class="lineCov">          1 :     get&lt;0&gt;(out) = elLoDijo;</span>
-<span class="lineNum">     463 </span>            : 
-<span class="lineNum">     464 </span><span class="lineCov">          1 :     int j=0;</span>
-<span class="lineNum">     465 </span><span class="lineCov">          9 :     while(j &lt; m.size()) {</span>
-<span class="lineNum">     466 </span><span class="lineCov">          4 :         if(j!= get&lt;0&gt;(out)) {</span>
-<span class="lineNum">     467 </span><span class="lineCov">          3 :             get&lt;1&gt;(out).push_back(distanciaAP(m, get&lt;0&gt;(out), j, freq, frase)); // busco las distancias de cada microfono</span>
+<a name="450"><span class="lineNum">     450 </span>            : </a>
+<span class="lineNum">     451 </span>            : /************************** EJERCICIO medirLaDistancia **************************/
+<span class="lineNum">     452 </span><span class="lineCov">          2 : locutor medirLaDistancia(sala m, audio frase, int freq, int prof){</span>
+<span class="lineNum">     453 </span><span class="lineCov">          2 :     locutor out;</span>
+<span class="lineNum">     454 </span><span class="lineCov">          2 :     int elLoDijo = 0;</span>
+<span class="lineNum">     455 </span><span class="lineCov">         10 :     for(int p = 0; p &lt; m.size(); p++){</span>
+<span class="lineNum">     456 </span><span class="lineCov">          8 :         if (intensidadCorrelacion(m[elLoDijo],frase) &lt; intensidadCorrelacion(m[p],frase)){ // aca estoy busacando quien lo dijo</span>
+<span class="lineNum">     457 </span><span class="lineCov">          2 :             elLoDijo = p;</span>
+<span class="lineNum">     458 </span>            :         }
+<span class="lineNum">     459 </span>            :     }
+<span class="lineNum">     460 </span><span class="lineCov">          2 :     get&lt;0&gt;(out) = elLoDijo;</span>
+<span class="lineNum">     461 </span>            : 
+<span class="lineNum">     462 </span><span class="lineCov">          2 :     int j=0;</span>
+<span class="lineNum">     463 </span><span class="lineCov">         18 :     while(j &lt; m.size()) {</span>
+<span class="lineNum">     464 </span><span class="lineCov">          8 :         if(j!= get&lt;0&gt;(out)) {</span>
+<span class="lineNum">     465 </span><span class="lineCov">          6 :             get&lt;1&gt;(out).push_back(distanciaAP(m, get&lt;0&gt;(out), j, freq, frase)); // busco las distancias de cada microfono</span>
+<span class="lineNum">     466 </span>            :         }else{
+<span class="lineNum">     467 </span><span class="lineCov">          2 :             get&lt;1&gt;(out).push_back(0); // la distancia entre la persona que dijo la frase y si misma es cero</span>
 <span class="lineNum">     468 </span>            :         }
-<span class="lineNum">     469 </span><span class="lineCov">          4 :         j++;</span>
+<span class="lineNum">     469 </span><span class="lineCov">          8 :         j++;</span>
 <span class="lineNum">     470 </span>            :     }
 <span class="lineNum">     471 </span>            : 
-<span class="lineNum">     472 </span><span class="lineCov">          1 :     return out;</span>
-<span class="lineNum">     473 </span>            : }
-<a name="474"><span class="lineNum">     474 </span>            : </a>
-<span class="lineNum">     475 </span>            : 
-<span class="lineNum">     476 </span><span class="lineCov">          8 : float intensidadCorrelacion(audio a, audio frase){</span>
-<span class="lineNum">     477 </span><span class="lineCov">          8 :     int l_a= a.size();</span>
-<span class="lineNum">     478 </span><span class="lineCov">          8 :     int l_f= frase.size();</span>
-<span class="lineNum">     479 </span><span class="lineCov">          8 :     int sum = 0;</span>
-<span class="lineNum">     480 </span><span class="lineCov">          8 :     int acum = 0;</span>
-<span class="lineNum">     481 </span><span class="lineCov">      48008 :     for (int i = 0; i &lt; l_a - l_f; i++) {</span>
-<span class="lineNum">     482 </span><span class="lineCov">      48000 :         if (correlacion(subseq(a, acum, acum + l_f), frase) &lt; correlacion(subseq(a, i, i + l_f), frase)) {</span>
-<span class="lineNum">     483 </span><span class="lineCov">        970 :             acum = i;</span>
-<span class="lineNum">     484 </span>            :         }
-<span class="lineNum">     485 </span>            :     }
-<span class="lineNum">     486 </span><span class="lineCov">          8 :     sum = sum + intensidadMedia(subseq(a, acum, acum + l_f));</span>
-<span class="lineNum">     487 </span>            : 
-<span class="lineNum">     488 </span><span class="lineCov">          8 :     return sum;</span>
-<span class="lineNum">     489 </span>            : }
-<a name="490"><span class="lineNum">     490 </span>            : </a>
-<span class="lineNum">     491 </span>            : 
-<span class="lineNum">     492 </span><span class="lineCov">          3 : float distanciaAP(sala m, int p1,int p2,int freq, audio frase) {</span>
-<span class="lineNum">     493 </span><span class="lineCov">          3 :     float vel_sonido_freq = 343.2 / freq;</span>
-<span class="lineNum">     494 </span><span class="lineCov">          3 :     float dist = abs(comienzoCorrelacion(m[p1], frase) - comienzoCorrelacion(m[p2], frase)) * vel_sonido_freq;</span>
-<a name="495"><span class="lineNum">     495 </span>            : </a>
-<span class="lineNum">     496 </span><span class="lineCov">          3 :     return dist;</span>
-<span class="lineNum">     497 </span><span class="lineCov">          3 : }</span>
-<span class="lineNum">     498 </span>            : 
-<span class="lineNum">     499 </span>            : //trate de seguir la especificacion pero el programa me cuelga... verificar los auxiliares
+<span class="lineNum">     472 </span><span class="lineCov">          2 :     return out;</span>
+<a name="473"><span class="lineNum">     473 </span>            : }</a>
+<span class="lineNum">     474 </span>            : 
+<span class="lineNum">     475 </span><span class="lineCov">         16 : float intensidadCorrelacion(audio a, audio frase){</span>
+<span class="lineNum">     476 </span><span class="lineCov">         16 :     int l_a= a.size();</span>
+<span class="lineNum">     477 </span><span class="lineCov">         16 :     int l_f= frase.size();</span>
+<span class="lineNum">     478 </span><span class="lineCov">         16 :     float sum = 0;</span>
+<span class="lineNum">     479 </span><span class="lineCov">         16 :     int acum = 0;</span>
+<span class="lineNum">     480 </span><span class="lineCov">      96016 :     for (int i = 0; i &lt; l_a - l_f; i++) {</span>
+<span class="lineNum">     481 </span><span class="lineCov">      96000 :         if (correlacion(subseq(a, acum, acum + l_f), frase) &lt; correlacion(subseq(a, i, i + l_f), frase)) {</span>
+<span class="lineNum">     482 </span><span class="lineCov">       1766 :             acum = i;</span>
+<span class="lineNum">     483 </span>            :         }
+<span class="lineNum">     484 </span>            :     }
+<span class="lineNum">     485 </span><span class="lineCov">         16 :     sum =  intensidadMedia(subseq(a, acum, acum + l_f));</span>
+<span class="lineNum">     486 </span>            : 
+<span class="lineNum">     487 </span><span class="lineCov">         16 :     return sum;</span>
+<span class="lineNum">     488 </span>            : }
+<a name="489"><span class="lineNum">     489 </span>            : </a>
+<span class="lineNum">     490 </span>            : 
+<span class="lineNum">     491 </span><span class="lineCov">          6 : float distanciaAP(sala m, int p1,int p2,int freq, audio frase) {</span>
+<span class="lineNum">     492 </span><span class="lineCov">          6 :     float vel_sonido_freq = (float)343.2 / (float)freq;</span>
+<span class="lineNum">     493 </span><span class="lineCov">          6 :     float dist = abs(comienzoCorrelacion(m[p1], frase) - comienzoCorrelacion(m[p2], frase)) * vel_sonido_freq;</span>
+<a name="494"><span class="lineNum">     494 </span>            : </a>
+<span class="lineNum">     495 </span><span class="lineCov">          6 :     return dist;</span>
+<span class="lineNum">     496 </span><span class="lineCov">          6 : }</span>
 </pre>
       </td>
     </tr>

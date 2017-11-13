@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-11-13 03:55:41</td>
+            <td class="headerValue">2017-11-13 12:54:05</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">23</td>
+            <td class="headerCovTableEntry">21</td>
             <td class="headerCovTableEntry">27</td>
-            <td class="headerCovTableEntryMed">85.2 %</td>
+            <td class="headerCovTableEntryMed">77.8 %</td>
           </tr>
           <tr><td><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -315,7 +315,7 @@
 <span class="lineNum">     253 </span>            : //   Expected: Foo() is even
 <a name="254"><span class="lineNum">     254 </span>            : //     Actual: it's 5</a>
 <span class="lineNum">     255 </span>            : //
-<span class="lineNum">     256 </span><span class="lineCov">        210 : class GTEST_API_ AssertionResult {</span>
+<span class="lineNum">     256 </span><span class="lineCov">        106 : class GTEST_API_ AssertionResult {</span>
 <span class="lineNum">     257 </span>            :  public:
 <span class="lineNum">     258 </span>            :   // Copy constructor.
 <span class="lineNum">     259 </span>            :   // Used in EXPECT_TRUE/FALSE(assertion_result).
@@ -331,12 +331,12 @@
 <span class="lineNum">     269 </span>            :   // the argument is implicitly convertible to AssertionResult. In that case
 <a name="270"><span class="lineNum">     270 </span>            :   // we want AssertionResult's copy constructor to be used.</a>
 <span class="lineNum">     271 </span>            :   template &lt;typename T&gt;
-<span class="lineNum">     272 </span><span class="lineCov">         51 :   explicit AssertionResult(</span>
+<span class="lineNum">     272 </span><span class="lineCov">        104 :   explicit AssertionResult(</span>
 <span class="lineNum">     273 </span>            :       const T&amp; success,
 <span class="lineNum">     274 </span>            :       typename internal::EnableIf&lt;
 <span class="lineNum">     275 </span>            :           !internal::ImplicitlyConvertible&lt;T, AssertionResult&gt;::value&gt;::type*
 <span class="lineNum">     276 </span>            :           /*enabler*/ = NULL)
-<span class="lineNum">     277 </span><span class="lineCov">         51 :       : success_(success) {}</span>
+<span class="lineNum">     277 </span><span class="lineCov">        104 :       : success_(success) {}</span>
 <span class="lineNum">     278 </span>            : 
 <span class="lineNum">     279 </span>            :   GTEST_DISABLE_MSC_WARNINGS_POP_()
 <span class="lineNum">     280 </span>            : 
@@ -347,7 +347,7 @@
 <span class="lineNum">     285 </span>            :   }
 <a name="286"><span class="lineNum">     286 </span>            : </a>
 <span class="lineNum">     287 </span>            :   // Returns true iff the assertion succeeded.
-<span class="lineNum">     288 </span><span class="lineCov">        202 :   operator bool() const { return success_; }  // NOLINT</span>
+<span class="lineNum">     288 </span><span class="lineCov">        104 :   operator bool() const { return success_; }  // NOLINT</span>
 <span class="lineNum">     289 </span>            : 
 <span class="lineNum">     290 </span>            :   // Returns the assertion's negation. Used with EXPECT/ASSERT_FALSE.
 <span class="lineNum">     291 </span>            :   AssertionResult operator!() const;
@@ -356,12 +356,12 @@
 <span class="lineNum">     294 </span>            :   // use it when they fail (i.e., the predicate's outcome doesn't match the
 <a name="295"><span class="lineNum">     295 </span>            :   // assertion's expectation). When nothing has been streamed into the</a>
 <span class="lineNum">     296 </span>            :   // object, returns an empty string.
-<span class="lineNum">     297 </span><span class="lineCov">         10 :   const char* message() const {</span>
-<span class="lineNum">     298 </span><span class="lineCov">         10 :     return message_.get() != NULL ?  message_-&gt;c_str() : &quot;&quot;;</span>
+<span class="lineNum">     297 </span><span class="lineCov">          2 :   const char* message() const {</span>
+<span class="lineNum">     298 </span><span class="lineCov">          2 :     return message_.get() != NULL ?  message_-&gt;c_str() : &quot;&quot;;</span>
 <span class="lineNum">     299 </span>            :   }
 <a name="300"><span class="lineNum">     300 </span>            :   // TODO(vladl@google.com): Remove this after making sure no clients use it.</a>
 <span class="lineNum">     301 </span>            :   // Deprecated; please use message() instead.
-<span class="lineNum">     302 </span><span class="lineCov">          8 :   const char* failure_message() const { return message(); }</span>
+<span class="lineNum">     302 </span><span class="lineCov">          2 :   const char* failure_message() const { return message(); }</span>
 <span class="lineNum">     303 </span>            : 
 <span class="lineNum">     304 </span>            :   // Streams a custom failure message into this object.
 <span class="lineNum">     305 </span>            :   template &lt;typename T&gt; AssertionResult&amp; operator&lt;&lt;(const T&amp; value) {
@@ -448,7 +448,7 @@
 <span class="lineNum">     386 </span>            :   // test in test case Foo.  Hence a sub-class can define its own
 <a name="387"><span class="lineNum">     387 </span>            :   // SetUpTestCase() method to shadow the one defined in the super</a>
 <span class="lineNum">     388 </span>            :   // class.
-<span class="lineNum">     389 </span><span class="lineCov">         56 :   static void SetUpTestCase() {}</span>
+<span class="lineNum">     389 </span><span class="lineCov">         28 :   static void SetUpTestCase() {}</span>
 <span class="lineNum">     390 </span>            : 
 <span class="lineNum">     391 </span>            :   // Tears down the stuff shared by all tests in this test case.
 <span class="lineNum">     392 </span>            :   //
@@ -456,7 +456,7 @@
 <span class="lineNum">     394 </span>            :   // test in test case Foo.  Hence a sub-class can define its own
 <a name="395"><span class="lineNum">     395 </span>            :   // TearDownTestCase() method to shadow the one defined in the super</a>
 <span class="lineNum">     396 </span>            :   // class.
-<span class="lineNum">     397 </span><span class="lineCov">         54 :   static void TearDownTestCase() {}</span>
+<span class="lineNum">     397 </span><span class="lineCov">         28 :   static void TearDownTestCase() {}</span>
 <span class="lineNum">     398 </span>            : 
 <span class="lineNum">     399 </span>            :   // Returns true iff the current test has a fatal failure.
 <span class="lineNum">     400 </span>            :   static bool HasFatalFailure();
@@ -1434,29 +1434,29 @@
 <span class="lineNum">    1372 </span>            : // frame size of CmpHelperEQ. This helps reduce the overhead of some sanitizers
 <a name="1373"><span class="lineNum">    1373 </span>            : // when calling EXPECT_* in a tight loop.</a>
 <span class="lineNum">    1374 </span>            : template &lt;typename T1, typename T2&gt;
-<span class="lineNum">    1375 </span><span class="lineCov">          8 : AssertionResult CmpHelperEQFailure(const char* lhs_expression,</span>
+<span class="lineNum">    1375 </span><span class="lineCov">          2 : AssertionResult CmpHelperEQFailure(const char* lhs_expression,</span>
 <span class="lineNum">    1376 </span>            :                                    const char* rhs_expression,
 <span class="lineNum">    1377 </span>            :                                    const T1&amp; lhs, const T2&amp; rhs) {
 <span class="lineNum">    1378 </span>            :   return EqFailure(lhs_expression,
 <span class="lineNum">    1379 </span>            :                    rhs_expression,
 <span class="lineNum">    1380 </span>            :                    FormatForComparisonFailureMessage(lhs, rhs),
 <span class="lineNum">    1381 </span>            :                    FormatForComparisonFailureMessage(rhs, lhs),
-<span class="lineNum">    1382 </span><span class="lineCov">          8 :                    false);</span>
+<span class="lineNum">    1382 </span><span class="lineCov">          2 :                    false);</span>
 <span class="lineNum">    1383 </span>            : }
 <span class="lineNum">    1384 </span>            : 
 <a name="1385"><span class="lineNum">    1385 </span>            : // The helper function for {ASSERT|EXPECT}_EQ.</a>
 <span class="lineNum">    1386 </span>            : template &lt;typename T1, typename T2&gt;
-<span class="lineNum">    1387 </span><span class="lineCov">        170 : AssertionResult CmpHelperEQ(const char* lhs_expression,</span>
+<span class="lineNum">    1387 </span><span class="lineCov">         86 : AssertionResult CmpHelperEQ(const char* lhs_expression,</span>
 <span class="lineNum">    1388 </span>            :                             const char* rhs_expression,
 <span class="lineNum">    1389 </span>            :                             const T1&amp; lhs,
 <span class="lineNum">    1390 </span>            :                             const T2&amp; rhs) {
 <span class="lineNum">    1391 </span>            : GTEST_DISABLE_MSC_WARNINGS_PUSH_(4389 /* signed/unsigned mismatch */)
-<span class="lineNum">    1392 </span><span class="lineCov">        170 :   if (lhs == rhs) {</span>
-<span class="lineNum">    1393 </span><span class="lineCov">        162 :     return AssertionSuccess();</span>
+<span class="lineNum">    1392 </span><span class="lineCov">         86 :   if (lhs == rhs) {</span>
+<span class="lineNum">    1393 </span><span class="lineCov">         84 :     return AssertionSuccess();</span>
 <span class="lineNum">    1394 </span>            :   }
 <span class="lineNum">    1395 </span>            : GTEST_DISABLE_MSC_WARNINGS_POP_()
 <span class="lineNum">    1396 </span>            : 
-<span class="lineNum">    1397 </span><span class="lineCov">          8 :   return CmpHelperEQFailure(lhs_expression, rhs_expression, lhs, rhs);</span>
+<span class="lineNum">    1397 </span><span class="lineCov">          2 :   return CmpHelperEQFailure(lhs_expression, rhs_expression, lhs, rhs);</span>
 <span class="lineNum">    1398 </span>            : }
 <span class="lineNum">    1399 </span>            : 
 <span class="lineNum">    1400 </span>            : // With this overloaded version, we allow anonymous enums to be used
@@ -1476,11 +1476,11 @@
 <span class="lineNum">    1414 </span>            :  public:
 <a name="1415"><span class="lineNum">    1415 </span>            :   // This templatized version is for the general case.</a>
 <span class="lineNum">    1416 </span>            :   template &lt;typename T1, typename T2&gt;
-<span class="lineNum">    1417 </span><span class="lineCov">        170 :   static AssertionResult Compare(const char* lhs_expression,</span>
+<span class="lineNum">    1417 </span><span class="lineCov">         86 :   static AssertionResult Compare(const char* lhs_expression,</span>
 <span class="lineNum">    1418 </span>            :                                  const char* rhs_expression,
 <span class="lineNum">    1419 </span>            :                                  const T1&amp; lhs,
 <span class="lineNum">    1420 </span>            :                                  const T2&amp; rhs) {
-<span class="lineNum">    1421 </span><span class="lineCov">        170 :     return CmpHelperEQ(lhs_expression, rhs_expression, lhs, rhs);</span>
+<span class="lineNum">    1421 </span><span class="lineCov">         86 :     return CmpHelperEQ(lhs_expression, rhs_expression, lhs, rhs);</span>
 <span class="lineNum">    1422 </span>            :   }
 <span class="lineNum">    1423 </span>            : 
 <span class="lineNum">    1424 </span>            :   // With this overloaded version, we allow anonymous enums to be used
@@ -2295,8 +2295,8 @@
 <span class="lineNum">    2233 </span>            : // namespace and has an all-caps name.
 <a name="2234"><span class="lineNum">    2234 </span>            : int RUN_ALL_TESTS() GTEST_MUST_USE_RESULT_;</a>
 <span class="lineNum">    2235 </span>            : 
-<span class="lineNum">    2236 </span><span class="lineCov">          6 : inline int RUN_ALL_TESTS() {</span>
-<span class="lineNum">    2237 </span><span class="lineCov">          6 :   return ::testing::UnitTest::GetInstance()-&gt;Run();</span>
+<span class="lineNum">    2236 </span><span class="lineCov">          2 : inline int RUN_ALL_TESTS() {</span>
+<span class="lineNum">    2237 </span><span class="lineCov">          2 :   return ::testing::UnitTest::GetInstance()-&gt;Run();</span>
 <span class="lineNum">    2238 </span>            : }
 <span class="lineNum">    2239 </span>            : 
 <span class="lineNum">    2240 </span>            : #endif  // GTEST_INCLUDE_GTEST_GTEST_H_

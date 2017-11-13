@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-11-13 03:55:41</td>
+            <td class="headerValue">2017-11-13 12:54:05</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">7</td>
@@ -177,7 +177,7 @@
 <span class="lineNum">     115 </span>            :   */
 <a name="116"><span class="lineNum">     116 </span>            :   template&lt;typename _Category, typename _Tp, typename _Distance = ptrdiff_t,</a>
 <span class="lineNum">     117 </span>            :            typename _Pointer = _Tp*, typename _Reference = _Tp&amp;&gt;
-<span class="lineNum">     118 </span><span class="lineCov">     267674 :     struct iterator</span>
+<span class="lineNum">     118 </span><span class="lineCov">    2707279 :     struct iterator</span>
 <span class="lineNum">     119 </span>            :     {
 <span class="lineNum">     120 </span>            :       /// One of the @link iterator_tags tag types@endlink.
 <span class="lineNum">     121 </span>            :       typedef _Category  iterator_category;
@@ -263,8 +263,8 @@
 <span class="lineNum">     201 </span>            :   */
 <a name="202"><span class="lineNum">     202 </span>            :   template&lt;typename _Iter&gt;</a>
 <span class="lineNum">     203 </span>            :     inline typename iterator_traits&lt;_Iter&gt;::iterator_category
-<span class="lineNum">     204 </span><span class="lineCov">        280 :     __iterator_category(const _Iter&amp;)</span>
-<span class="lineNum">     205 </span><span class="lineCov">        280 :     { return typename iterator_traits&lt;_Iter&gt;::iterator_category(); }</span>
+<span class="lineNum">     204 </span><span class="lineCov">        140 :     __iterator_category(const _Iter&amp;)</span>
+<span class="lineNum">     205 </span><span class="lineCov">        140 :     { return typename iterator_traits&lt;_Iter&gt;::iterator_category(); }</span>
 <span class="lineNum">     206 </span>            : 
 <span class="lineNum">     207 </span>            :   //@}
 <span class="lineNum">     208 </span>            : 

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-11-13 03:55:41</td>
+            <td class="headerValue">2017-11-13 12:54:05</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">6</td>
@@ -66,17 +66,17 @@
 <span class="lineNum">       4 </span>            : 
 <a name="5"><span class="lineNum">       5 </span>            : using namespace std;</a>
 <span class="lineNum">       6 </span>            : 
-<span class="lineNum">       7 </span><span class="lineCov">         26 : TEST(compararSilencios, persona0){</span>
-<span class="lineNum">       8 </span><span class="lineCov">          6 :     cout &lt;&lt; &quot;El F1-score para la persona 0 es: &quot;;</span>
-<span class="lineNum">       9 </span><span class="lineCov">          6 :     int frecuencia, profundidad, duracion = 0;</span>
-<span class="lineNum">      10 </span><span class="lineCov">         10 :     audio persona0 = leerVectorAudio(&quot;datos/spkr0.dat&quot;, frecuencia, profundidad, duracion);</span>
-<span class="lineNum">      11 </span><span class="lineCov">          6 :     int locutor = 0;</span>
-<span class="lineNum">      12 </span><span class="lineCov">          6 :     int umbral = 3500;</span>
-<span class="lineNum">      13 </span><span class="lineCov">          6 :     cout &lt;&lt; compararSilencios(persona0, frecuencia, profundidad, locutor, umbral);</span>
-<span class="lineNum">      14 </span><span class="lineCov">          4 :     EXPECT_TRUE(true);</span>
+<span class="lineNum">       7 </span><span class="lineCov">         10 : TEST(compararSilencios, persona0){</span>
+<span class="lineNum">       8 </span><span class="lineCov">          2 :     cout &lt;&lt; &quot;El F1-score para la persona 0 es: &quot;;</span>
+<span class="lineNum">       9 </span><span class="lineCov">          2 :     int frecuencia, profundidad, duracion = 0;</span>
+<span class="lineNum">      10 </span><span class="lineCov">          4 :     audio persona0 = leerVectorAudio(&quot;datos/spkr0.dat&quot;, frecuencia, profundidad, duracion);</span>
+<span class="lineNum">      11 </span><span class="lineCov">          2 :     int locutor = 0;</span>
+<span class="lineNum">      12 </span><span class="lineCov">          2 :     int umbral = 3500;</span>
+<span class="lineNum">      13 </span><span class="lineCov">          2 :     cout &lt;&lt; compararSilencios(persona0, frecuencia, profundidad, locutor, umbral) &lt;&lt; endl;</span>
+<span class="lineNum">      14 </span><span class="lineCov">          2 :     EXPECT_TRUE(true);</span>
 <a name="15"><span class="lineNum">      15 </span>            :     /* este test siempre va a ser pasado, pero lo que me interesa a mi es el valor del</a>
 <span class="lineNum">      16 </span>            :      * estadistico que imprimo por pantalla */
-<span class="lineNum">      17 </span><span class="lineCov">         22 : }</span>
+<span class="lineNum">      17 </span><span class="lineCov">          8 : }</span>
 </pre>
       </td>
     </tr>

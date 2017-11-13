@@ -39,7 +39,7 @@ lista_intervalos cargarIntervaloDeHabla(string archivo);
 vector<bool> enmascarar(tiempo dur, lista_intervalos tiempos);
 float tiempoEnPosicion(int i);
 void negacionLogica(vector<bool> &mascara );
-vector<bool> enmascararSilencios(audio &s, int umbral);
+vector<bool> enmascararSilencios(audio &s, int umbral, int prof, int freq);
 audio deArchivoAVector (string archivo);
 unsigned int verdaderosPositivos(vector<bool> &mascaraConAlgoritmo, vector<bool> &mascaraDesdeIntervalos);
 unsigned int verdaderosNegativos(vector<bool> &mascaraConAlgoritmo, vector<bool> &mascaraDesdeIntervalos);

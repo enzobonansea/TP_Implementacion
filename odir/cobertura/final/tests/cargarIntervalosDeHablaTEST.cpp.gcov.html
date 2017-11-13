@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-11-13 03:55:41</td>
+            <td class="headerValue">2017-11-13 12:54:05</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">6</td>
@@ -66,35 +66,35 @@
 <span class="lineNum">       4 </span>            : 
 <a name="5"><span class="lineNum">       5 </span>            : using namespace std;</a>
 <span class="lineNum">       6 </span>            : 
-<span class="lineNum">       7 </span><span class="lineCov">         22 : TEST(cargarIntervaloDeHablaTEST, spkr0){</span>
+<span class="lineNum">       7 </span><span class="lineCov">         10 : TEST(cargarIntervaloDeHablaTEST, spkr0){</span>
 <span class="lineNum">       8 </span>            :     //inicializacion
-<span class="lineNum">       9 </span><span class="lineCov">          8 :     string archivo = &quot;datos/habla_spkr0.txt&quot;;</span>
+<span class="lineNum">       9 </span><span class="lineCov">          4 :     string archivo = &quot;datos/habla_spkr0.txt&quot;;</span>
 <span class="lineNum">      10 </span>            :     //ejercicio
-<span class="lineNum">      11 </span><span class="lineCov">          8 :     lista_intervalos intervalosCargados = cargarIntervaloDeHabla(archivo);</span>
-<span class="lineNum">      12 </span><span class="lineCov">          4 :     bool res = true;</span>
-<span class="lineNum">      13 </span><span class="lineCov">          8 :     ifstream entrada;</span>
-<span class="lineNum">      14 </span><span class="lineCov">          4 :     entrada.open(archivo, ifstream::in);</span>
-<span class="lineNum">      15 </span><span class="lineCov">          4 :     int i = 0;</span>
-<span class="lineNum">      16 </span><span class="lineCov">        196 :     while(!entrada.eof()){</span>
+<span class="lineNum">      11 </span><span class="lineCov">          4 :     lista_intervalos intervalosCargados = cargarIntervaloDeHabla(archivo);</span>
+<span class="lineNum">      12 </span><span class="lineCov">          2 :     bool res = true;</span>
+<span class="lineNum">      13 </span><span class="lineCov">          4 :     ifstream entrada;</span>
+<span class="lineNum">      14 </span><span class="lineCov">          2 :     entrada.open(archivo, ifstream::in);</span>
+<span class="lineNum">      15 </span><span class="lineCov">          2 :     int i = 0;</span>
+<span class="lineNum">      16 </span><span class="lineCov">         98 :     while(!entrada.eof()){</span>
 <span class="lineNum">      17 </span>            :         //comparo el contenido de intervalosCargados con contenido de habla_spkr0.txt
-<span class="lineNum">      18 </span><span class="lineCov">         96 :         int indice = floor(i / 2);</span>
-<span class="lineNum">      19 </span><span class="lineCov">         96 :         float valorReal = 0;</span>
-<span class="lineNum">      20 </span><span class="lineCov">         96 :         entrada &gt;&gt; valorReal;</span>
-<span class="lineNum">      21 </span><span class="lineCov">         96 :         float valorCargado = 0;</span>
-<span class="lineNum">      22 </span><span class="lineCov">         96 :         if(i % 2 == 0) {</span>
-<span class="lineNum">      23 </span><span class="lineCov">         48 :             valorCargado = get&lt;0&gt;(intervalosCargados[indice]);</span>
+<span class="lineNum">      18 </span><span class="lineCov">         48 :         int indice = floor(i / 2);</span>
+<span class="lineNum">      19 </span><span class="lineCov">         48 :         float valorReal = 0;</span>
+<span class="lineNum">      20 </span><span class="lineCov">         48 :         entrada &gt;&gt; valorReal;</span>
+<span class="lineNum">      21 </span><span class="lineCov">         48 :         float valorCargado = 0;</span>
+<span class="lineNum">      22 </span><span class="lineCov">         48 :         if(i % 2 == 0) {</span>
+<span class="lineNum">      23 </span><span class="lineCov">         24 :             valorCargado = get&lt;0&gt;(intervalosCargados[indice]);</span>
 <span class="lineNum">      24 </span>            :         }
 <span class="lineNum">      25 </span>            :         else {
-<span class="lineNum">      26 </span><span class="lineCov">         48 :             valorCargado = get&lt;1&gt;(intervalosCargados[indice]);</span>
+<span class="lineNum">      26 </span><span class="lineCov">         24 :             valorCargado = get&lt;1&gt;(intervalosCargados[indice]);</span>
 <span class="lineNum">      27 </span>            :         }
-<span class="lineNum">      28 </span><span class="lineCov">         96 :         bool condicion = valorCargado == valorReal;</span>
-<span class="lineNum">      29 </span><span class="lineCov">         96 :         res &amp;= condicion;</span>
-<span class="lineNum">      30 </span><span class="lineCov">         96 :         i++;</span>
+<span class="lineNum">      28 </span><span class="lineCov">         48 :         bool condicion = valorCargado == valorReal;</span>
+<span class="lineNum">      29 </span><span class="lineCov">         48 :         res &amp;= condicion;</span>
+<span class="lineNum">      30 </span><span class="lineCov">         48 :         i++;</span>
 <span class="lineNum">      31 </span>            :     }
-<span class="lineNum">      32 </span><span class="lineCov">          4 :     entrada.close();</span>
+<span class="lineNum">      32 </span><span class="lineCov">          2 :     entrada.close();</span>
 <a name="33"><span class="lineNum">      33 </span>            :     //check</a>
-<span class="lineNum">      34 </span><span class="lineCov">          4 :     EXPECT_TRUE(res);</span>
-<span class="lineNum">      35 </span><span class="lineCov">         22 : }</span>
+<span class="lineNum">      34 </span><span class="lineCov">          2 :     EXPECT_TRUE(res);</span>
+<span class="lineNum">      35 </span><span class="lineCov">          8 : }</span>
 </pre>
       </td>
     </tr>

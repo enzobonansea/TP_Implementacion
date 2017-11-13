@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-11-13 03:55:41</td>
+            <td class="headerValue">2017-11-13 12:54:05</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -162,8 +162,8 @@
 <span class="lineNum">     100 </span>            :     inline _GLIBCXX_CONSTEXPR
 <a name="101"><span class="lineNum">     101 </span>            :     typename __gnu_cxx::__enable_if&lt;__is_integer&lt;_Tp&gt;::__value,</a>
 <span class="lineNum">     102 </span>            :                                     double&gt;::__type
-<span class="lineNum">     103 </span><span class="lineCov">     711734 :     abs(_Tp __x)</span>
-<span class="lineNum">     104 </span><span class="lineCov">     711734 :     { return __builtin_fabs(__x); }</span>
+<span class="lineNum">     103 </span><span class="lineCov">   11213298 :     abs(_Tp __x)</span>
+<span class="lineNum">     104 </span><span class="lineCov">   11213298 :     { return __builtin_fabs(__x); }</span>
 <span class="lineNum">     105 </span>            : 
 <span class="lineNum">     106 </span>            :   using ::acos;
 <span class="lineNum">     107 </span>            : 
@@ -342,8 +342,8 @@
 <span class="lineNum">     280 </span>            : 
 <a name="281"><span class="lineNum">     281 </span>            : #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO</a>
 <span class="lineNum">     282 </span>            :   inline _GLIBCXX_CONSTEXPR float
-<span class="lineNum">     283 </span><span class="lineCov">     706095 :   floor(float __x)</span>
-<span class="lineNum">     284 </span><span class="lineCov">     706095 :   { return __builtin_floorf(__x); }</span>
+<span class="lineNum">     283 </span><span class="lineCov">    4275775 :   floor(float __x)</span>
+<span class="lineNum">     284 </span><span class="lineCov">    4275775 :   { return __builtin_floorf(__x); }</span>
 <span class="lineNum">     285 </span>            : 
 <span class="lineNum">     286 </span>            :   inline _GLIBCXX_CONSTEXPR long double
 <span class="lineNum">     287 </span>            :   floor(long double __x)
@@ -354,8 +354,8 @@
 <span class="lineNum">     292 </span>            :     inline _GLIBCXX_CONSTEXPR
 <a name="293"><span class="lineNum">     293 </span>            :     typename __gnu_cxx::__enable_if&lt;__is_integer&lt;_Tp&gt;::__value,</a>
 <span class="lineNum">     294 </span>            :                                     double&gt;::__type
-<span class="lineNum">     295 </span><span class="lineCov">        164 :     floor(_Tp __x)</span>
-<span class="lineNum">     296 </span><span class="lineCov">        164 :     { return __builtin_floor(__x); }</span>
+<span class="lineNum">     295 </span><span class="lineCov">        328 :     floor(_Tp __x)</span>
+<span class="lineNum">     296 </span><span class="lineCov">        328 :     { return __builtin_floor(__x); }</span>
 <span class="lineNum">     297 </span>            : 
 <span class="lineNum">     298 </span>            :   using ::fmod;
 <span class="lineNum">     299 </span>            : 
@@ -497,10 +497,10 @@
 <span class="lineNum">     435 </span>            :   template&lt;typename _Tp, typename _Up&gt;
 <a name="436"><span class="lineNum">     436 </span>            :     inline _GLIBCXX_CONSTEXPR</a>
 <span class="lineNum">     437 </span>            :     typename __gnu_cxx::__promote_2&lt;_Tp, _Up&gt;::__type
-<span class="lineNum">     438 </span><span class="lineCov">          8 :     pow(_Tp __x, _Up __y)</span>
+<span class="lineNum">     438 </span><span class="lineCov">         16 :     pow(_Tp __x, _Up __y)</span>
 <span class="lineNum">     439 </span>            :     {
 <span class="lineNum">     440 </span>            :       typedef typename __gnu_cxx::__promote_2&lt;_Tp, _Up&gt;::__type __type;
-<span class="lineNum">     441 </span><span class="lineCov">          8 :       return pow(__type(__x), __type(__y));</span>
+<span class="lineNum">     441 </span><span class="lineCov">         16 :       return pow(__type(__x), __type(__y));</span>
 <span class="lineNum">     442 </span>            :     }
 <span class="lineNum">     443 </span>            : 
 <span class="lineNum">     444 </span>            :   using ::sin;
@@ -545,8 +545,8 @@
 <span class="lineNum">     483 </span>            : 
 <a name="484"><span class="lineNum">     484 </span>            : #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO</a>
 <span class="lineNum">     485 </span>            :   inline _GLIBCXX_CONSTEXPR float
-<span class="lineNum">     486 </span><span class="lineCov">    1440080 :   sqrt(float __x)</span>
-<span class="lineNum">     487 </span><span class="lineCov">    1440080 :   { return __builtin_sqrtf(__x); }</span>
+<span class="lineNum">     486 </span><span class="lineCov">     720040 :   sqrt(float __x)</span>
+<span class="lineNum">     487 </span><span class="lineCov">     720040 :   { return __builtin_sqrtf(__x); }</span>
 <span class="lineNum">     488 </span>            : 
 <span class="lineNum">     489 </span>            :   inline _GLIBCXX_CONSTEXPR long double
 <span class="lineNum">     490 </span>            :   sqrt(long double __x)
