@@ -40,20 +40,18 @@ vector<bool> enmascarar(tiempo dur, lista_intervalos tiempos);
 float tiempoEnPosicion(int i);
 void negacionLogica(vector<bool> &mascara );
 vector<bool> enmascararSilencios(audio &s, int umbral, int prof, int freq);
-audio deArchivoAVector (string archivo);
 unsigned int verdaderosPositivos(vector<bool> &mascaraConAlgoritmo, vector<bool> &mascaraDesdeIntervalos);
 unsigned int verdaderosNegativos(vector<bool> &mascaraConAlgoritmo, vector<bool> &mascaraDesdeIntervalos);
 unsigned int falsosPositivos(vector<bool> &mascaraConAlgoritmo, vector<bool> &mascaraDesdeIntervalos);
 unsigned int falsosNegativos(vector<bool> &mascaraConAlgoritmo, vector<bool> &mascaraDesdeIntervalos);
 float compararSilencios(audio &vec, int freq, int prof, int locutor, int umbralSilencio);
 float resultadoFinal(sala &m, int freq, int prof, int umbralSilencio);
-void resultadosEjercicio7(int umbralSilencio);
 
-audio sacarPausas(audio s, int freq, int prof, int umbral);
+audio sacarPausas(audio &s, int freq, int prof, int umbral);
+bool muestraEnMomentoDeSilencio(audio &s, int posicion, lista_intervalos silencios, int freq);
 
 int encontrarAparicion(audio x, audio y);
 int comienzoCorrelacion(audio a,audio frase);
-bool esMaximaCorrelacion(audio a, int starPoint, audio frase);
 float intensidadCorrelacion(audio a, audio frase);
 float distanciaAP(sala m, int p1,int p2,int freq, audio frase);
 

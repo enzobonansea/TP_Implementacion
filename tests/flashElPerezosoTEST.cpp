@@ -11,7 +11,7 @@
 
 using namespace std;
 
-TEST (flashElPerezosoTEST, pereza){
+TEST (flashElPerezosoTEST, prueba1){
     int freq = 4;
     int prof = 16;
 
@@ -25,4 +25,18 @@ TEST (flashElPerezosoTEST, pereza){
                     {1,1,1,1,1,1,1,1,1,1,1}    };
 
     EXPECT_EQ (flashElPerezoso(m, freq, prof), res);
+}
+
+TEST(flashElPerezosoTEST, prueba2){
+    int freq = 4;
+    int prof = 16;
+    sala m = {  {5,11,2,3},
+                {1,3,5,1},
+                {4,1,2,5}  };
+    sala exp = {  {5, 8, 11, 6, 2, 2, 3},
+                  {1, 2, 3, 4, 5, 3, 1},
+                  {4, 2, 1, 1, 2, 3, 5}  };
+    sala res = flashElPerezoso(m, freq, prof);
+    EXPECT_EQ(res, exp);
+
 }

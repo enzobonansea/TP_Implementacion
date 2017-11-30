@@ -61,17 +61,16 @@ bool sonTodosCeros(audio a){
 /************************** EJERCICIO elAcaparador **************************/
 int elAcaparador(sala m, int freq, int prof){
     int persona = 0;
-    for(int i = 0; i < m.size(); i++)
-        if(acapara(m, i, prof, freq))
-            persona = i;
+    while(persona < m.size() and !acapara(m, persona, prof, freq))
+        persona++;
     return persona;
 }
 
 bool acapara(sala m, int posibleAcaparador, int prof, int freq){
     bool res = true;
     int persona = 0;
-    while(persona < m.size()){
-        if(persona != posibleAcaparador and intensidadMedia(m[persona]) >= intensidadMedia(m[posibleAcaparador]))
+    while(persona < m.size() and res){
+        if(intensidadMedia(m[persona]) > intensidadMedia(m[posibleAcaparador]))
             res = false;
         persona++;
     }
@@ -114,34 +113,23 @@ audio ardillizarAudio(audio a){
 
 /************************** EJERCICIO flashElPerezoso **************************/
 sala flashElPerezoso(sala m, int prof, int freq){
-    int length_m = m.size();
-    int length_mi = 2 * m[0].size() - 1;
-    sala res(length_m, vector<int> (length_mi));
-
+    int cantidadDePersonas = m.size();
+    int longitudDeSenialesEntrada = m[0].size();
+    int longitudDeSenialesSalida = 2 * longitudDeSenialesEntrada - 1;
+    sala res(cantidadDePersonas, vector<int>(longitudDeSenialesSalida));
     int i = 0;
-    while(i < length_m){
+    while(i < cantidadDePersonas){
         int j = 0;
-        int l = 0;
-        while(j < m[i].size() or l < vecInterpolado(m[i]).size()){
-            res[i][2*j] = m[i][j];
-            res[i][2*j+1] = vecInterpolado(m[i])[l];
+        while(j < longitudDeSenialesEntrada){
+            res[i][2 * j] = m[i][j];
+            if(j < longitudDeSenialesEntrada - 1)
+                res[i][(2 * j) + 1] = floor((m[i][j] + m[i][j+1])/2);
             j++;
-            l++;
         }
         i++;
     }
     return res;
 }
-
-vector<int> vecInterpolado(vector<int> a){
-    vector<int> interpolado;
-    for(int i = 1; i < a.size(); i++){
-        int promedioVecinos = floor((a[i-1] + a[i])/2);
-        interpolado.push_back(promedioVecinos);
-    }
-    return interpolado;
-}
-
 /************************** EJERCICIO silencios **************************/
 lista_intervalos silencios(audio &s, int prof, int freq, int umbral){
     lista_intervalos res;
@@ -258,10 +246,6 @@ bool haySilencioQueLoContiene(audio a, int i, int freq, int umbral, int prof){
 }
 
 /************************** EJERCICIO compararSilencios **************************/
-/* en los archivos spkrX.dat obtengo de las primeras 3 posiciones los valores
- * correspondientes a la frecuencia, profundidad y duracion de cada audio */
-
-
 lista_intervalos cargarIntervaloDeHabla(string archivo){
     lista_intervalos res;
     ifstream entrada;
@@ -402,33 +386,31 @@ float resultadoFinal(sala &m, int freq, int prof, int umbralSilencio){
 }
 
 /************************** EJERCICIO sacarPausas **************************/
-audio sacarPausas(audio s, int freq, int prof, int umbral) {
+audio sacarPausas(audio &s, int freq, int prof, int umbral) {
     audio result;
-    int i =0;
-    vector < tuple<int,int> > aux;
-    /*bool esSilencio (audio s,intervalo inter,int umbral,int i,int j)*/
-    while(i<s.size()) {
-        if (s[i] <= umbral) {
-            for (int j = i; j < s.size(); j++) {
-                tuple<float,float> inter;
-                get<0>(inter) = i/(float)freq;
-                get<1>(inter) = j/(float)freq;
-                if (esSilencio(s,inter,umbral,i,j-1, freq)) {
-                    result.push_back(s[j]);
-                    i = j;
-                }
-            }
-        } else {
+    lista_intervalos momentosDeSilencio = silencios(s, prof, freq, umbral);
+    int i = 0;
+    while(i < s.size()){
+        if(!muestraEnMomentoDeSilencio(s, i, momentosDeSilencio, freq))
             result.push_back(s[i]);
-        }
         i++;
     }
-    /*si el intervalo es un silencio y no esta contenido en otro silencio(esSilencio)
-    salto la posicion inicial a j sino pusheo tod o el intervalo al vector audio   */
-
-
     return result;
 }
+
+bool muestraEnMomentoDeSilencio(audio &s, int posicion, lista_intervalos silencios, int freq){
+    bool res = false;
+    int i = 0;
+    while(i < silencios.size()){
+        int posicionInicioSilencio = indiceEnTiempo(get<0>(silencios[i]), freq);
+        int posicionFinSilencio = indiceEnTiempo(get<1>(silencios[i]), freq);
+        if(posicionInicioSilencio <= posicion and posicion < posicionFinSilencio)
+            res = true;
+        i++;
+    }
+    return res;
+}
+
 /************************** EJERCICIO encontrarAparicion **************************/
 int encontrarAparicion(audio x, audio y){
     int res = comienzoCorrelacion(x,y);
@@ -442,7 +424,6 @@ int comienzoCorrelacion(audio a, audio frase) {
     for (int i = 0; i < l_a - l_f; i++) {
         if (correlacion(subseq(a, acum, acum + l_f), frase) < correlacion(subseq(a, i, i + l_f), frase)) {
             acum = i;
-
         }
     }
     return acum;

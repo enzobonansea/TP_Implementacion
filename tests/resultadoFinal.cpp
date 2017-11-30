@@ -14,8 +14,8 @@ vector<string> archivos = {"datos/spkr0.dat",
                            "datos/spkr4.dat",
                            "datos/spkr5.dat"};
 sala reunion = cargarSalaAudio(archivos, frecuencia, profundidad, duracion);
-int umbral = 4000;
-cout << resultadoFinal(reunion, frecuencia, profundidad, umbral)<<endl;
+int umbral = 7605;
+cout << resultadoFinal(reunion, frecuencia, profundidad, umbral) << endl;
 EXPECT_TRUE(true);
 /* este test siempre va a ser pasado, pero lo que me interesa a mi es el valor del
  * estadistico que imprimo por pantalla */
