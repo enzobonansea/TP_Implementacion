@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-11-13 12:54:05</td>
+            <td class="headerValue">2017-12-02 14:50:21</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">6</td>
@@ -69,35 +69,35 @@
 <span class="lineNum">       7 </span>            : 
 <a name="8"><span class="lineNum">       8 </span>            : using namespace std;</a>
 <span class="lineNum">       9 </span>            : 
-<span class="lineNum">      10 </span><span class="lineCov">         10 : TEST(silenciosTEST,unAudio){</span>
-<span class="lineNum">      11 </span><span class="lineCov">          2 :     int prof = 16;</span>
-<span class="lineNum">      12 </span><span class="lineCov">          2 :     int freq = 35;</span>
-<span class="lineNum">      13 </span><span class="lineCov">          4 :     audio a = {0,0,0,0,1,2,3,0,0,0,0,0,5,6,0,0,3};</span>
+<span class="lineNum">      10 </span><span class="lineCov">         15 : TEST(silenciosTEST,unAudio){</span>
+<span class="lineNum">      11 </span><span class="lineCov">          3 :     int prof = 16;</span>
+<span class="lineNum">      12 </span><span class="lineCov">          3 :     int freq = 35;</span>
+<span class="lineNum">      13 </span><span class="lineCov">          6 :     audio a = {0,0,0,0,1,2,3,0,0,0,0,0,5,6,0,0,3};</span>
 <span class="lineNum">      14 </span>            :     /* el test estaba mal! Decia:
 <span class="lineNum">      15 </span>            :      * lista_intervalos ts = {make_tuple(0,0.1143), make_tuple(0.2,0.3429)} ;
 <span class="lineNum">      16 </span>            :      * y deberia ser: */
-<span class="lineNum">      17 </span><span class="lineCov">          4 :     lista_intervalos ts = {make_tuple(0,0.1429), make_tuple(0.2,0.3429)};</span>
+<span class="lineNum">      17 </span><span class="lineCov">          6 :     lista_intervalos ts = {make_tuple(0,0.1429), make_tuple(0.2,0.3429)};</span>
 <span class="lineNum">      18 </span>            : 
-<span class="lineNum">      19 </span><span class="lineCov">          4 :     lista_intervalos t_out = silencios(a,prof,freq,1);</span>
-<span class="lineNum">      20 </span><span class="lineCov">          2 :     cout &lt;&lt; &quot;encontrados &quot; &lt;&lt; ts.size() &lt;&lt; &quot; intervalos&quot; &lt;&lt; endl;</span>
-<span class="lineNum">      21 </span><span class="lineCov">          2 :     ASSERT_EQ(ts.size(),t_out.size());</span>
-<span class="lineNum">      22 </span><span class="lineCov">          6 :     for(int i=0;i&lt;ts.size();i++){</span>
-<span class="lineNum">      23 </span><span class="lineCov">          4 :         intervalo t1 = ts[i];</span>
-<span class="lineNum">      24 </span><span class="lineCov">          4 :         intervalo t2 = t_out[i];</span>
+<span class="lineNum">      19 </span><span class="lineCov">          6 :     lista_intervalos t_out = silencios(a,prof,freq,1);</span>
+<span class="lineNum">      20 </span><span class="lineCov">          3 :     cout &lt;&lt; &quot;encontrados &quot; &lt;&lt; ts.size() &lt;&lt; &quot; intervalos&quot; &lt;&lt; endl;</span>
+<span class="lineNum">      21 </span><span class="lineCov">          3 :     ASSERT_EQ(ts.size(),t_out.size());</span>
+<span class="lineNum">      22 </span><span class="lineCov">          9 :     for(int i=0;i&lt;ts.size();i++){</span>
+<span class="lineNum">      23 </span><span class="lineCov">          6 :         intervalo t1 = ts[i];</span>
+<span class="lineNum">      24 </span><span class="lineCov">          6 :         intervalo t2 = t_out[i];</span>
 <span class="lineNum">      25 </span>            : 
 <span class="lineNum">      26 </span>            :         // test inicio del intervalo
-<span class="lineNum">      27 </span><span class="lineCov">          4 :         int m1 = floor(get&lt;0&gt;(t1) * freq);</span>
-<span class="lineNum">      28 </span><span class="lineCov">          4 :         int m2 = floor(get&lt;0&gt;(t2) * freq);</span>
+<span class="lineNum">      27 </span><span class="lineCov">          6 :         int m1 = floor(get&lt;0&gt;(t1) * freq);</span>
+<span class="lineNum">      28 </span><span class="lineCov">          6 :         int m2 = floor(get&lt;0&gt;(t2) * freq);</span>
 <span class="lineNum">      29 </span>            : 
-<span class="lineNum">      30 </span><span class="lineCov">          4 :         EXPECT_EQ(m1,m2);</span>
+<span class="lineNum">      30 </span><span class="lineCov">          6 :         EXPECT_EQ(m1,m2);</span>
 <span class="lineNum">      31 </span>            :         // test fin de intervalo
-<span class="lineNum">      32 </span><span class="lineCov">          4 :         m1 = floor(get&lt;1&gt;(t1) * freq);</span>
-<span class="lineNum">      33 </span><span class="lineCov">          4 :         m2 = floor(get&lt;1&gt;(t2) * freq);</span>
+<span class="lineNum">      32 </span><span class="lineCov">          6 :         m1 = floor(get&lt;1&gt;(t1) * freq);</span>
+<span class="lineNum">      33 </span><span class="lineCov">          6 :         m2 = floor(get&lt;1&gt;(t2) * freq);</span>
 <span class="lineNum">      34 </span>            : 
-<span class="lineNum">      35 </span><span class="lineCov">          4 :         EXPECT_EQ(m1,m2);</span>
+<span class="lineNum">      35 </span><span class="lineCov">          6 :         EXPECT_EQ(m1,m2);</span>
 <a name="36"><span class="lineNum">      36 </span>            : </a>
 <span class="lineNum">      37 </span>            :     }
-<span class="lineNum">      38 </span><span class="lineCov">          6 : }</span>
+<span class="lineNum">      38 </span><span class="lineCov">          9 : }</span>
 </pre>
       </td>
     </tr>

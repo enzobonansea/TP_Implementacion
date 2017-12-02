@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-11-13 12:54:05</td>
+            <td class="headerValue">2017-12-02 14:50:21</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">6</td>
@@ -69,13 +69,26 @@
 <span class="lineNum">       7 </span>            : 
 <a name="8"><span class="lineNum">       8 </span>            : using namespace std;</a>
 <span class="lineNum">       9 </span>            : 
-<span class="lineNum">      10 </span><span class="lineCov">         10 : TEST(sacarPausasTEST,pausasEnELMedio){</span>
-<span class="lineNum">      11 </span><span class="lineCov">          4 :     audio a = {2,2,2,0,0,0,0,2,4,0,0,0,0,2,4,5,6};</span>
-<span class="lineNum">      12 </span><span class="lineCov">          4 :     vector&lt;int&gt; res = sacarPausas(a,4,16,0);</span>
-<span class="lineNum">      13 </span><span class="lineCov">          4 :     vector&lt;int&gt; exp = {2,2,2,2,4,2,4,5,6};</span>
-<a name="14"><span class="lineNum">      14 </span><span class="lineCov">          2 :     EXPECT_EQ(res,exp);</span></a>
-<span class="lineNum">      15 </span>            : 
-<span class="lineNum">      16 </span><span class="lineCov">          8 : }</span>
+<span class="lineNum">      10 </span><span class="lineCov">         15 : TEST(sacarPausasTEST,pausasEnELMedio){</span>
+<span class="lineNum">      11 </span><span class="lineCov">          6 :     audio a = {2,2,2,0,0,0,0,2,4,0,0,0,0,2,4,5,6};</span>
+<span class="lineNum">      12 </span><span class="lineCov">          6 :     int freq = 4; // =&gt; en a[i] transcurrieron 0.25s</span>
+<span class="lineNum">      13 </span><span class="lineCov">          6 :     int prof = 16;</span>
+<a name="14"><span class="lineNum">      14 </span><span class="lineCov">          3 :     int umbral = 0; // =&gt; ( esSilencio(a[i]) &lt;=&gt; a[i] &lt; 0 )</span></a>
+<span class="lineNum">      15 </span>            :     vector&lt;int&gt; res = sacarPausas(a,freq,prof,umbral);
+<span class="lineNum">      16 </span><span class="lineCov">         12 :     vector&lt;int&gt; exp = {2,2,2,2,4,2,4,5,6};</span>
+<span class="lineNum">      17 </span>            :     EXPECT_EQ(res,exp);
+<span class="lineNum">      18 </span>            : 
+<span class="lineNum">      19 </span>            : }
+<span class="lineNum">      20 </span>            : 
+<span class="lineNum">      21 </span>            : TEST(sacarPausasTEST, noPasa) {
+<span class="lineNum">      22 </span>            :     int freq = 40;
+<span class="lineNum">      23 </span>            :     int prof = 16;
+<span class="lineNum">      24 </span>            :     int umbral = 10;
+<span class="lineNum">      25 </span>            :     audio a = {17, 1, 2, 11, 4, 5, 6, 7, 8, 8, 9, 12};
+<span class="lineNum">      26 </span>            :     vector&lt;int&gt; res = sacarPausas(a, freq, prof, umbral);
+<span class="lineNum">      27 </span>            :     vector&lt;int&gt; exp = {17, 1, 2, 11, 12};
+<span class="lineNum">      28 </span>            :     EXPECT_EQ(res, exp);
+<span class="lineNum">      29 </span>            : }
 </pre>
       </td>
     </tr>
