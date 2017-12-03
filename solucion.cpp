@@ -271,17 +271,13 @@ vector<bool> enmascarar(tiempo dur, lista_intervalos tiempos) {
         while (j < tiempos.size()) {
             float t0 = get<0>(tiempos[j]);
             float t1 = get<1>(tiempos[j]);
-            if(t0 <= tiempoEnPosicion(i) and tiempoEnPosicion(i) < t1)
+            if(round(100*t0) <= i and i < round(100*t1))
                 mascara[i] = true;
             j++;
         }
         i++;
     }
     return mascara;
-}
-
-float tiempoEnPosicion(int i) {
-    return i / (float) 100;
 }
 
 void negacionLogica(vector<bool> &mascara ) {
