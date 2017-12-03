@@ -10,7 +10,7 @@ TEST(elAcaparadorTEST, prueba1){
     };
     int freq = 3;
     int prof = 4;
-    EXPECT_EQ(4, elAcaparador(m, freq, prof));
+    EXPECT_EQ(3, elAcaparador(m, freq, prof));
 }
 
 TEST(elAcaparadorTEST, prueba2){
