@@ -61,16 +61,17 @@ bool sonTodosCeros(audio a){
 /************************** EJERCICIO elAcaparador **************************/
 int elAcaparador(sala m, int freq, int prof){
     int persona = 0;
-    while(persona < m.size() and !acapara(m, persona, prof, freq))
+    while(persona < m.size() and !acapara(m, persona, prof, freq)) {
         persona++;
+    }
     return persona;
 }
 
 bool acapara(sala m, int posibleAcaparador, int prof, int freq){
     bool res = true;
     int persona = 0;
-    while(persona < m.size() and res){
-        if(intensidadMedia(m[persona]) > intensidadMedia(m[posibleAcaparador]))
+    while(persona < m.size() and res ){
+        if(persona != posibleAcaparador and intensidadMedia(m[persona]) > intensidadMedia(m[posibleAcaparador]))
             res = false;
         persona++;
     }
