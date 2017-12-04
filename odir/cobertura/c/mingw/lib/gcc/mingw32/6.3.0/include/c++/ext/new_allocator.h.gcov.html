@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-12-02 14:50:21</td>
+            <td class="headerValue">2017-12-03 20:59:36</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">44</td>
-            <td class="headerCovTableEntry">49</td>
-            <td class="headerCovTableEntryMed">89.8 %</td>
+            <td class="headerCovTableEntry">42</td>
+            <td class="headerCovTableEntry">46</td>
+            <td class="headerCovTableEntryHi">91.3 %</td>
           </tr>
           <tr><td><img src="../../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -138,14 +138,14 @@
 <span class="lineNum">      76 </span>            :       typedef std::true_type propagate_on_container_move_assignment;
 <a name="77"><span class="lineNum">      77 </span>            : #endif</a>
 <span class="lineNum">      78 </span>            : 
-<a name="79"><span class="lineNum">      79 </span><span class="lineCov">     542478 :       new_allocator() _GLIBCXX_USE_NOEXCEPT { }</span></a>
+<a name="79"><span class="lineNum">      79 </span><span class="lineCov">     180868 :       new_allocator() _GLIBCXX_USE_NOEXCEPT { }</span></a>
 <span class="lineNum">      80 </span>            : 
-<span class="lineNum">      81 </span><span class="lineCov">    4326632 :       new_allocator(const new_allocator&amp;) _GLIBCXX_USE_NOEXCEPT { }</span>
+<span class="lineNum">      81 </span><span class="lineCov">    1442332 :       new_allocator(const new_allocator&amp;) _GLIBCXX_USE_NOEXCEPT { }</span>
 <span class="lineNum">      82 </span>            : 
 <span class="lineNum">      83 </span>            :       template&lt;typename _Tp1&gt;
 <a name="84"><span class="lineNum">      84 </span>            :         new_allocator(const new_allocator&lt;_Tp1&gt;&amp;) _GLIBCXX_USE_NOEXCEPT { }</a>
 <span class="lineNum">      85 </span>            : 
-<span class="lineNum">      86 </span><span class="lineCov">    4869107 :       ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }</span>
+<span class="lineNum">      86 </span><span class="lineCov">    1623190 :       ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }</span>
 <span class="lineNum">      87 </span>            : 
 <span class="lineNum">      88 </span>            :       pointer
 <span class="lineNum">      89 </span>            :       address(reference __x) const _GLIBCXX_NOEXCEPT
@@ -158,28 +158,28 @@
 <span class="lineNum">      96 </span>            :       // NB: __n is permitted to be 0.  The C++ standard says nothing
 <a name="97"><span class="lineNum">      97 </span>            :       // about what the return value is when __n == 0.</a>
 <span class="lineNum">      98 </span>            :       pointer
-<span class="lineNum">      99 </span><span class="lineCov">   10267853 :       allocate(size_type __n, const void* = 0)</span>
+<span class="lineNum">      99 </span><span class="lineCov">    3422662 :       allocate(size_type __n, const void* = 0)</span>
 <span class="lineNum">     100 </span>            :       { 
-<span class="lineNum">     101 </span><span class="lineCov">   10267853 :         if (__n &gt; this-&gt;max_size())</span>
+<span class="lineNum">     101 </span><span class="lineCov">    3422662 :         if (__n &gt; this-&gt;max_size())</span>
 <span class="lineNum">     102 </span><span class="lineNoCov">          0 :           std::__throw_bad_alloc();</span>
 <span class="lineNum">     103 </span>            : 
-<span class="lineNum">     104 </span><span class="lineCov">   10267853 :         return static_cast&lt;_Tp*&gt;(::operator new(__n * sizeof(_Tp)));</span>
+<span class="lineNum">     104 </span><span class="lineCov">    3422662 :         return static_cast&lt;_Tp*&gt;(::operator new(__n * sizeof(_Tp)));</span>
 <span class="lineNum">     105 </span>            :       }
 <span class="lineNum">     106 </span>            : 
 <a name="107"><span class="lineNum">     107 </span>            :       // __p is not permitted to be a null pointer.</a>
 <span class="lineNum">     108 </span>            :       void
-<span class="lineNum">     109 </span><span class="lineCov">   10267850 :       deallocate(pointer __p, size_type)</span>
-<span class="lineNum">     110 </span><span class="lineCov">   10267850 :       { ::operator delete(__p); }</span>
+<span class="lineNum">     109 </span><span class="lineCov">    3422652 :       deallocate(pointer __p, size_type)</span>
+<span class="lineNum">     110 </span><span class="lineCov">    3422652 :       { ::operator delete(__p); }</span>
 <a name="111"><span class="lineNum">     111 </span>            : </a>
 <span class="lineNum">     112 </span>            :       size_type
-<span class="lineNum">     113 </span><span class="lineCov">   26476755 :       max_size() const _GLIBCXX_USE_NOEXCEPT</span>
-<span class="lineNum">     114 </span><span class="lineCov">   26476755 :       { return size_t(-1) / sizeof(_Tp); }</span>
+<span class="lineNum">     113 </span><span class="lineCov">    8825562 :       max_size() const _GLIBCXX_USE_NOEXCEPT</span>
+<span class="lineNum">     114 </span><span class="lineCov">    8825562 :       { return size_t(-1) / sizeof(_Tp); }</span>
 <span class="lineNum">     115 </span>            : 
 <span class="lineNum">     116 </span>            : #if __cplusplus &gt;= 201103L
 <a name="117"><span class="lineNum">     117 </span>            :       template&lt;typename _Up, typename... _Args&gt;</a>
 <span class="lineNum">     118 </span>            :         void
-<span class="lineNum">     119 </span><span class="lineCov"> 7957315926 :         construct(_Up* __p, _Args&amp;&amp;... __args)</span>
-<span class="lineNum">     120 </span><span class="lineCov"> 7957315926 :         { ::new((void *)__p) _Up(std::forward&lt;_Args&gt;(__args)...); }</span>
+<span class="lineNum">     119 </span><span class="lineCov"> 2654998612 :         construct(_Up* __p, _Args&amp;&amp;... __args)</span>
+<span class="lineNum">     120 </span><span class="lineCov"> 2654998612 :         { ::new((void *)__p) _Up(std::forward&lt;_Args&gt;(__args)...); }</span>
 <span class="lineNum">     121 </span>            : 
 <a name="122"><span class="lineNum">     122 </span>            :       template&lt;typename _Up&gt;</a>
 <span class="lineNum">     123 </span>            :         void 
