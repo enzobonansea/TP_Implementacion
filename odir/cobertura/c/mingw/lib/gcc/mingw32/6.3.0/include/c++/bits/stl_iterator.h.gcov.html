@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-12-03 20:59:36</td>
+            <td class="headerValue">2017-12-03 21:30:33</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">49</td>
@@ -835,8 +835,8 @@
 <span class="lineNum">     773 </span>            :       : _M_current(_Iterator()) { }
 <a name="774"><span class="lineNum">     774 </span>            : </a>
 <span class="lineNum">     775 </span>            :       explicit
-<span class="lineNum">     776 </span><span class="lineCov">    1442507 :       __normal_iterator(const _Iterator&amp; __i) _GLIBCXX_NOEXCEPT</span>
-<span class="lineNum">     777 </span><span class="lineCov">    1442507 :       : _M_current(__i) { }</span>
+<span class="lineNum">     776 </span><span class="lineCov">    1442589 :       __normal_iterator(const _Iterator&amp; __i) _GLIBCXX_NOEXCEPT</span>
+<span class="lineNum">     777 </span><span class="lineCov">    1442589 :       : _M_current(__i) { }</span>
 <span class="lineNum">     778 </span>            : 
 <span class="lineNum">     779 </span>            :       // Allow iterator to const_iterator conversion
 <span class="lineNum">     780 </span>            :       template&lt;typename _Iter&gt;
@@ -848,18 +848,18 @@
 <span class="lineNum">     786 </span>            : 
 <a name="787"><span class="lineNum">     787 </span>            :       // Forward iterator requirements</a>
 <span class="lineNum">     788 </span>            :       reference
-<span class="lineNum">     789 </span><span class="lineCov">        694 :       operator*() const _GLIBCXX_NOEXCEPT</span>
-<span class="lineNum">     790 </span><span class="lineCov">        694 :       { return *_M_current; }</span>
+<span class="lineNum">     789 </span><span class="lineCov">        714 :       operator*() const _GLIBCXX_NOEXCEPT</span>
+<span class="lineNum">     790 </span><span class="lineCov">        714 :       { return *_M_current; }</span>
 <span class="lineNum">     791 </span>            : 
 <span class="lineNum">     792 </span>            :       pointer
 <span class="lineNum">     793 </span>            :       operator-&gt;() const _GLIBCXX_NOEXCEPT
 <span class="lineNum">     794 </span>            :       { return _M_current; }
 <a name="795"><span class="lineNum">     795 </span>            : </a>
 <span class="lineNum">     796 </span>            :       __normal_iterator&amp;
-<span class="lineNum">     797 </span><span class="lineCov">        694 :       operator++() _GLIBCXX_NOEXCEPT</span>
+<span class="lineNum">     797 </span><span class="lineCov">        714 :       operator++() _GLIBCXX_NOEXCEPT</span>
 <span class="lineNum">     798 </span>            :       {
-<span class="lineNum">     799 </span><span class="lineCov">        694 :         ++_M_current;</span>
-<span class="lineNum">     800 </span><span class="lineCov">        694 :         return *this;</span>
+<span class="lineNum">     799 </span><span class="lineCov">        714 :         ++_M_current;</span>
+<span class="lineNum">     800 </span><span class="lineCov">        714 :         return *this;</span>
 <span class="lineNum">     801 </span>            :       }
 <span class="lineNum">     802 </span>            : 
 <span class="lineNum">     803 </span>            :       __normal_iterator
@@ -888,8 +888,8 @@
 <span class="lineNum">     826 </span>            :       { _M_current += __n; return *this; }
 <a name="827"><span class="lineNum">     827 </span>            : </a>
 <span class="lineNum">     828 </span>            :       __normal_iterator
-<span class="lineNum">     829 </span><span class="lineCov">        168 :       operator+(difference_type __n) const _GLIBCXX_NOEXCEPT</span>
-<span class="lineNum">     830 </span><span class="lineCov">        168 :       { return __normal_iterator(_M_current + __n); }</span>
+<span class="lineNum">     829 </span><span class="lineCov">        210 :       operator+(difference_type __n) const _GLIBCXX_NOEXCEPT</span>
+<span class="lineNum">     830 </span><span class="lineCov">        210 :       { return __normal_iterator(_M_current + __n); }</span>
 <span class="lineNum">     831 </span>            : 
 <span class="lineNum">     832 </span>            :       __normal_iterator&amp;
 <span class="lineNum">     833 </span>            :       operator-=(difference_type __n) _GLIBCXX_NOEXCEPT
@@ -900,8 +900,8 @@
 <span class="lineNum">     838 </span>            :       { return __normal_iterator(_M_current - __n); }
 <a name="839"><span class="lineNum">     839 </span>            : </a>
 <span class="lineNum">     840 </span>            :       const _Iterator&amp;
-<span class="lineNum">     841 </span><span class="lineCov">    1443839 :       base() const _GLIBCXX_NOEXCEPT</span>
-<span class="lineNum">     842 </span><span class="lineCov">    1443839 :       { return _M_current; }</span>
+<span class="lineNum">     841 </span><span class="lineCov">    1443947 :       base() const _GLIBCXX_NOEXCEPT</span>
+<span class="lineNum">     842 </span><span class="lineCov">    1443947 :       { return _M_current; }</span>
 <span class="lineNum">     843 </span>            :     };
 <span class="lineNum">     844 </span>            : 
 <span class="lineNum">     845 </span>            :   // Note: In what follows, the left- and right-hand-side iterators are
@@ -936,10 +936,10 @@
 <span class="lineNum">     874 </span>            : 
 <a name="875"><span class="lineNum">     875 </span>            :   template&lt;typename _Iterator, typename _Container&gt;</a>
 <span class="lineNum">     876 </span>            :     inline bool
-<span class="lineNum">     877 </span><span class="lineCov">        796 :     operator!=(const __normal_iterator&lt;_Iterator, _Container&gt;&amp; __lhs,</span>
+<span class="lineNum">     877 </span><span class="lineCov">        820 :     operator!=(const __normal_iterator&lt;_Iterator, _Container&gt;&amp; __lhs,</span>
 <span class="lineNum">     878 </span>            :                const __normal_iterator&lt;_Iterator, _Container&gt;&amp; __rhs)
 <span class="lineNum">     879 </span>            :     _GLIBCXX_NOEXCEPT
-<span class="lineNum">     880 </span><span class="lineCov">        796 :     { return __lhs.base() != __rhs.base(); }</span>
+<span class="lineNum">     880 </span><span class="lineCov">        820 :     { return __lhs.base() != __rhs.base(); }</span>
 <span class="lineNum">     881 </span>            : 
 <span class="lineNum">     882 </span>            :   // Random access iterator requirements
 <span class="lineNum">     883 </span>            :   template&lt;typename _IteratorL, typename _IteratorR, typename _Container&gt;
@@ -1018,10 +1018,10 @@
 <span class="lineNum">     956 </span>            : 
 <a name="957"><span class="lineNum">     957 </span>            :   template&lt;typename _Iterator, typename _Container&gt;</a>
 <span class="lineNum">     958 </span>            :     inline typename __normal_iterator&lt;_Iterator, _Container&gt;::difference_type
-<span class="lineNum">     959 </span><span class="lineCov">         56 :     operator-(const __normal_iterator&lt;_Iterator, _Container&gt;&amp; __lhs,</span>
+<span class="lineNum">     959 </span><span class="lineCov">         70 :     operator-(const __normal_iterator&lt;_Iterator, _Container&gt;&amp; __lhs,</span>
 <span class="lineNum">     960 </span>            :               const __normal_iterator&lt;_Iterator, _Container&gt;&amp; __rhs)
 <span class="lineNum">     961 </span>            :     _GLIBCXX_NOEXCEPT
-<span class="lineNum">     962 </span><span class="lineCov">         56 :     { return __lhs.base() - __rhs.base(); }</span>
+<span class="lineNum">     962 </span><span class="lineCov">         70 :     { return __lhs.base() - __rhs.base(); }</span>
 <span class="lineNum">     963 </span>            : 
 <span class="lineNum">     964 </span>            :   template&lt;typename _Iterator, typename _Container&gt;
 <span class="lineNum">     965 </span>            :     inline __normal_iterator&lt;_Iterator, _Container&gt;
@@ -1039,8 +1039,8 @@
 <span class="lineNum">     977 </span>            : 
 <a name="978"><span class="lineNum">     978 </span>            :   template&lt;typename _Iterator, typename _Container&gt;</a>
 <span class="lineNum">     979 </span>            :     _Iterator
-<span class="lineNum">     980 </span><span class="lineCov">    1442177 :     __niter_base(__gnu_cxx::__normal_iterator&lt;_Iterator, _Container&gt; __it)</span>
-<span class="lineNum">     981 </span><span class="lineCov">    1442177 :     { return __it.base(); }</span>
+<span class="lineNum">     980 </span><span class="lineCov">    1442221 :     __niter_base(__gnu_cxx::__normal_iterator&lt;_Iterator, _Container&gt; __it)</span>
+<span class="lineNum">     981 </span><span class="lineCov">    1442221 :     { return __it.base(); }</span>
 <span class="lineNum">     982 </span>            : 
 <span class="lineNum">     983 </span>            : _GLIBCXX_END_NAMESPACE_VERSION
 <span class="lineNum">     984 </span>            : } // namespace

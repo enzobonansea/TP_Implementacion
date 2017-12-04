@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-12-03 20:59:36</td>
+            <td class="headerValue">2017-12-03 21:30:33</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">35</td>
@@ -205,14 +205,14 @@
 <span class="lineNum">     143 </span><span class="lineCov">    1912834 :     : _M_p(__x), _M_offset(__y) { }</span>
 <a name="144"><span class="lineNum">     144 </span>            : </a>
 <span class="lineNum">     145 </span>            :     void
-<span class="lineNum">     146 </span><span class="lineCov">       1128 :     _M_bump_up()</span>
+<span class="lineNum">     146 </span><span class="lineCov">       1398 :     _M_bump_up()</span>
 <span class="lineNum">     147 </span>            :     {
-<span class="lineNum">     148 </span><span class="lineCov">       1128 :       if (_M_offset++ == int(_S_word_bit) - 1)</span>
+<span class="lineNum">     148 </span><span class="lineCov">       1398 :       if (_M_offset++ == int(_S_word_bit) - 1)</span>
 <span class="lineNum">     149 </span>            :         {
 <span class="lineNum">     150 </span><span class="lineNoCov">          0 :           _M_offset = 0;</span>
 <span class="lineNum">     151 </span><span class="lineNoCov">          0 :           ++_M_p;</span>
 <span class="lineNum">     152 </span>            :         }
-<span class="lineNum">     153 </span><span class="lineCov">       1128 :     }</span>
+<span class="lineNum">     153 </span><span class="lineCov">       1398 :     }</span>
 <span class="lineNum">     154 </span>            : 
 <span class="lineNum">     155 </span>            :     void
 <span class="lineNum">     156 </span>            :     _M_bump_down()
@@ -239,8 +239,8 @@
 <span class="lineNum">     177 </span><span class="lineCov">         20 :     }</span>
 <a name="178"><span class="lineNum">     178 </span>            : </a>
 <span class="lineNum">     179 </span>            :     bool
-<span class="lineNum">     180 </span><span class="lineCov">        426 :     operator==(const _Bit_iterator_base&amp; __i) const</span>
-<span class="lineNum">     181 </span><span class="lineCov">        426 :     { return _M_p == __i._M_p &amp;&amp; _M_offset == __i._M_offset; }</span>
+<span class="lineNum">     180 </span><span class="lineCov">        512 :     operator==(const _Bit_iterator_base&amp; __i) const</span>
+<span class="lineNum">     181 </span><span class="lineCov">        512 :     { return _M_p == __i._M_p &amp;&amp; _M_offset == __i._M_offset; }</span>
 <span class="lineNum">     182 </span>            : 
 <span class="lineNum">     183 </span>            :     bool
 <span class="lineNum">     184 </span>            :     operator&lt;(const _Bit_iterator_base&amp; __i) const
@@ -250,8 +250,8 @@
 <span class="lineNum">     188 </span>            :     }
 <a name="189"><span class="lineNum">     189 </span>            : </a>
 <span class="lineNum">     190 </span>            :     bool
-<span class="lineNum">     191 </span><span class="lineCov">        426 :     operator!=(const _Bit_iterator_base&amp; __i) const</span>
-<span class="lineNum">     192 </span><span class="lineCov">        426 :     { return !(*this == __i); }</span>
+<span class="lineNum">     191 </span><span class="lineCov">        512 :     operator!=(const _Bit_iterator_base&amp; __i) const</span>
+<span class="lineNum">     192 </span><span class="lineCov">        512 :     { return !(*this == __i); }</span>
 <span class="lineNum">     193 </span>            : 
 <span class="lineNum">     194 </span>            :     bool
 <span class="lineNum">     195 </span>            :     operator&gt;(const _Bit_iterator_base&amp; __i) const
@@ -293,10 +293,10 @@
 <span class="lineNum">     231 </span><span class="lineCov">     736624 :     { return reference(_M_p, 1UL &lt;&lt; _M_offset); }</span>
 <a name="232"><span class="lineNum">     232 </span>            : </a>
 <span class="lineNum">     233 </span>            :     iterator&amp;
-<span class="lineNum">     234 </span><span class="lineCov">        440 :     operator++()</span>
+<span class="lineNum">     234 </span><span class="lineCov">        550 :     operator++()</span>
 <span class="lineNum">     235 </span>            :     {
-<span class="lineNum">     236 </span><span class="lineCov">        440 :       _M_bump_up();</span>
-<span class="lineNum">     237 </span><span class="lineCov">        440 :       return *this;</span>
+<span class="lineNum">     236 </span><span class="lineCov">        550 :       _M_bump_up();</span>
+<span class="lineNum">     237 </span><span class="lineCov">        550 :       return *this;</span>
 <span class="lineNum">     238 </span>            :     }
 <span class="lineNum">     239 </span>            : 
 <span class="lineNum">     240 </span>            :     iterator
@@ -379,14 +379,14 @@
 <span class="lineNum">     317 </span>            :     { return _Bit_iterator(_M_p, _M_offset); }
 <a name="318"><span class="lineNum">     318 </span>            : </a>
 <span class="lineNum">     319 </span>            :     const_reference
-<span class="lineNum">     320 </span><span class="lineCov">        696 :     operator*() const</span>
-<span class="lineNum">     321 </span><span class="lineCov">        696 :     { return _Bit_reference(_M_p, 1UL &lt;&lt; _M_offset); }</span>
+<span class="lineNum">     320 </span><span class="lineCov">        856 :     operator*() const</span>
+<span class="lineNum">     321 </span><span class="lineCov">        856 :     { return _Bit_reference(_M_p, 1UL &lt;&lt; _M_offset); }</span>
 <a name="322"><span class="lineNum">     322 </span>            : </a>
 <span class="lineNum">     323 </span>            :     const_iterator&amp;
-<span class="lineNum">     324 </span><span class="lineCov">        688 :     operator++()</span>
+<span class="lineNum">     324 </span><span class="lineCov">        848 :     operator++()</span>
 <span class="lineNum">     325 </span>            :     {
-<span class="lineNum">     326 </span><span class="lineCov">        688 :       _M_bump_up();</span>
-<span class="lineNum">     327 </span><span class="lineCov">        688 :       return *this;</span>
+<span class="lineNum">     326 </span><span class="lineCov">        848 :       _M_bump_up();</span>
+<span class="lineNum">     327 </span><span class="lineCov">        848 :       return *this;</span>
 <span class="lineNum">     328 </span>            :     }
 <span class="lineNum">     329 </span>            : 
 <span class="lineNum">     330 </span>            :     const_iterator
@@ -709,13 +709,13 @@
 <span class="lineNum">     647 </span>            :       _M_copy_aligned(__x.begin(), __x.end(), this-&gt;_M_impl._M_start);
 <a name="648"><span class="lineNum">     648 </span>            :     }</a>
 <span class="lineNum">     649 </span>            : 
-<span class="lineNum">     650 </span><span class="lineCov">         32 :     vector(initializer_list&lt;bool&gt; __l,</span>
+<span class="lineNum">     650 </span><span class="lineCov">         40 :     vector(initializer_list&lt;bool&gt; __l,</span>
 <span class="lineNum">     651 </span>            :            const allocator_type&amp; __a = allocator_type())
-<span class="lineNum">     652 </span><span class="lineCov">         32 :     : _Base(__a)</span>
+<span class="lineNum">     652 </span><span class="lineCov">         40 :     : _Base(__a)</span>
 <span class="lineNum">     653 </span>            :     {
-<span class="lineNum">     654 </span><span class="lineCov">         32 :       _M_initialize_range(__l.begin(), __l.end(),</span>
+<span class="lineNum">     654 </span><span class="lineCov">         40 :       _M_initialize_range(__l.begin(), __l.end(),</span>
 <span class="lineNum">     655 </span>            :                           random_access_iterator_tag());
-<span class="lineNum">     656 </span><span class="lineCov">         32 :     }</span>
+<span class="lineNum">     656 </span><span class="lineCov">         40 :     }</span>
 <span class="lineNum">     657 </span>            : #endif
 <span class="lineNum">     658 </span>            : 
 <span class="lineNum">     659 </span>            : #if __cplusplus &gt;= 201103L
@@ -1185,13 +1185,13 @@
 <span class="lineNum">    1123 </span>            : 
 <a name="1124"><span class="lineNum">    1124 </span>            :     template&lt;typename _ForwardIterator&gt;</a>
 <span class="lineNum">    1125 </span>            :       void
-<span class="lineNum">    1126 </span><span class="lineCov">         32 :       _M_initialize_range(_ForwardIterator __first, _ForwardIterator __last,</span>
+<span class="lineNum">    1126 </span><span class="lineCov">         40 :       _M_initialize_range(_ForwardIterator __first, _ForwardIterator __last,</span>
 <span class="lineNum">    1127 </span>            :                           std::forward_iterator_tag)
 <span class="lineNum">    1128 </span>            :       {
-<span class="lineNum">    1129 </span><span class="lineCov">         32 :         const size_type __n = std::distance(__first, __last);</span>
-<span class="lineNum">    1130 </span><span class="lineCov">         32 :         _M_initialize(__n);</span>
-<span class="lineNum">    1131 </span><span class="lineCov">         32 :         std::copy(__first, __last, this-&gt;_M_impl._M_start);</span>
-<span class="lineNum">    1132 </span><span class="lineCov">         32 :       }</span>
+<span class="lineNum">    1129 </span><span class="lineCov">         40 :         const size_type __n = std::distance(__first, __last);</span>
+<span class="lineNum">    1130 </span><span class="lineCov">         40 :         _M_initialize(__n);</span>
+<span class="lineNum">    1131 </span><span class="lineCov">         40 :         std::copy(__first, __last, this-&gt;_M_impl._M_start);</span>
+<span class="lineNum">    1132 </span><span class="lineCov">         40 :       }</span>
 <span class="lineNum">    1133 </span>            : 
 <span class="lineNum">    1134 </span>            :     // _GLIBCXX_RESOLVE_LIB_DEFECTS
 <span class="lineNum">    1135 </span>            :     // 438. Ambiguity in the &quot;do the right thing&quot; clause

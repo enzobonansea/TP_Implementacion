@@ -162,15 +162,6 @@ lista_intervalos silencios(audio &s, int prof, int freq, int umbral){
     return res;
 }
 
-bool esSilencio (audio &s, intervalo inter, int umbral, int i, int j, int freq){
-    bool res = false;
-    float tf = get<1>(inter);
-    float ti = get<0>(inter);
-    bool duracionValida = indiceEnTiempo(tf, freq) - indiceEnTiempo(ti, freq) > indiceEnTiempo(0.1, freq);
-    if(duracionValida and noSuperaUmbral(s, i, j, umbral) and noHaySilencioMayor(s, i, j, umbral))
-        res = true;
-    return res;
-}
 
 int indiceEnTiempo(float tiempo, int freq){
     int res = floor(freq * tiempo);

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-12-03 20:59:36</td>
+            <td class="headerValue">2017-12-03 21:30:33</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">12</td>
@@ -155,13 +155,13 @@
 <span class="lineNum">      93 </span>            : 
 <a name="94"><span class="lineNum">      94 </span>            :   template&lt;typename _RandomAccessIterator&gt;</a>
 <span class="lineNum">      95 </span>            :     inline typename iterator_traits&lt;_RandomAccessIterator&gt;::difference_type
-<span class="lineNum">      96 </span><span class="lineCov">        614 :     __distance(_RandomAccessIterator __first, _RandomAccessIterator __last,</span>
+<span class="lineNum">      96 </span><span class="lineCov">        786 :     __distance(_RandomAccessIterator __first, _RandomAccessIterator __last,</span>
 <span class="lineNum">      97 </span>            :                random_access_iterator_tag)
 <span class="lineNum">      98 </span>            :     {
 <span class="lineNum">      99 </span>            :       // concept requirements
 <span class="lineNum">     100 </span>            :       __glibcxx_function_requires(_RandomAccessIteratorConcept&lt;
 <span class="lineNum">     101 </span>            :                                   _RandomAccessIterator&gt;)
-<span class="lineNum">     102 </span><span class="lineCov">        614 :       return __last - __first;</span>
+<span class="lineNum">     102 </span><span class="lineCov">        786 :       return __last - __first;</span>
 <span class="lineNum">     103 </span>            :     }
 <span class="lineNum">     104 </span>            : 
 <span class="lineNum">     105 </span>            : #if _GLIBCXX_USE_CXX11_ABI
@@ -194,11 +194,11 @@
 <span class="lineNum">     132 </span>            :   */
 <a name="133"><span class="lineNum">     133 </span>            :   template&lt;typename _InputIterator&gt;</a>
 <span class="lineNum">     134 </span>            :     inline typename iterator_traits&lt;_InputIterator&gt;::difference_type
-<span class="lineNum">     135 </span><span class="lineCov">        614 :     distance(_InputIterator __first, _InputIterator __last)</span>
+<span class="lineNum">     135 </span><span class="lineCov">        786 :     distance(_InputIterator __first, _InputIterator __last)</span>
 <span class="lineNum">     136 </span>            :     {
 <span class="lineNum">     137 </span>            :       // concept requirements -- taken care of in __distance
-<span class="lineNum">     138 </span><span class="lineCov">        558 :       return std::__distance(__first, __last,</span>
-<span class="lineNum">     139 </span><span class="lineCov">       1172 :                              std::__iterator_category(__first));</span>
+<span class="lineNum">     138 </span><span class="lineCov">        716 :       return std::__distance(__first, __last,</span>
+<span class="lineNum">     139 </span><span class="lineCov">       1502 :                              std::__iterator_category(__first));</span>
 <span class="lineNum">     140 </span>            :     }
 <span class="lineNum">     141 </span>            : 
 <span class="lineNum">     142 </span>            :   template&lt;typename _InputIterator, typename _Distance&gt;

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-12-03 20:59:36</td>
+            <td class="headerValue">2017-12-03 21:30:33</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">18</td>
@@ -106,10 +106,10 @@
 <span class="lineNum">      44 </span>            :    */
 <a name="45"><span class="lineNum">      45 </span>            :   template&lt;typename _Tp&gt;</a>
 <span class="lineNum">      46 </span>            :     inline _Tp*
-<span class="lineNum">      47 </span><span class="lineCov">       1895 :     __addressof(_Tp&amp; __r) _GLIBCXX_NOEXCEPT</span>
+<span class="lineNum">      47 </span><span class="lineCov">       1975 :     __addressof(_Tp&amp; __r) _GLIBCXX_NOEXCEPT</span>
 <span class="lineNum">      48 </span>            :     {
 <span class="lineNum">      49 </span>            :       return reinterpret_cast&lt;_Tp*&gt;
-<span class="lineNum">      50 </span><span class="lineCov">       1895 :         (&amp;const_cast&lt;char&amp;&gt;(reinterpret_cast&lt;const volatile char&amp;&gt;(__r)));</span>
+<span class="lineNum">      50 </span><span class="lineCov">       1975 :         (&amp;const_cast&lt;char&amp;&gt;(reinterpret_cast&lt;const volatile char&amp;&gt;(__r)));</span>
 <span class="lineNum">      51 </span>            :     }
 <span class="lineNum">      52 </span>            : 
 <span class="lineNum">      53 </span>            : _GLIBCXX_END_NAMESPACE_VERSION
@@ -135,8 +135,8 @@
 <span class="lineNum">      73 </span>            :    */
 <a name="74"><span class="lineNum">      74 </span>            :   template&lt;typename _Tp&gt;</a>
 <span class="lineNum">      75 </span>            :     constexpr _Tp&amp;&amp;
-<span class="lineNum">      76 </span><span class="lineCov"> 5312702576 :     forward(typename std::remove_reference&lt;_Tp&gt;::type&amp; __t) noexcept</span>
-<span class="lineNum">      77 </span><span class="lineCov"> 5312702576 :     { return static_cast&lt;_Tp&amp;&amp;&gt;(__t); }</span>
+<span class="lineNum">      76 </span><span class="lineCov"> 5312702616 :     forward(typename std::remove_reference&lt;_Tp&gt;::type&amp; __t) noexcept</span>
+<span class="lineNum">      77 </span><span class="lineCov"> 5312702616 :     { return static_cast&lt;_Tp&amp;&amp;&gt;(__t); }</span>
 <span class="lineNum">      78 </span>            : 
 <span class="lineNum">      79 </span>            :   /**
 <span class="lineNum">      80 </span>            :    *  @brief  Forward an rvalue.
